@@ -20,6 +20,7 @@ export default function Team() {
       position: "ตำแหน่ง : ผู้อำนวยการฝ่ายกฎหมาย",
       description: "หน้าที่ : กำกับการทำงานและดูแลคดีในสำนักงาน บริหารภาพรวมของทีมกฎหมาย ตรวจสอบการทำงาน และควบคุมทิศทางการดำเนินคดีทั้งองค์กร",
       specialties: ["กฎหมายอาญา", "กฎหมายธุรกิจ", "การทำสัญญา"],
+      facebookUrl: "https://web.facebook.com/niyom.nottee?locale=th_TH",
     },
     {
       id: 2,
@@ -27,6 +28,7 @@ export default function Team() {
       position: "ตำแหน่ง : ทนายความและเลขานุกรมสำนักงาน",
       description: "ทนายความที่มีความเชี่ยวชาญในด้านกฎหมายแพ่งและการจัดการสำนักงานเพื่อดำเนินการงานทั้งปวงในสำนักงาน",
       specialties: ["กฎหมายแพ่ง", "หนังสือทวงถามหนี้", "ปรึกษาเบื้องต้น"],
+      facebookUrl: "https://web.facebook.com/som.phakji?locale=th_TH",
     },
   ];
 
@@ -152,12 +154,12 @@ export default function Team() {
                   </div>
 
                   {/* CTA */}
-                  <Link href="/">
+                  <a href={member.facebookUrl} target="_blank" rel="noopener noreferrer">
                     <Button className="gold-gradient text-white border-0 font-semibold">
                       ติดต่อ {member.name.split(" ")[1]}
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
-                  </Link>
+                  </a>
                 </div>
 
                 {/* Icon Section */}
