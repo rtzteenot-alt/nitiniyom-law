@@ -293,8 +293,8 @@ export default function Home() {
         <div className="container">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
-              { value: "10+", label: "ปีประสบการณ์" },
-              { value: "500+", label: "คดีที่ดูแล" },
+              { value: "3+", label: "ปีประสบการณ์" },
+              { value: "84+", label: "คดีที่ดูแล" },
               { value: "98%", label: "ความพึงพอใจ" },
               { value: "24/7", label: "พร้อมให้คำปรึกษา" },
             ].map((stat) => (
