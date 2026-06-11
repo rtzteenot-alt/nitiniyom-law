@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { Scale, Menu, X, ArrowRight, Mail, Phone, MapPin } from "lucide-react";
+import { Scale, Menu, X, ArrowRight, Mail, Phone, MapPin, Users, Award, Heart } from "lucide-react";
 
 export default function Team() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -19,14 +19,14 @@ export default function Team() {
       name: "นาย นิยม ดีจันทึก",
       position: "ผู้กำกับดูแลคดีในสำนักงาน",
       description: "ผู้นำทีมในการจัดการคดีความและให้คำปรึกษาทางกฎหมายแก่ลูกค้า",
-      imageUrl: "", // เว้นไว้สำหรับใส่รูปภาพ
+      specialties: ["กฎหมายอาญา", "กฎหมายแพ่ง", "การทำสัญญา"],
     },
     {
       id: 2,
       name: "นางสาว ภัคจิรา นาคพลกรัง",
       position: "ทนายความและเลขานุการสำนักงาน",
       description: "ทนายความที่มีความเชี่ยวชาญในด้านกฎหมายแพ่งและการจัดการสำนักงาน",
-      imageUrl: "", // เว้นไว้สำหรับใส่รูปภาพ
+      specialties: ["กฎหมายแพ่ง", "หนังสือทวงถามหนี้", "ปรึกษาเบื้องต้น"],
     },
   ];
 
@@ -114,42 +114,57 @@ export default function Team() {
 
       {/* Team Members Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
-            {teamMembers.map((member) => (
+        <div className="max-w-5xl mx-auto">
+          <div className="space-y-12">
+            {teamMembers.map((member, index) => (
               <div
                 key={member.id}
-                className="group flex flex-col items-center text-center"
+                className={`flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} gap-12 items-center`}
               >
-                {/* Image Placeholder */}
-                <div className="w-full aspect-square rounded-2xl bg-gradient-to-br from-gold/10 to-navy/10 border-2 border-gold/20 flex items-center justify-center mb-8 overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  {member.imageUrl ? (
-                    <img
-                      src={member.imageUrl}
-                      alt={member.name}
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gold/5 to-navy/5">
-                      <div className="text-center">
-                        <Scale className="w-16 h-16 text-gold/30 mx-auto mb-2" />
-                        <p className="text-sm text-muted-foreground">เว้นไว้สำหรับรูปภาพ</p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Member Info */}
-                <div className="space-y-3">
-                  <h3 className="font-serif text-2xl font-bold text-foreground">
+                {/* Info Section */}
+                <div className="flex-1">
+                  <h3 className="font-serif text-3xl font-bold text-foreground mb-2">
                     {member.name}
                   </h3>
-                  <p className="text-lg font-semibold text-gold">
+                  <p className="text-xl font-semibold text-gold mb-6">
                     {member.position}
                   </p>
-                  <p className="text-foreground/70 leading-relaxed max-w-sm">
+                  <p className="text-lg text-foreground/70 leading-relaxed mb-8">
                     {member.description}
                   </p>
+
+                  {/* Specialties */}
+                  <div className="mb-8">
+                    <h4 className="font-semibold text-foreground mb-4 flex items-center gap-2">
+                      <Award className="w-5 h-5 text-gold" />
+                      ความเชี่ยวชาญ
+                    </h4>
+                    <div className="flex flex-wrap gap-3">
+                      {member.specialties.map((specialty) => (
+                        <span
+                          key={specialty}
+                          className="px-4 py-2 bg-gold/10 text-gold rounded-full text-sm font-medium border border-gold/20"
+                        >
+                          {specialty}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* CTA */}
+                  <Link href="/">
+                    <Button className="gold-gradient text-white border-0 font-semibold">
+                      ติดต่อ {member.name.split(" ")[1]}
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </Link>
+                </div>
+
+                {/* Icon Section */}
+                <div className="flex-1 flex justify-center">
+                  <div className="w-64 h-64 rounded-3xl gold-gradient flex items-center justify-center shadow-2xl">
+                    <Users className="w-32 h-32 text-white/30" />
+                  </div>
                 </div>
               </div>
             ))}
@@ -157,40 +172,40 @@ export default function Team() {
         </div>
       </section>
 
-      {/* About Section */}
+      {/* Values Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="font-serif text-3xl font-bold text-foreground mb-4">
-              เกี่ยวกับทีมงาน
+              ค่านิยมของทีมงาน
             </h2>
             <p className="text-lg text-foreground/70">
-              ทีมของสำนักงานกฎหมายนิตินิยม ประกอบด้วยบุคลากรที่มีความรู้ความสามารถและประสบการณ์
+              เรามุ่งมั่นให้บริการด้วยความเป็นมืออาชีพและจริยธรรมสูงสุด
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-white rounded-2xl p-8 shadow-sm border border-border hover:shadow-md transition-shadow">
               <div className="w-12 h-12 rounded-xl gold-gradient flex items-center justify-center mb-4">
-                <Scale className="w-6 h-6 text-white" />
+                <Heart className="w-6 h-6 text-white" />
               </div>
               <h3 className="font-semibold text-lg text-foreground mb-2">
-                ความเชี่ยวชาญ
+                ความเอาใจใส่
               </h3>
               <p className="text-foreground/70">
-                ทีมงานของเรามีความเชี่ยวชาญในด้านกฎหมายต่างๆ ทั้งอาญา แพ่ง สัญญา และการทวงถามหนี้
+                ตั้งใจฟังและเข้าใจปัญหาของลูกค้าอย่างแท้จริง เพื่อหาทางแก้ไขที่ดีที่สุด
               </p>
             </div>
 
             <div className="bg-white rounded-2xl p-8 shadow-sm border border-border hover:shadow-md transition-shadow">
               <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4">
-                <Phone className="w-6 h-6" />
+                <Award className="w-6 h-6" />
               </div>
               <h3 className="font-semibold text-lg text-foreground mb-2">
-                บริการที่ดี
+                ความเชี่ยวชาญ
               </h3>
               <p className="text-foreground/70">
-                มุ่งมั่นให้บริการที่ดีที่สุด พร้อมตั้งใจฟังและเข้าใจปัญหาของลูกค้าอย่างแท้จริง
+                ทีมที่มีความรู้และประสบการณ์สูงในด้านกฎหมายต่างๆ พร้อมอัปเดตความรู้อยู่เสมอ
               </p>
             </div>
 
@@ -203,18 +218,6 @@ export default function Team() {
               </h3>
               <p className="text-foreground/70">
                 ยึดมั่นในหลักการยุติธรรมและจริยธรรมวิชาชีพในการให้บริการทางกฎหมาย
-              </p>
-            </div>
-
-            <div className="bg-white rounded-2xl p-8 shadow-sm border border-border hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-4">
-                <Mail className="w-6 h-6" />
-              </div>
-              <h3 className="font-semibold text-lg text-foreground mb-2">
-                การสื่อสาร
-              </h3>
-              <p className="text-foreground/70">
-                ติดต่อสื่อสารอย่างชัดเจนและโปร่งใส เพื่อให้ลูกค้าเข้าใจสถานการณ์ได้ดี
               </p>
             </div>
           </div>
