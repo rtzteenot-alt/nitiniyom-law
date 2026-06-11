@@ -12,11 +12,13 @@ import AdminAppointments from "./pages/admin/Appointments";
 import AdminMessages from "./pages/admin/Messages";
 import AdminInvoices from "./pages/admin/Invoices";
 import AdminLogin from "./pages/admin/Login";
+import Team from "./pages/Team";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/team" component={Team} />
       <Route path="/admin/login" component={AdminLogin} />
       <Route path="/admin" component={AdminDashboard} />
       <Route path="/admin/clients" component={AdminClients} />

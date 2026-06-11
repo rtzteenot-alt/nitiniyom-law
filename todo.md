@@ -35,3 +35,10 @@
 - [x] Responsive design ทุกหน้า
 - [x] Animation และ micro-interactions
 - [x] Vitest unit tests (17 tests passed)
+
+
+## Phase 6: Team/Organization Structure Page
+- [x] สร้างหน้า Team - แสดงข้อมูลสมาชิกทีมงาน
+- [x] เพิ่ม placeholder สำหรับรูปภาพสมาชิก
+- [x] เพิ่ม Team link ในเมนู Navigation
+- [x] ใช้ธีมเดียวกัน (Navy + Gold)
