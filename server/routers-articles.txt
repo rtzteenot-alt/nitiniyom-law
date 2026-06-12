@@ -1,0 +1,10 @@
+  // ===== Public: Articles (Blog) =====
+  articles: router({
+    list: publicProcedure.query(async () => {
+      const all = await getArticles("published");
+      return all;
+    }),
+    bySlug: publicProcedure.input(z.object({ slug: z.string() })).query(({ input }) =>
+      getArticleBySlug(input.slug)
+    ),
+  }),

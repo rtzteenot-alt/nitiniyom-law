@@ -15,6 +15,13 @@
       "when": 1781111772481,
       "tag": "0001_confused_mantis",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1781278368936,
+      "tag": "0002_outgoing_maverick",
+      "breakpoints": true
     }
   ]
 }

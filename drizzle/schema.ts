@@ -132,3 +132,20 @@ export const invoices = mysqlTable("invoices", {
 
 export type Invoice = typeof invoices.$inferSelect;
 export type InsertInvoice = typeof invoices.$inferInsert;
+
+export const articles = mysqlTable("articles", {
+  id: int("id").autoincrement().primaryKey(),
+  title: varchar("title", { length: 255 }).notNull(),
+  slug: varchar("slug", { length: 255 }).notNull().unique(),
+  excerpt: text("excerpt"),
+  content: text("content").notNull(),
+  category: varchar("category", { length: 100 }).notNull(),
+  author: varchar("author", { length: 255 }).default("สำนักงานกฎหมายนิตินิยม"),
+  status: mysqlEnum("status", ["draft", "published", "archived"]).default("draft").notNull(),
+  publishedAt: timestamp("publishedAt"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Article = typeof articles.$inferSelect;
+export type InsertArticle = typeof articles.$inferInsert;

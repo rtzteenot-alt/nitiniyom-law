@@ -42,3 +42,16 @@
 - [x] เพิ่ม placeholder สำหรับรูปภาพสมาชิก
 - [x] เพิ่ม Team link ในเมนู Navigation
 - [x] ใช้ธีมเดียวกัน (Navy + Gold)
+
+## Phase 7: Blog/Articles
+- [x] สร้าง articles table ในฐานข้อมูล
+- [x] สร้าง query helpers ใน server/db.ts
+- [x] สร้าง tRPC routes สำหรับ articles (public + admin)
+- [x] สร้างหน้า Blog listing
+- [x] สร้างหน้า Blog detail
+- [x] เพิ่ม Blog link ในเมนู Navigation
+- [x] Responsive design (mobile + desktop)
+- [x] Tests ผ่านทั้งหมด 17/17
+
+
+

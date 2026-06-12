@@ -30,6 +30,11 @@ import {
   getDashboardStats,
   getMonthlyRevenue,
   getCaseTypeStats,
+  getArticles,
+  getArticleBySlug,
+  createArticle,
+  updateArticle,
+  deleteArticle,
 } from "./db";
 import { notifyOwner } from "./_core/notification";
 
@@ -313,6 +318,72 @@ export const appRouter = router({
       .mutation(async ({ input }) => {
         const { id, ...data } = input;
         await updateInvoice(id, data);
+        return { success: true };
+      }),
+  }),
+
+  // ===== Public: Articles (Blog) =====
+  articles: router({
+    list: publicProcedure.query(async () => {
+      const all = await getArticles("published");
+      return all;
+    }),
+    bySlug: publicProcedure.input(z.object({ slug: z.string() })).query(({ input }) =>
+      getArticleBySlug(input.slug)
+    ),
+  }),
+
+  // ===== Admin: Articles Management =====
+  articlesAdmin: router({
+    list: adminProcedure.query(() => getArticles()),
+    create: adminProcedure
+      .input(
+        z.object({
+          title: z.string().min(1),
+          slug: z.string().min(1),
+          excerpt: z.string().optional(),
+          content: z.string().min(1),
+          category: z.string().min(1),
+          status: z.enum(["draft", "published", "archived"]).optional(),
+        })
+      )
+      .mutation(async ({ input }) => {
+        await createArticle({
+          title: input.title,
+          slug: input.slug,
+          excerpt: input.excerpt ?? null,
+          content: input.content,
+          category: input.category,
+          status: input.status ?? "draft",
+          publishedAt: input.status === "published" ? new Date() : null,
+        });
+        return { success: true };
+      }),
+    update: adminProcedure
+      .input(
+        z.object({
+          id: z.number(),
+          title: z.string().optional(),
+          slug: z.string().optional(),
+          excerpt: z.string().optional(),
+          content: z.string().optional(),
+          category: z.string().optional(),
+          status: z.enum(["draft", "published", "archived"]).optional(),
+        })
+      )
+      .mutation(async ({ input }) => {
+        const { id, ...data } = input;
+        const updateData: any = { ...data };
+        if (data.status === "published") {
+          updateData.publishedAt = new Date();
+        }
+        await updateArticle(id, updateData);
+        return { success: true };
+      }),
+    delete: adminProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input }) => {
+        await deleteArticle(input.id);
         return { success: true };
       }),
   }),

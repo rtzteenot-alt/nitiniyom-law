@@ -8,11 +8,13 @@ import {
   appointments,
   contactMessages,
   invoices,
+  articles,
   InsertClient,
   InsertCase,
   InsertAppointment,
   InsertContactMessage,
   InsertInvoice,
+  InsertArticle,
 } from "../drizzle/schema";
 import { ENV } from "./_core/env";
 
@@ -298,4 +300,43 @@ export async function getCaseTypeStats() {
     GROUP BY type
   `);
   return (result[0] as unknown) as Array<{ type: string; count: number }>;
+}
+
+// ===== Articles =====
+export async function getArticles(status?: string) {
+  const db = await getDb();
+  if (!db) return [];
+  if (status) {
+    return db
+      .select()
+      .from(articles)
+      .where(eq(articles.status, status as any))
+      .orderBy(desc(articles.publishedAt || articles.createdAt));
+  }
+  return db.select().from(articles).orderBy(desc(articles.publishedAt || articles.createdAt));
+}
+
+export async function getArticleBySlug(slug: string) {
+  const db = await getDb();
+  if (!db) return null;
+  const result = await db.select().from(articles).where(eq(articles.slug, slug)).limit(1);
+  return result.length > 0 ? result[0] : null;
+}
+
+export async function createArticle(data: InsertArticle) {
+  const db = await getDb();
+  if (!db) throw new Error("DB not available");
+  return db.insert(articles).values(data);
+}
+
+export async function updateArticle(id: number, data: Partial<InsertArticle>) {
+  const db = await getDb();
+  if (!db) throw new Error("DB not available");
+  return db.update(articles).set(data).where(eq(articles.id, id));
+}
+
+export async function deleteArticle(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("DB not available");
+  return db.delete(articles).where(eq(articles.id, id));
 }

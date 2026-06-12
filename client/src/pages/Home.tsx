@@ -143,6 +143,11 @@ export default function Home() {
                   ทีมงาน
                 </span>
               </Link>
+              <Link href="/blog">
+                <span className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors cursor-pointer">
+                  บทความ
+                </span>
+              </Link>
               {[
                 { label: "เกี่ยวกับเรา", id: "about" },
                 { label: "บริการ", id: "services" },
@@ -184,6 +189,11 @@ export default function Home() {
               <Link href="/team">
                 <div className="text-left py-2 text-sm font-medium text-foreground/80 hover:text-foreground border-b border-border/50 cursor-pointer">
                   ทีมงาน
+                </div>
+              </Link>
+              <Link href="/blog">
+                <div className="text-left py-2 text-sm font-medium text-foreground/80 hover:text-foreground border-b border-border/50 cursor-pointer">
+                  บทความ
                 </div>
               </Link>
               {[
