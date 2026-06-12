@@ -44,6 +44,13 @@ export default function Team() {
       position: "ทนายความ",
       education: "มหาวิทยาลัยรามคำแหง",
     },
+    {
+      id: 2,
+      name: "ยศกร กันภัย",
+      title: "นาย",
+      position: "ทนายความ",
+      education: "มหาวิทยาลัยรามคำแหง",
+    },
   ];
 
   return (
