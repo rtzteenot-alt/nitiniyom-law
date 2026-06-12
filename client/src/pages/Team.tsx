@@ -41,14 +41,14 @@ export default function Team() {
       id: 1,
       name: "ธนกร คูณตุ้ม",
       title: "นาย",
-      position: "ทนายความ",
+      position: "ผู้ช่วยทนายความ",
       education: "มหาวิทยาลัยรามคำแหง",
     },
     {
       id: 2,
       name: "ยศกร กันภัย",
       title: "นาย",
-      position: "ทนายความ",
+      position: "ทนายความและที่ปรึกษาสำนักงาน",
       education: "มหาวิทยาลัยรามคำแหง",
     },
   ];
