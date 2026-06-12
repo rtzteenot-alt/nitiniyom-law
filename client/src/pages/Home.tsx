@@ -518,11 +518,31 @@ export default function Home() {
                       <MapPin className="w-5 h-5 text-muted-foreground" />
                     </div>
                     <div>
-                      <p className="text-xs text-muted-foreground mb-0.5">ที่ตั้ง</p>
+                      <p className="text-xs text-muted-foreground mb-0.5">สำนักงานหลัก</p>
+                      <p className="font-medium text-foreground text-sm leading-relaxed">
+                        บ้านเลขที่ 11 บ้านโนนสมบูรณ์ หมู่ 5 ตำบล บ้านแมด อำเภอบุณฑริก อุบลราชธานี 34230
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-5 h-5 text-muted-foreground" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground mb-0.5">ศูนย์ประสานงาน</p>
+                      <p className="font-medium text-foreground text-sm leading-relaxed">
+                        398 บ้านเรียงแถวใต้ ต.นิคมสร้างตนเองลำโดมน้อย อ.สิรินธร จ.อุบลราชธานี
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-5 h-5 text-muted-foreground" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground mb-0.5">พื้นที่บริการเพิ่มเติม</p>
                       <p className="font-medium text-foreground text-sm">
-                        สำนักงานกฎหมายนิตินิยม
-                        <br />
-                        กรุงเทพมหานคร
+                        กรุงเทพฯ, ปริมณฑล
                       </p>
                     </div>
                   </div>
