@@ -609,7 +609,7 @@ export default function Home() {
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground mb-0.5">อีเมล</p>
-                      <p className="font-medium text-foreground">info@nitiniyom.com</p>
+                      <p className="font-medium text-foreground">niyomphakjira@gmail.com</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
@@ -618,20 +618,24 @@ export default function Home() {
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground mb-0.5">สำนักงานหลัก</p>
-                      <p className="font-medium text-foreground text-sm leading-relaxed">
-                        บ้านเลขที่ 11 บ้านโนนสมบูรณ์ หมู่ 5 ตำบล บ้านแมด อำเภอบุณฑริก อุบลราชธานี 34230
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-5 h-5 text-muted-foreground" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground mb-0.5">ศูนย์ประสานงาน</p>
-                      <p className="font-medium text-foreground text-sm leading-relaxed">
-                        398 บ้านเรียงแถวใต้ ต.นิคมสร้างตนเองลำโดมน้อย อ.สิรินธร จ.อุบลราชธานี
-                      </p>
+                      <p className="font-serif font-bold text-sm text-foreground mb-2">พื้นที่จังหวัดอุบลราชธานี</p>
+                      <div className="space-y-3">
+                        <div>
+                          <p className="text-xs text-muted-foreground mb-1">สำนักงานหลัก</p>
+                          <p className="font-medium text-foreground text-sm leading-relaxed">
+                            บ้านเลขที่ 11 บ้านโนนสมบูรณ์ หมู่ 5 ตำบล บ้านแมด อำเภอบุณฑริก อุบลราชธานี 34230
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-muted-foreground mb-1">ศูนย์ประสานงาน</p>
+                          <p className="font-medium text-foreground text-sm leading-relaxed">
+                            398 บ้านเรียงแถวใต้ ต.นิคมสร้างตนเองลำโดมน้อย อ.สิรินธร จ.อุบลราชธานี 34350
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-muted-foreground mb-1">ทั่วพื้นที่จังหวัดอุบลราชธานี</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
@@ -709,7 +713,7 @@ export default function Home() {
                 </a>
                 <div className="flex items-center gap-2">
                   <Mail className="w-4 h-4 text-amber-400" />
-                  info@nitiniyom.com
+                  niyomphakjira@gmail.com
                 </div>
               </div>
             </div>
