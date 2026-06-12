@@ -483,92 +483,6 @@ export default function Home() {
           </div>
 
           <div className="grid lg:grid-cols-5 gap-12">
-            {/* Contact Info */}
-            <div className="lg:col-span-2 space-y-6">
-              <div className="bg-white rounded-2xl p-7 shadow-sm border border-border">
-                <h3 className="font-serif text-lg font-bold text-foreground mb-6">
-                  ข้อมูลติดต่อ
-                </h3>
-                <div className="space-y-5">
-                  <a
-                    href="tel:0615909678"
-                    className="flex items-start gap-4 group"
-                  >
-                    <div className="w-10 h-10 rounded-xl gold-gradient flex items-center justify-center flex-shrink-0 shadow-sm">
-                      <Phone className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground mb-0.5">โทรศัพท์</p>
-                      <p className="font-semibold text-foreground group-hover:text-gold transition-colors">
-                        061-590-9678
-                      </p>
-                    </div>
-                  </a>
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <Mail className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground mb-0.5">อีเมล</p>
-                      <p className="font-medium text-foreground">info@nitiniyom.com</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-5 h-5 text-muted-foreground" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground mb-0.5">สำนักงานหลัก</p>
-                      <p className="font-medium text-foreground text-sm leading-relaxed">
-                        บ้านเลขที่ 11 บ้านโนนสมบูรณ์ หมู่ 5 ตำบล บ้านแมด อำเภอบุณฑริก อุบลราชธานี 34230
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-5 h-5 text-muted-foreground" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground mb-0.5">ศูนย์ประสานงาน</p>
-                      <p className="font-medium text-foreground text-sm leading-relaxed">
-                        398 บ้านเรียงแถวใต้ ต.นิคมสร้างตนเองลำโดมน้อย อ.สิรินธร จ.อุบลราชธานี
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-5 h-5 text-muted-foreground" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground mb-0.5">พื้นที่บริการเพิ่มเติม</p>
-                      <p className="font-medium text-foreground text-sm">
-                        กรุงเทพฯ, ปริมณฑล
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-primary rounded-2xl p-7 text-primary-foreground">
-                <Users className="w-8 h-8 text-gold mb-4" />
-                <h4 className="font-serif text-lg font-bold mb-2">เวลาทำการ</h4>
-                <div className="space-y-2 text-sm text-primary-foreground/80">
-                  <div className="flex justify-between">
-                    <span>จันทร์ – ศุกร์</span>
-                    <span className="font-medium text-primary-foreground">08:00 – 18:00</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>เสาร์ – อาทิตย์</span>
-                    <span className="font-medium text-primary-foreground">09:00 – 16:00</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>นอกเวลา (ฉุกเฉิน)</span>
-                    <span className="font-medium text-amber-400">โทรได้ตลอด 24 ชม.</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             {/* Contact Form */}
             <div className="lg:col-span-3">
               <div className="bg-white rounded-2xl p-8 shadow-sm border border-border">
@@ -655,6 +569,92 @@ export default function Home() {
                     {!submitContact.isPending && <ArrowRight className="w-4 h-4 ml-2" />}
                   </Button>
                 </form>
+              </div>
+            </div>
+
+            {/* Contact Info */}
+            <div className="lg:col-span-2 space-y-6">
+              <div className="bg-white rounded-2xl p-7 shadow-sm border border-border">
+                <h3 className="font-serif text-lg font-bold text-foreground mb-6">
+                  ข้อมูลติดต่อ
+                </h3>
+                <div className="space-y-5">
+                  <a
+                    href="tel:0615909678"
+                    className="flex items-start gap-4 group"
+                  >
+                    <div className="w-10 h-10 rounded-xl gold-gradient flex items-center justify-center flex-shrink-0 shadow-sm">
+                      <Phone className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground mb-0.5">โทรศัพท์</p>
+                      <p className="font-semibold text-foreground group-hover:text-gold transition-colors">
+                        061-590-9678
+                      </p>
+                    </div>
+                  </a>
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <Mail className="w-5 h-5 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground mb-0.5">อีเมล</p>
+                      <p className="font-medium text-foreground">info@nitiniyom.com</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-5 h-5 text-muted-foreground" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground mb-0.5">สำนักงานหลัก</p>
+                      <p className="font-medium text-foreground text-sm leading-relaxed">
+                        บ้านเลขที่ 11 บ้านโนนสมบูรณ์ หมู่ 5 ตำบล บ้านแมด อำเภอบุณฑริก อุบลราชธานี 34230
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-5 h-5 text-muted-foreground" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground mb-0.5">ศูนย์ประสานงาน</p>
+                      <p className="font-medium text-foreground text-sm leading-relaxed">
+                        398 บ้านเรียงแถวใต้ ต.นิคมสร้างตนเองลำโดมน้อย อ.สิรินธร จ.อุบลราชธานี
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-5 h-5 text-muted-foreground" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground mb-0.5">พื้นที่บริการเพิ่มเติม</p>
+                      <p className="font-medium text-foreground text-sm">
+                        กรุงเทพฯ, ปริมณฑล
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-primary rounded-2xl p-7 text-primary-foreground">
+                <Users className="w-8 h-8 text-gold mb-4" />
+                <h4 className="font-serif text-lg font-bold mb-2">เวลาทำการ</h4>
+                <div className="space-y-2 text-sm text-primary-foreground/80">
+                  <div className="flex justify-between">
+                    <span>จันทร์ – ศุกร์</span>
+                    <span className="font-medium text-primary-foreground">08:00 – 18:00</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>เสาร์ – อาทิตย์</span>
+                    <span className="font-medium text-primary-foreground">09:00 – 16:00</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>นอกเวลา (ฉุกเฉิน)</span>
+                    <span className="font-medium text-amber-400">โทรได้ตลอด 24 ชม.</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
