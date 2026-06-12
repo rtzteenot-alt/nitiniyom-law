@@ -42,6 +42,7 @@ export default function Team() {
       name: "ธนกร คูณตุ้ม",
       title: "นาย",
       position: "ทนายความ",
+      education: "มหาวิทยาลัยรามคำแหง",
     },
   ];
 
@@ -202,9 +203,14 @@ export default function Team() {
                 <h3 className="font-serif text-2xl font-bold text-foreground mb-1">
                   {partner.title} {partner.name}
                 </h3>
-                <p className="text-base font-semibold text-gold">
+                <p className="text-base font-semibold text-gold mb-3">
                   {partner.position}
                 </p>
+                {partner.education && (
+                  <p className="text-sm text-foreground/60">
+                    <span className="font-medium">ประวัติการศึกษา:</span> {partner.education}
+                  </p>
+                )}
               </div>
             ))}
           </div>

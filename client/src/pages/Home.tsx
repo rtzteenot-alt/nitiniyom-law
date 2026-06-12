@@ -140,7 +140,7 @@ export default function Home() {
             <div className="hidden md:flex items-center gap-8">
               <Link href="/team">
                 <span className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors cursor-pointer">
-                  ทีมงาน
+                  โครงสร้างขององค์กร
                 </span>
               </Link>
               <Link href="/blog">
@@ -188,7 +188,7 @@ export default function Home() {
             <div className="container py-4 flex flex-col gap-3">
               <Link href="/team">
                 <div className="text-left py-2 text-sm font-medium text-foreground/80 hover:text-foreground border-b border-border/50 cursor-pointer">
-                  ทีมงาน
+                  โครงสร้างขององค์กร
                 </div>
               </Link>
               <Link href="/blog">
