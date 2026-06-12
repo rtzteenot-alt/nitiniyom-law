@@ -43,6 +43,7 @@ export default function Team() {
       title: "นาย",
       position: "ผู้ช่วยทนายความ",
       education: "มหาวิทยาลัยรามคำแหง",
+      expertise: ["กฎหมายแพ่ง", "กฎหมายวิธีพิจารณาแพ่ง", "คดีครอบครัว"],
     },
     {
       id: 2,
@@ -50,6 +51,7 @@ export default function Team() {
       title: "นาย",
       position: "ทนายความและที่ปรึกษาสำนักงาน",
       education: "มหาวิทยาลัยรามคำแหง",
+      expertise: ["กฎหมายแพ่ง", "การจดนิติบุคคล", "การทำนิติกรรม"],
     },
   ];
 
@@ -214,9 +216,19 @@ export default function Team() {
                   {partner.position}
                 </p>
                 {partner.education && (
-                  <p className="text-sm text-foreground/60">
+                  <p className="text-sm text-foreground/60 mb-3">
                     <span className="font-medium">ประวัติการศึกษา:</span> {partner.education}
                   </p>
+                )}
+                {partner.expertise && (
+                  <div className="text-sm text-foreground/70">
+                    <span className="font-medium block mb-2">ความเชี่ยวชาญ:</span>
+                    <ul className="list-disc list-inside space-y-1">
+                      {partner.expertise.map((exp, idx) => (
+                        <li key={idx}>{exp}</li>
+                      ))}
+                    </ul>
+                  </div>
                 )}
               </div>
             ))}
