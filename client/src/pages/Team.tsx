@@ -16,19 +16,32 @@ export default function Team() {
   const teamMembers = [
     {
       id: 1,
-      name: "นาย นิยม ดีจันทึก",
-      position: "ตำแหน่ง : ผู้อำนวยการฝ่ายกฎหมาย",
-      description: "หน้าที่ : กำกับการทำงานและดูแลคดีในสำนักงาน บริหารภาพรวมของทีมกฎหมาย ตรวจสอบการทำงาน และควบคุมทิศทางการดำเนินคดีทั้งองค์กร",
+      name: "นิยม ดีจันทึก",
+      title: "นาย",
+      position: "ผู้อำนวยการฝ่ายกฎหมาย",
+      description: "กำกับการทำงานและดูแลคดีในสำนักงาน บริหารภาพรวมของทีมกฎหมาย ตรวจสอบการทำงาน และควบคุมทิศทางการดำเนินคดีทั้งองค์กร",
+      education: "มหาวิทยาลัยรามคำแหง",
       specialties: ["กฎหมายอาญา", "กฎหมายธุรกิจ", "การทำสัญญา"],
       facebookUrl: "https://web.facebook.com/niyom.nottee?locale=th_TH",
     },
     {
       id: 2,
-      name: "นางสาว ภัคจิรา นาคพลกรัง",
-      position: "ตำแหน่ง : ทนายความและเลขานุการสำนักงาน",
+      name: "ภัคจิรา นาคพลกรัง",
+      title: "นางสาว",
+      position: "ทนายความและเลขานุการสำนักงาน",
       description: "ทนายความที่มีความเชี่ยวชาญในด้านกฎหมายแพ่งและการจัดการสำนักงานเพื่อดำเนินการงานทั้งปวงในสำนักงาน",
+      education: "มหาวิทยาลัยขอนแก่น เกรียรตินิยมอันดับ 1",
       specialties: ["กฎหมายแพ่ง", "หนังสือทวงถามหนี้", "ปรึกษาเบื้องต้น"],
       facebookUrl: "https://web.facebook.com/som.phakji?locale=th_TH",
+    },
+  ];
+
+  const partners = [
+    {
+      id: 1,
+      name: "ธนกร คูณตุ้ม",
+      title: "นาย",
+      position: "ทนายความ",
     },
   ];
 
@@ -125,13 +138,18 @@ export default function Team() {
               >
                 {/* Info Section */}
                 <div className="flex-1">
-                  <h3 className="font-serif text-3xl font-bold text-foreground mb-2">
-                    {member.name}
+                  <h3 className="font-serif text-2xl font-bold text-foreground mb-1">
+                    {member.title} {member.name}
                   </h3>
-                  <p className="text-xl font-semibold text-gold mb-6">
+                  <p className="text-base font-semibold text-gold mb-4">
                     {member.position}
                   </p>
-                  <p className="text-lg text-foreground/70 leading-relaxed mb-8">
+                  <div className="mb-4 pb-4 border-b border-border">
+                    <p className="text-sm text-foreground/60">
+                      <span className="font-medium">ประวัติการศึกษา:</span> {member.education}
+                    </p>
+                  </div>
+                  <p className="text-base text-foreground/70 leading-relaxed mb-8">
                     {member.description}
                   </p>
 
@@ -162,12 +180,31 @@ export default function Team() {
                   </a>
                 </div>
 
-                {/* Icon Section */}
-                <div className="flex-1 flex justify-center">
-                  <div className="w-64 h-64 rounded-3xl gold-gradient flex items-center justify-center shadow-2xl">
-                    <Users className="w-32 h-32 text-white/30" />
-                  </div>
-                </div>
+
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Partners Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/50">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="font-serif text-3xl font-bold text-foreground mb-12 text-center">
+            ผู้ร่วมมือ
+          </h2>
+          <div className="grid md:grid-cols-1 gap-8">
+            {partners.map((partner) => (
+              <div
+                key={partner.id}
+                className="bg-white rounded-2xl p-8 shadow-sm border border-border hover:shadow-md transition-shadow"
+              >
+                <h3 className="font-serif text-2xl font-bold text-foreground mb-1">
+                  {partner.title} {partner.name}
+                </h3>
+                <p className="text-base font-semibold text-gold">
+                  {partner.position}
+                </p>
               </div>
             ))}
           </div>
