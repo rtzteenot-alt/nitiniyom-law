@@ -9,12 +9,13 @@ import { format } from "date-fns";
 import { th } from "date-fns/locale";
 
 const categoryColors: Record<string, string> = {
-  "กฎหมายอาญา": "bg-red-100 text-red-800",
-  "กฎหมายแพ่ง": "bg-blue-100 text-blue-800",
-  "การทำสัญญา": "bg-green-100 text-green-800",
-  "ทวงถามหนี้": "bg-yellow-100 text-yellow-800",
-  "ปรึกษาเบื้องต้น": "bg-purple-100 text-purple-800",
-  "อื่น ๆ": "bg-gray-100 text-gray-800",
+  "กฎหมายอาญา": "bg-red-600/20 text-red-700 border border-red-300",
+  "กฎหมายแพ่ง": "bg-blue-600/20 text-blue-700 border border-blue-300",
+  "การทำสัญญา": "bg-amber-600/20 text-amber-700 border border-amber-300",
+  "ทวงถามหนี้": "bg-red-500/20 text-red-700 border border-red-300",
+  "ปรึกษาเบื้องต้น": "bg-blue-500/20 text-blue-700 border border-blue-300",
+  "business_law": "bg-amber-600/20 text-amber-700 border border-amber-300",
+  "อื่น ๆ": "bg-slate-200 text-slate-800 border border-slate-300",
 };
 
 interface Article {
@@ -51,17 +52,20 @@ export default function Blog() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#1a3a52] to-[#2d5a7b] text-white py-16 px-4">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 font-serif">บทความกฎหมาย</h1>
-          <p className="text-lg text-gray-200">
+      <div className="bg-gradient-to-r from-blue-900 via-red-800 to-blue-900 text-white py-16 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.3'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+        }} />
+        <div className="max-w-4xl mx-auto relative z-10">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 font-serif text-amber-300">บทความกฎหมาย</h1>
+          <p className="text-lg text-blue-100">
             ข้อมูลและความรู้เกี่ยวกับกฎหมายที่เป็นประโยชน์ต่อคุณ
           </p>
         </div>
       </div>
 
       {/* Content */}
-      <div className="max-w-5xl mx-auto px-4 py-12">
+      <div className="max-w-5xl mx-auto px-4 py-12 bg-white/50">
         {isLoading ? (
           <div className="flex justify-center items-center py-20">
             <Spinner />
@@ -81,7 +85,7 @@ export default function Blog() {
                         {article.category}
                       </Badge>
                     </div>
-                    <CardTitle className="line-clamp-2 text-lg">{article.title}</CardTitle>
+                    <CardTitle className="line-clamp-2 text-lg text-amber-700 font-semibold">{article.title}</CardTitle>
                     <CardDescription className="text-xs text-muted-foreground">
                       {article.publishedAt
                         ? format(new Date(article.publishedAt), "d MMMM yyyy", { locale: th })
@@ -101,14 +105,17 @@ export default function Blog() {
       </div>
 
       {/* CTA Section */}
-      <div className="bg-[#1a3a52] text-white py-12 px-4 mt-12">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">มีคำถามเกี่ยวกับกฎหมายหรือไม่?</h2>
-          <p className="text-gray-300 mb-6">
+      <div className="bg-gradient-to-r from-blue-900 via-red-800 to-blue-900 text-white py-12 px-4 mt-12 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.3'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+        }} />
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-amber-300">มีคำถามเกี่ยวกับกฎหมายหรือไม่?</h2>
+          <p className="text-blue-100 mb-6">
             ติดต่อเราเพื่อรับคำปรึกษาจากทนายความมืออาชีพ
           </p>
           <Link href="/#contact">
-            <Button className="bg-[#d4af37] hover:bg-[#c9a227] text-[#1a3a52] font-semibold">
+            <Button className="bg-amber-400 hover:bg-amber-500 text-blue-900 font-semibold shadow-lg">
               ติดต่อเรา
             </Button>
           </Link>
