@@ -165,3 +165,13 @@
   - [x] ปรับสไตล์ให้สอดคล้องกับโทรศัพท์ (gold-gradient background)
   - [x] เพิ่ม hover effect
 - [x] Tests ผ่านทั้งหมด 17/17
+
+## Phase 21: Add Email Notification System
+- [x] สร้างไฟล์ email.ts สำหรับส่งอีเมล
+  - [x] ใช้ Manus built-in email service
+  - [x] สร้างฟังก์ชัน sendEmail() พร้อม error handling
+- [x] แก้ไข contact.submit mutation
+  - [x] เพิ่มการส่งอีเมลไปยัง niyomphakjira@gmail.com
+  - [x] สร้าง HTML template สำหรับอีเมล
+  - [x] ส่งข้อมูลผู้ติดต่อ บริการ และข้อความ
+- [x] Tests ผ่านทั้งหมด 17/17

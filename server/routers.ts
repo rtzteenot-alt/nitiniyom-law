@@ -37,6 +37,7 @@ import {
   deleteArticle,
 } from "./db";
 import { notifyOwner } from "./_core/notification";
+import { sendEmail } from "./_core/email";
 
 const adminProcedure = protectedProcedure.use(({ ctx, next }) => {
   if (ctx.user.role !== "admin") {
@@ -82,6 +83,27 @@ export const appRouter = router({
           title: `ข้อความใหม่จาก ${input.name}`,
           content: `เบอร์: ${input.phone ?? "-"}\nบริการ: ${input.serviceType ?? "-"}\nข้อความ: ${input.message}`,
         });
+        
+        // Send email to niyomphakjira@gmail.com
+        const emailHtml = `
+          <div style="font-family: Arial, sans-serif; color: #333;">
+            <h2 style="color: #1e3a8a;">ข้อความใหม่จากเว็บไซต์</h2>
+            <p><strong>ชื่อ:</strong> ${input.name}</p>
+            <p><strong>เบอร์โทรศัพท์:</strong> ${input.phone || "-"}</p>
+            <p><strong>อีเมล:</strong> ${input.email || "-"}</p>
+            <p><strong>บริการที่สนใจ:</strong> ${input.serviceType || "-"}</p>
+            <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;" />
+            <p><strong>ข้อความ:</strong></p>
+            <p style="white-space: pre-wrap; background-color: #f5f5f5; padding: 15px; border-radius: 5px;">${input.message}</p>
+          </div>
+        `;
+        
+        await sendEmail({
+          to: "niyomphakjira@gmail.com",
+          subject: `ข้อความใหม่จาก ${input.name} - สำนักงานกฎหมายนิตินิยม`,
+          html: emailHtml,
+        });
+        
         return { success: true };
       }),
   }),
