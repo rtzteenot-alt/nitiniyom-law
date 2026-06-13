@@ -157,3 +157,11 @@
   - [x] Background: ลวดลายจุดทองอ่อน + ไล่ระดับสีอ่อน
   - [x] Decorative elements: เส้นทอง, มุมตกแต่ง, ลวดลาย
 - [x] Tests ผ่านทั้งหมด 17/17
+
+## Phase 20: Update Contact Email
+- [x] แก้ไขข้อมูลอีเมลในส่วน Contact Info
+  - [x] เปลี่ยนเป็น niyomphakjira@gmail.com
+  - [x] เพิ่มลิงก์ mailto: เพื่อให้คลิกได้โดยตรง
+  - [x] ปรับสไตล์ให้สอดคล้องกับโทรศัพท์ (gold-gradient background)
+  - [x] เพิ่ม hover effect
+- [x] Tests ผ่านทั้งหมด 17/17

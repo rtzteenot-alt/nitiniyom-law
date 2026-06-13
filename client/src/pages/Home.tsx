@@ -603,15 +603,20 @@ export default function Home() {
                       </p>
                     </div>
                   </a>
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <Mail className="w-5 h-5 text-primary" />
+                  <a
+                    href="mailto:niyomphakjira@gmail.com"
+                    className="flex items-start gap-4 group"
+                  >
+                    <div className="w-10 h-10 rounded-xl gold-gradient flex items-center justify-center flex-shrink-0 shadow-sm">
+                      <Mail className="w-5 h-5 text-white" />
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground mb-0.5">อีเมล</p>
-                      <p className="font-medium text-foreground">niyomphakjira@gmail.com</p>
+                      <p className="font-semibold text-foreground group-hover:text-gold transition-colors">
+                        niyomphakjira@gmail.com
+                      </p>
                     </div>
-                  </div>
+                  </a>
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center flex-shrink-0">
                       <MapPin className="w-5 h-5 text-muted-foreground" />
