@@ -9,13 +9,13 @@ import { format } from "date-fns";
 import { th } from "date-fns/locale";
 
 const categoryColors: Record<string, string> = {
-  "กฎหมายอาญา": "bg-red-600/20 text-red-700 border border-red-300",
-  "กฎหมายแพ่ง": "bg-blue-600/20 text-blue-700 border border-blue-300",
-  "การทำสัญญา": "bg-amber-600/20 text-amber-700 border border-amber-300",
-  "ทวงถามหนี้": "bg-red-500/20 text-red-700 border border-red-300",
-  "ปรึกษาเบื้องต้น": "bg-blue-500/20 text-blue-700 border border-blue-300",
-  "business_law": "bg-amber-600/20 text-amber-700 border border-amber-300",
-  "อื่น ๆ": "bg-slate-200 text-slate-800 border border-slate-300",
+  "กฎหมายอาญา": "bg-blue-100 text-blue-800 border border-blue-300",
+  "กฎหมายแพ่ง": "bg-amber-100 text-amber-800 border border-amber-300",
+  "การทำสัญญา": "bg-blue-50 text-blue-700 border border-blue-200",
+  "ทวงถามหนี้": "bg-amber-50 text-amber-700 border border-amber-200",
+  "ปรึกษาเบื้องต้น": "bg-blue-50 text-blue-700 border border-blue-200",
+  "business_law": "bg-amber-50 text-amber-700 border border-amber-200",
+  "อื่น ๆ": "bg-slate-100 text-slate-700 border border-slate-300",
 };
 
 interface Article {
@@ -50,50 +50,60 @@ export default function Blog() {
   }, [queryLoading]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-blue-900 via-red-800 to-blue-900 text-white py-16 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.3'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-blue-50 to-slate-50">
+      {/* Header - Luxury Design */}
+      <div className="relative overflow-hidden py-20 px-4">
+        {/* Background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900 via-blue-800 to-slate-900" />
+        {/* Gold accent line */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400" />
+        {/* Decorative pattern */}
+        <div className="absolute inset-0 opacity-5" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4af37'%3E%3Ccircle cx='50' cy='50' r='3'/%3E%3Ccircle cx='20' cy='20' r='2'/%3E%3Ccircle cx='80' cy='80' r='2'/%3E%3Ccircle cx='80' cy='20' r='2'/%3E%3Ccircle cx='20' cy='80' r='2'/%3E%3C/g%3E%3C/svg%3E")`
         }} />
-        <div className="max-w-4xl mx-auto relative z-10">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 font-serif text-amber-300">บทความกฎหมาย</h1>
-          <p className="text-lg text-blue-100">
-            ข้อมูลและความรู้เกี่ยวกับกฎหมายที่เป็นประโยชน์ต่อคุณ
+        <div className="max-w-5xl mx-auto relative z-10 text-center">
+          <div className="inline-block mb-4 px-4 py-2 rounded-full border border-amber-400/30 bg-amber-400/10">
+            <span className="text-amber-300 text-sm font-medium tracking-wider">📚 บทความกฎหมายเชิงลึก</span>
+          </div>
+          <h1 className="text-5xl md:text-6xl font-serif font-bold mb-4 text-white">บทความกฎหมาย</h1>
+          <div className="w-20 h-1 bg-gradient-to-r from-amber-400 to-amber-300 mx-auto mb-6" />
+          <p className="text-lg text-blue-100 max-w-2xl mx-auto">
+            ความรู้และข้อมูลกฎหมายที่เป็นประโยชน์ เพื่อให้คุณเข้าใจสิทธิและหน้าที่ของตนเองได้อย่างชัดเจน
           </p>
         </div>
       </div>
 
       {/* Content */}
-      <div className="max-w-5xl mx-auto px-4 py-12 bg-white/50">
+      <div className="max-w-5xl mx-auto px-4 py-16">
         {isLoading ? (
           <div className="flex justify-center items-center py-20">
             <Spinner />
           </div>
         ) : articles.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-gray-500 text-lg">ยังไม่มีบทความในขณะนี้</p>
+            <p className="text-slate-500 text-lg">ยังไม่มีบทความในขณะนี้</p>
           </div>
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {articles.map((article) => (
               <Link key={article.id} href={`/blog/${article.slug}`}>
-                <Card className="h-full hover:shadow-lg transition-shadow cursor-pointer border-border/50 hover:border-border">
-                  <CardHeader>
-                    <div className="flex items-start justify-between gap-2 mb-2">
+                <Card className="h-full hover:shadow-2xl transition-all duration-300 cursor-pointer border-amber-200/50 hover:border-amber-400 bg-white/80 backdrop-blur-sm hover:bg-white group">
+                  <CardHeader className="pb-3">
+                    <div className="flex items-start justify-between gap-2 mb-3">
                       <Badge className={categoryColors[article.category] || categoryColors["อื่น ๆ"]}>
                         {article.category}
                       </Badge>
                     </div>
-                    <CardTitle className="line-clamp-2 text-lg text-amber-700 font-semibold">{article.title}</CardTitle>
-                    <CardDescription className="text-xs text-muted-foreground">
-                      {article.publishedAt
+                    <div className="h-1 w-12 bg-gradient-to-r from-amber-400 to-amber-300 rounded-full mb-2 group-hover:w-full transition-all duration-300" />
+                    <CardTitle className="line-clamp-2 text-lg text-blue-900 font-serif font-bold group-hover:text-amber-700 transition-colors">{article.title}</CardTitle>
+                    <CardDescription className="text-xs text-blue-600/70 mt-2">
+                      📅 {article.publishedAt
                         ? format(new Date(article.publishedAt), "d MMMM yyyy", { locale: th })
                         : format(new Date(article.createdAt), "d MMMM yyyy", { locale: th })}
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-muted-foreground line-clamp-3">
+                    <p className="text-sm text-slate-600 line-clamp-3 leading-relaxed">
                       {article.excerpt || article.content.substring(0, 150)}...
                     </p>
                   </CardContent>
@@ -104,19 +114,28 @@ export default function Blog() {
         )}
       </div>
 
-      {/* CTA Section */}
-      <div className="bg-gradient-to-r from-blue-900 via-red-800 to-blue-900 text-white py-12 px-4 mt-12 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.3'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+      {/* CTA Section - Luxury */}
+      <div className="relative overflow-hidden py-16 px-4 mt-12">
+        {/* Background */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900 via-blue-800 to-slate-900" />
+        {/* Gold accent line */}
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400" />
+        {/* Decorative corners */}
+        <div className="absolute top-0 left-0 w-20 h-20 border-t-2 border-l-2 border-amber-400/30" />
+        <div className="absolute bottom-0 right-0 w-20 h-20 border-b-2 border-r-2 border-amber-400/30" />
+        {/* Pattern */}
+        <div className="absolute inset-0 opacity-5" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4af37'%3E%3Ccircle cx='50' cy='50' r='3'/%3E%3Ccircle cx='20' cy='20' r='2'/%3E%3Ccircle cx='80' cy='80' r='2'/%3E%3Ccircle cx='80' cy='20' r='2'/%3E%3Ccircle cx='20' cy='80' r='2'/%3E%3C/g%3E%3C/svg%3E")`
         }} />
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-amber-300">มีคำถามเกี่ยวกับกฎหมายหรือไม่?</h2>
-          <p className="text-blue-100 mb-6">
-            ติดต่อเราเพื่อรับคำปรึกษาจากทนายความมืออาชีพ
+          <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-amber-300">มีคำถามเกี่ยวกับกฎหมายหรือไม่?</h2>
+          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-amber-300 mx-auto mb-6" />
+          <p className="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
+            ติดต่อเราเพื่อรับคำปรึกษาจากทนายความมืออาชีพของสำนักงานกฎหมายนิตินิยม
           </p>
           <Link href="/#contact">
-            <Button className="bg-amber-400 hover:bg-amber-500 text-blue-900 font-semibold shadow-lg">
-              ติดต่อเรา
+            <Button className="bg-gradient-to-r from-amber-400 to-amber-300 hover:from-amber-500 hover:to-amber-400 text-blue-900 font-semibold px-8 py-6 text-lg shadow-xl hover:shadow-2xl transition-all duration-300">
+              ติดต่อเรา →
             </Button>
           </Link>
         </div>
