@@ -444,42 +444,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== CTA BANNER ===== */}
-      <section className="py-16 navy-gradient relative overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c9a84c' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        />
-        <div className="container relative z-10 text-center">
-          <h2 className="font-serif text-2xl md:text-3xl font-bold text-white mb-4">
-            มีปัญหาด้านกฎหมาย? ปรึกษาเราได้เลย
-          </h2>
-          <p className="text-white/70 mb-8 max-w-lg mx-auto">
-            โทรหาเราได้ทันที หรือส่งข้อความเพื่อนัดหมายปรึกษา ฟรี ไม่มีค่าใช้จ่ายเบื้องต้น
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="tel:0615909678">
-              <Button
-                size="lg"
-                className="gold-gradient text-white border-0 font-semibold px-8 shadow-lg"
-              >
-                <Phone className="w-4 h-4 mr-2" />
-                โทร 061-590-9678
-              </Button>
-            </a>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-white/30 text-white hover:bg-white/10 bg-transparent font-medium px-8"
-              onClick={() => scrollTo("contact")}
-            >
-              ส่งข้อความ
-            </Button>
-          </div>
-        </div>
-      </section>
+
 
       {/* ===== CONTACT SECTION ===== */}
       <section id="contact" className="py-20 md:py-28 bg-background">

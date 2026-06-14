@@ -206,3 +206,7 @@
   - [x] Desktop menu
   - [x] Mobile menu
 - [x] Tests ผ่านทั้งหมด 17/17
+
+## Phase 25: Remove CTA Banner Section
+- [x] ลบส่วน CTA Banner "มีปัญหาด้านกฎหมาย? ปรึกษาเราได้เลย" ออกจากหน้า Home
+- [x] Tests ผ่านทั้งหมด 17/17
