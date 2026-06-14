@@ -32,7 +32,7 @@ export default function Services() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-blue-50 to-slate-50">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Header - Luxury Design */}
       <div className="relative overflow-hidden py-20 px-4">
         {/* Background gradient */}
@@ -129,7 +129,7 @@ export default function Services() {
         </div>
 
         {/* Benefits Section */}
-        <div className="mb-16 bg-gradient-to-r from-blue-50 to-slate-50 rounded-lg p-8 md:p-12 border border-amber-200/30">
+        <div className="mb-16 bg-background rounded-lg p-8 md:p-12 border border-amber-200/30">
           <h2 className="text-3xl font-serif font-bold text-blue-900 mb-8">
             ประโยชน์ของการใช้บริการเรา
           </h2>

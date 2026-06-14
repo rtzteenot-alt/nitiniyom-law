@@ -201,6 +201,7 @@
   - [x] เพิ่มเอกสารทางกฎหมายอื่น ๆ 8 ประเภท
   - [x] ออกแบบให้สอดคล้องกับธีม Navy + Gold
   - [x] Responsive design (mobile + desktop)
+  - [x] แก้ไขพื้นหลังให้เป็นสีเดียวกับหน้าแรก
 - [x] เพิ่มลิงค์ Services ในเมนู Navigation
   - [x] Desktop menu
   - [x] Mobile menu
