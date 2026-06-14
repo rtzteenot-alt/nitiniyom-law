@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { Scale, Menu, X, ArrowRight, Mail, Phone, MapPin, Users, Award, Heart } from "lucide-react";
+import { Scale, Menu, X, ArrowRight, Award, Heart, Sparkles, CheckCircle2 } from "lucide-react";
 
 export default function Team() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -55,70 +55,71 @@ export default function Team() {
     },
   ];
 
+  const values = [
+    { icon: Heart, title: "ความเอาใจใส่", desc: "ตั้งใจฟังและเข้าใจปัญหาของลูกค้าอย่างแท้จริง เพื่อหาทางแก้ไขที่ดีที่สุด" },
+    { icon: Award, title: "ความเชี่ยวชาญ", desc: "ทีมที่มีความรู้และประสบการณ์สูงในด้านกฎหมายต่างๆ พร้อมอัปเดตความรู้อยู่เสมอ" },
+    { icon: Scale, title: "ยุติธรรม", desc: "ยึดมั่นในหลักการยุติธรรมและจริยธรรมวิชาชีพในการให้บริการทางกฎหมาย" },
+  ];
+
   return (
-    <div className="min-h-screen bg-white">
-      {/* Navigation */}
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      {/* ===== NAVBAR ===== */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? "bg-white shadow-md" : "bg-transparent"
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled
+            ? "bg-white/95 backdrop-blur-md shadow-lg border-b border-amber-100"
+            : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link href="/">
-            <div className="flex items-center gap-2 cursor-pointer group">
-              <div className="w-8 h-8 rounded-full gold-gradient flex items-center justify-center shadow-md">
-                <Scale className="w-4 h-4 text-white" />
+        <div className="container">
+          <div className="flex items-center justify-between h-16 md:h-20">
+            <Link href="/">
+              <div className="flex items-center gap-3 cursor-pointer group">
+                <div className="w-10 h-10 rounded-full gold-gradient flex items-center justify-center shadow-md animate-glow-pulse">
+                  <Scale className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className="font-serif font-bold text-base leading-tight text-foreground">นิตินิยม</p>
+                  <p className="text-xs text-muted-foreground leading-tight">สำนักงานกฎหมาย</p>
+                </div>
               </div>
-              <span className="font-serif font-bold text-lg text-foreground group-hover:text-gold transition-colors">
-                นิตินิยม
-              </span>
+            </Link>
+
+            <div className="hidden md:flex items-center gap-8">
+              <Link href="/">
+                <span className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors cursor-pointer">
+                  หน้าหลัก
+                </span>
+              </Link>
+              <Link href="/team">
+                <span className="text-sm font-medium text-gold cursor-pointer">ทีมงาน</span>
+              </Link>
+              <Link href="/#contact">
+                <Button size="sm" className="gold-gradient text-white border-0 font-medium px-5 shadow-md hover:opacity-90">
+                  ติดต่อเรา
+                </Button>
+              </Link>
             </div>
-          </Link>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="/">
-              <span className="text-sm font-medium text-foreground/70 hover:text-gold transition-colors cursor-pointer">
-                หน้าหลัก
-              </span>
-            </Link>
-            <Link href="/team">
-              <span className="text-sm font-medium text-gold cursor-pointer">ทีมงาน</span>
-            </Link>
-            <Link href="/">
-              <Button className="gold-gradient text-white border-0 font-semibold">
-                ติดต่อเรา
-              </Button>
-            </Link>
+            <button className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors" onClick={() => setMenuOpen(!menuOpen)}>
+              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2 hover:bg-muted rounded-lg transition-colors"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            {menuOpen ? (
-              <X className="w-5 h-5" />
-            ) : (
-              <Menu className="w-5 h-5" />
-            )}
-          </button>
         </div>
 
-        {/* Mobile Menu */}
         {menuOpen && (
-          <div className="md:hidden bg-white border-t border-border">
-            <div className="px-4 py-4 space-y-3">
+          <div className="md:hidden bg-white/98 backdrop-blur-md border-t border-border shadow-lg animate-fade-in-up">
+            <div className="container py-4 flex flex-col gap-3">
               <Link href="/">
-                <div className="text-sm font-medium text-foreground/70 hover:text-gold transition-colors cursor-pointer py-2">
+                <div className="text-left py-2 text-sm font-medium text-foreground/80 hover:text-foreground border-b border-border/50 cursor-pointer">
                   หน้าหลัก
                 </div>
               </Link>
               <Link href="/team">
-                <div className="text-sm font-medium text-gold py-2 cursor-pointer">ทีมงาน</div>
+                <div className="text-left py-2 text-sm font-medium text-gold border-b border-border/50 cursor-pointer">ทีมงาน</div>
               </Link>
-              <Link href="/">
-                <Button className="w-full gold-gradient text-white border-0 font-semibold">
+              <Link href="/#contact">
+                <Button size="sm" className="w-full mt-2 gold-gradient text-white border-0">
                   ติดต่อเรา
                 </Button>
               </Link>
@@ -127,39 +128,84 @@ export default function Team() {
         )}
       </nav>
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 navy-gradient text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="font-serif text-4xl sm:text-5xl font-bold mb-4">ทีมงานของเรา</h1>
-          <p className="text-lg text-white/80 mb-8">
-            ทีมทนายความและเจ้าหน้าที่มืออาชีพ พร้อมให้บริการและคำปรึกษาทางกฎหมายด้วยความจริงจัง
-          </p>
+      {/* ===== HERO SECTION ===== */}
+      <section className="relative min-h-[60vh] flex items-center overflow-hidden pt-24">
+        {/* Layered background */}
+        <div className="absolute inset-0 hero-gradient" />
+
+        {/* Animated grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage: `linear-gradient(oklch(0.72 0.12 75 / 0.5) 1px, transparent 1px),
+                              linear-gradient(90deg, oklch(0.72 0.12 75 / 0.5) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+
+        {/* Radial glow */}
+        <div
+          className="absolute top-1/3 left-1/4 w-[600px] h-[600px] rounded-full opacity-20"
+          style={{
+            background: "radial-gradient(circle, oklch(0.72 0.12 75 / 0.4) 0%, transparent 70%)",
+          }}
+        />
+
+        {/* Gold top line */}
+        <div className="absolute top-0 left-0 right-0 h-1 gold-gradient-animated" />
+
+        <div className="container relative z-10">
+          <div className="max-w-3xl">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-amber-400/30 bg-amber-400/10 mb-8 animate-fade-in-up">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              <span className="text-amber-300 text-xs font-medium tracking-wider uppercase">
+                ทีมทนายความมืออาชีพ
+              </span>
+            </div>
+
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 animate-fade-in-up delay-100">
+              ทีมงาน
+              <br />
+              <span className="gold-text-shimmer">ของเรา</span>
+            </h1>
+
+            <p className="text-lg text-white/75 leading-relaxed mb-8 max-w-2xl animate-fade-in-up delay-200">
+              ทีมทนายความและเจ้าหน้าที่มืออาชีพ พร้อมให้บริการและคำปรึกษาทางกฎหมายด้วยความจริงจัง
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Team Members Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto">
-          <div className="space-y-12">
+      {/* ===== TEAM MEMBERS SECTION ===== */}
+      <section className="py-20 md:py-28 bg-background">
+        <div className="container">
+          <div className="space-y-16">
             {teamMembers.map((member, index) => (
               <div
                 key={member.id}
-                className={`flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} gap-12 items-center`}
+                className={`grid lg:grid-cols-2 gap-12 items-center animate-fade-in-up`}
+                style={{ animationDelay: `${index * 100}ms` }}
               >
                 {/* Info Section */}
-                <div className="flex-1">
-                  <h3 className="font-serif text-2xl font-bold text-foreground mb-1">
+                <div className={index % 2 === 1 ? "lg:order-2" : ""}>
+                  <div className="inline-flex items-center gap-2 mb-4">
+                    <div className="h-px w-8 bg-gold" />
+                    <span className="text-xs font-semibold tracking-widest uppercase text-gold">ทีมหลัก</span>
+                  </div>
+
+                  <h3 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-2">
                     {member.title} {member.name}
                   </h3>
-                  <p className="text-base font-semibold text-gold mb-4">
-                    {member.position}
-                  </p>
-                  <div className="mb-4 pb-4 border-b border-border">
-                    <p className="text-sm text-foreground/60">
-                      <span className="font-medium">ประวัติการศึกษา:</span> {member.education}
+                  <p className="text-lg font-semibold text-gold mb-6">{member.position}</p>
+
+                  <div className="mb-6 pb-6 border-b border-border/30">
+                    <p className="text-sm text-muted-foreground">
+                      <span className="font-medium text-foreground">ประวัติการศึกษา:</span> {member.education}
                     </p>
                   </div>
-                  <p className="text-base text-foreground/70 leading-relaxed mb-8">
+
+                  <p className="text-base text-muted-foreground leading-relaxed mb-8">
                     {member.description}
                   </p>
 
@@ -173,7 +219,7 @@ export default function Team() {
                       {member.specialties.map((specialty) => (
                         <span
                           key={specialty}
-                          className="px-4 py-2 bg-gold/10 text-gold rounded-full text-sm font-medium border border-gold/20"
+                          className="px-4 py-2 glass-card rounded-full text-sm font-medium text-gold border border-gold/20 hover:border-gold/50 transition-colors"
                         >
                           {specialty}
                         </span>
@@ -183,51 +229,76 @@ export default function Team() {
 
                   {/* CTA */}
                   <a href={member.facebookUrl} target="_blank" rel="noopener noreferrer">
-                    <Button className="gold-gradient text-white border-0 font-semibold">
+                    <Button className="gold-gradient-animated text-white hover:opacity-90 font-semibold px-8 shadow-lg shadow-amber-900/30 border-0 glow-gold">
                       ติดต่อ {member.name.split(" ")[1]}
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
                   </a>
                 </div>
 
-
+                {/* Visual placeholder */}
+                <div className={`relative h-96 rounded-2xl glass-card border border-white/10 overflow-hidden flex items-center justify-center ${index % 2 === 1 ? "lg:order-1" : ""}`}>
+                  <div className="absolute inset-0 hero-gradient opacity-50" />
+                  <div className="relative z-10 text-center">
+                    <div className="w-24 h-24 rounded-full gold-gradient flex items-center justify-center mx-auto mb-4 shadow-lg animate-glow-pulse">
+                      <span className="text-4xl font-serif font-bold text-white">{member.name.charAt(0)}</span>
+                    </div>
+                    <p className="text-white/80 font-serif text-lg">{member.title} {member.name}</p>
+                    <p className="text-amber-300 text-sm mt-2">{member.position}</p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Partners Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/50">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="font-serif text-3xl font-bold text-foreground mb-12 text-center">
-            PARTNER
-          </h2>
-          <div className="grid md:grid-cols-1 gap-8">
-            {partners.map((partner) => (
+      {/* ===== PARTNERS SECTION ===== */}
+      <section className="py-20 md:py-28 bg-muted/30">
+        <div className="container">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 mb-4">
+              <div className="h-px w-8 bg-gold" />
+              <span className="text-xs font-semibold tracking-widest uppercase text-gold">ทีมสนับสนุน</span>
+              <div className="h-px w-8 bg-gold" />
+            </div>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Partners
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              ทีมผู้เชี่ยวชาญที่พร้อมสนับสนุนการทำงานของเรา
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {partners.map((partner, i) => (
               <div
                 key={partner.id}
-                className="bg-white rounded-2xl p-8 shadow-sm border border-border hover:shadow-md transition-shadow"
+                className={`rounded-2xl p-8 glass-card border border-white/10 card-hover animate-fade-in-up`}
+                style={{ animationDelay: `${i * 100}ms` }}
               >
-                <h3 className="font-serif text-2xl font-bold text-foreground mb-1">
+                <h3 className="font-serif text-2xl font-bold text-foreground mb-2">
                   {partner.title} {partner.name}
                 </h3>
-                <p className="text-base font-semibold text-gold mb-3">
-                  {partner.position}
-                </p>
+                <p className="text-lg font-semibold text-gold mb-4">{partner.position}</p>
+
                 {partner.education && (
-                  <p className="text-sm text-foreground/60 mb-3">
-                    <span className="font-medium">ประวัติการศึกษา:</span> {partner.education}
+                  <p className="text-sm text-muted-foreground mb-4">
+                    <span className="font-medium text-foreground">ประวัติการศึกษา:</span> {partner.education}
                   </p>
                 )}
+
                 {partner.expertise && (
-                  <div className="text-sm text-foreground/70">
-                    <span className="font-medium block mb-2">ความเชี่ยวชาญ:</span>
-                    <ul className="list-disc list-inside space-y-1">
+                  <div className="text-sm">
+                    <span className="font-medium text-foreground block mb-3">ความเชี่ยวชาญ:</span>
+                    <div className="flex flex-wrap gap-2">
                       {partner.expertise.map((exp, idx) => (
-                        <li key={idx}>{exp}</li>
+                        <span key={idx} className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-gold/10 text-gold text-xs font-medium border border-gold/20">
+                          <CheckCircle2 className="w-3 h-3" />
+                          {exp}
+                        </span>
                       ))}
-                    </ul>
+                    </div>
                   </div>
                 )}
               </div>
@@ -236,180 +307,82 @@ export default function Team() {
         </div>
       </section>
 
-      {/* Values Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="font-serif text-3xl font-bold text-foreground mb-4">
+      {/* ===== VALUES SECTION ===== */}
+      <section className="py-20 md:py-28 bg-background">
+        <div className="container">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 mb-4">
+              <div className="h-px w-8 bg-gold" />
+              <span className="text-xs font-semibold tracking-widest uppercase text-gold">ค่านิยม</span>
+              <div className="h-px w-8 bg-gold" />
+            </div>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4">
               ค่านิยมของทีมงาน
             </h2>
-            <p className="text-lg text-foreground/70">
+            <p className="text-muted-foreground max-w-2xl mx-auto">
               เรามุ่งมั่นให้บริการด้วยความเป็นมืออาชีพและจริยธรรมสูงสุด
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-2xl p-8 shadow-sm border border-border hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-xl gold-gradient flex items-center justify-center mb-4">
-                <Heart className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="font-semibold text-lg text-foreground mb-2">
-                ความเอาใจใส่
-              </h3>
-              <p className="text-foreground/70">
-                ตั้งใจฟังและเข้าใจปัญหาของลูกค้าอย่างแท้จริง เพื่อหาทางแก้ไขที่ดีที่สุด
-              </p>
-            </div>
-
-            <div className="bg-white rounded-2xl p-8 shadow-sm border border-border hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4">
-                <Award className="w-6 h-6" />
-              </div>
-              <h3 className="font-semibold text-lg text-foreground mb-2">
-                ความเชี่ยวชาญ
-              </h3>
-              <p className="text-foreground/70">
-                ทีมที่มีความรู้และประสบการณ์สูงในด้านกฎหมายต่างๆ พร้อมอัปเดตความรู้อยู่เสมอ
-              </p>
-            </div>
-
-            <div className="bg-white rounded-2xl p-8 shadow-sm border border-border hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-green-50 text-green-600 flex items-center justify-center mb-4">
-                <Scale className="w-6 h-6" />
-              </div>
-              <h3 className="font-semibold text-lg text-foreground mb-2">
-                ยุติธรรม
-              </h3>
-              <p className="text-foreground/70">
-                ยึดมั่นในหลักการยุติธรรมและจริยธรรมวิชาชีพในการให้บริการทางกฎหมาย
-              </p>
-            </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {values.map((value, i) => {
+              const Icon = value.icon;
+              return (
+                <div
+                  key={i}
+                  className={`rounded-2xl p-8 glass-card border border-white/10 card-hover animate-fade-in-up`}
+                  style={{ animationDelay: `${i * 100}ms` }}
+                >
+                  <div className="w-14 h-14 rounded-xl gold-gradient flex items-center justify-center mb-6 shadow-md">
+                    <Icon className="w-7 h-7 text-white" />
+                  </div>
+                  <h3 className="font-semibold text-lg text-foreground mb-3">{value.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{value.desc}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 navy-gradient text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="font-serif text-3xl font-bold mb-4">
-            ต้องการคำปรึกษาทางกฎหมาย?
-          </h2>
-          <p className="text-lg text-white/80 mb-8">
-            ติดต่อทีมงานของเราวันนี้เพื่อรับคำแนะนำและบริการที่เหมาะสมกับความต้องการของคุณ
-          </p>
-          <Link href="/">
-            <Button className="gold-gradient text-white border-0 font-semibold text-base px-8 py-3 hover:shadow-lg transition-all">
-              ติดต่อเรา
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
-          </Link>
+      {/* ===== CTA SECTION ===== */}
+      <section className="relative overflow-hidden py-16 md:py-20">
+        {/* Background */}
+        <div className="absolute inset-0 hero-gradient" />
+
+        {/* Decorative elements */}
+        <div
+          className="absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage: `linear-gradient(oklch(0.72 0.12 75 / 0.5) 1px, transparent 1px),
+                              linear-gradient(90deg, oklch(0.72 0.12 75 / 0.5) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+
+        {/* Gold accent lines */}
+        <div className="absolute top-0 left-0 right-0 h-1 gold-gradient-animated" />
+        <div className="absolute bottom-0 left-0 right-0 h-1 gold-gradient-animated" />
+
+        <div className="container relative z-10">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6 text-white animate-fade-in-up">
+              ต้องการคำปรึกษาทางกฎหมาย?
+            </h2>
+            <p className="text-lg text-white/75 mb-8 animate-fade-in-up delay-100">
+              ติดต่อทีมงานของเราวันนี้เพื่อรับคำแนะนำและบริการที่เหมาะสมกับความต้องการของคุณ
+            </p>
+            <div className="animate-fade-in-up delay-200">
+              <Link href="/#contact">
+                <Button className="gold-gradient-animated text-white hover:opacity-90 font-semibold px-8 py-6 text-lg shadow-lg shadow-amber-900/30 border-0 glow-gold">
+                  ติดต่อเรา
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-foreground text-white py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            {/* Logo */}
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 rounded-full gold-gradient flex items-center justify-center">
-                  <Scale className="w-4 h-4 text-white" />
-                </div>
-                <span className="font-serif font-bold text-lg">นิตินิยม</span>
-              </div>
-              <p className="text-sm text-white/60">
-                สำนักงานกฎหมายนิตินิยม ให้บริการคำปรึกษาและว่าความทางกฎหมายอย่างมืออาชีพ
-              </p>
-            </div>
-
-            {/* Quick Links */}
-            <div>
-              <h4 className="font-semibold mb-4">ลิงก์ด่วน</h4>
-              <ul className="space-y-2 text-sm text-white/60">
-                <li>
-                  <Link href="/">
-                    <span className="hover:text-gold transition-colors cursor-pointer">
-                      หน้าหลัก
-                    </span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/team">
-                    <span className="hover:text-gold transition-colors cursor-pointer">
-                      ทีมงาน
-                    </span>
-                  </Link>
-                </li>
-                <li>
-                  <a href="#services" className="hover:text-gold transition-colors">
-                    บริการ
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Services */}
-            <div>
-              <h4 className="font-semibold mb-4">บริการ</h4>
-              <ul className="space-y-2 text-sm text-white/60">
-                <li>
-                  <a href="#" className="hover:text-gold transition-colors">
-                    กฎหมายอาญา
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-gold transition-colors">
-                    กฎหมายแพ่ง
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-gold transition-colors">
-                    การทำสัญญา
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Contact */}
-            <div>
-              <h4 className="font-semibold mb-4">ติดต่อเรา</h4>
-              <div className="space-y-3 text-sm text-white/60">
-                <div className="flex items-center gap-2">
-                  <Phone className="w-4 h-4 text-gold flex-shrink-0" />
-                  <a href="tel:0615909678" className="hover:text-gold transition-colors">
-                    061-590-9678
-                  </a>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Mail className="w-4 h-4 text-gold flex-shrink-0" />
-                  <a href="mailto:info@nitiniyom.com" className="hover:text-gold transition-colors">
-                    info@nitiniyom.com
-                  </a>
-                </div>
-                <div className="flex items-start gap-2">
-                  <MapPin className="w-4 h-4 text-gold flex-shrink-0 mt-0.5" />
-                  <span>สำนักงานกฎหมายนิตินิยม</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="border-t border-white/10 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center text-sm text-white/60">
-              <p>&copy; 2026 สำนักงานกฎหมายนิตินิยม สงวนลิขสิทธิ์</p>
-              <div className="flex gap-6 mt-4 md:mt-0">
-                <a href="#" className="hover:text-gold transition-colors">
-                  นโยบายความเป็นส่วนตัว
-                </a>
-                <a href="#" className="hover:text-gold transition-colors">
-                  เงื่อนไขการใช้งาน
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

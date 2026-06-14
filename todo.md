@@ -223,3 +223,20 @@
 - [x] ปรับปรุง Services cards ด้วย card-hover effect
 - [x] เพิ่ม visual card ฝั่งขวาของ Hero (desktop)
 - [x] ปรับปรุง Footer ด้วย gold accent line และ hover effects
+
+
+## Phase 29: UI/UX Enhancement for All Pages
+- [x] ปรับปรุง Services หน้า
+  - [x] เพิ่ม hero section แบบ animated
+  - [x] ปรับปรุง service cards ให้มี glass-card style
+  - [x] เพิ่ม animations และ hover effects
+- [x] ปรับปรุง Blog หน้า
+  - [x] เพิ่ม hero section แบบ animated
+  - [x] ปรับปรุง blog cards ให้มี glass-card style
+  - [x] เพิ่ม animations และ hover effects
+- [x] ปรับปรุง Team หน้า
+  - [x] เพิ่ม hero section แบบ animated
+  - [x] ปรับปรุง team member cards
+  - [x] เพิ่ม animations และ hover effects
+- [x] ทดสอบทั้งหมด (Tests ผ่าน 17/17)
+- [x] บันทึก Checkpoint

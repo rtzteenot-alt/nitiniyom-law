@@ -1,218 +1,231 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, ArrowRight, Sparkles } from "lucide-react";
+
+const contractServices = [
+  "ร่างและตรวจสอบสัญญาซื้อขาย",
+  "ร่างและตรวจสอบสัญญาเช่า",
+  "ร่างและตรวจสอบสัญญาจ้างงาน",
+  "ร่างและตรวจสอบสัญญารับจ้างทำของ",
+  "ร่างและตรวจสอบสัญญากู้ยืมเงิน",
+  "ร่างและตรวจสอบสัญญาค้ำประกัน",
+  "ร่างและตรวจสอบสัญญาร่วมลงทุน (Joint Venture Agreement)",
+  "ร่างและตรวจสอบสัญญาหุ้นส่วนทางธุรกิจ",
+  "ร่างและตรวจสอบสัญญาแฟรนไชส์",
+  "ร่างและตรวจสอบสัญญาแต่งตั้งตัวแทนจำหน่าย",
+  "ร่างและตรวจสอบสัญญาให้บริการ (Service Agreement)",
+  "ร่างและตรวจสอบสัญญารักษาความลับ (NDA)",
+  "ร่างและตรวจสอบข้อตกลงทางธุรกิจ (MOU)",
+];
+
+const legalDocuments = [
+  "หนังสือทวงถามหนี้",
+  "หนังสือบอกกล่าว",
+  "หนังสือมอบอำนาจ",
+  "หนังสือรับสภาพหนี้",
+  "พินัยกรรม",
+  "คำร้อง คำขอ และหนังสือชี้แจงต่อหน่วยงานราชการ",
+  "หนังสือคัดค้านหรือโต้แย้งสิทธิ",
+  "เอกสารสำหรับการจัดตั้งและดำเนินธุรกิจ",
+];
+
+const benefits = [
+  { title: "ความถูกต้องทางกฎหมาย", desc: "เอกสารของคุณจะถูกตรวจสอบให้ถูกต้องตามกฎหมายปัจจุบัน" },
+  { title: "คุ้มครองสิทธิประโยชน์", desc: "ทีมของเราจะช่วยให้เอกสารคุ้มครองสิทธิประโยชน์ของคุณอย่างสูงสุด" },
+  { title: "ชัดเจนและเข้าใจได้", desc: "เอกสารจะถูกเขียนให้ชัดเจนและเข้าใจได้ง่าย" },
+  { title: "ประสบการณ์มืออาชีพ", desc: "ทนายความมีประสบการณ์ในการจัดการเอกสารกฎหมายหลากหลายประเภท" },
+];
 
 export default function Services() {
-  const contractServices = [
-    "ร่างและตรวจสอบสัญญาซื้อขาย",
-    "ร่างและตรวจสอบสัญญาเช่า",
-    "ร่างและตรวจสอบสัญญาจ้างงาน",
-    "ร่างและตรวจสอบสัญญารับจ้างทำของ",
-    "ร่างและตรวจสอบสัญญากู้ยืมเงิน",
-    "ร่างและตรวจสอบสัญญาค้ำประกัน",
-    "ร่างและตรวจสอบสัญญาร่วมลงทุน (Joint Venture Agreement)",
-    "ร่างและตรวจสอบสัญญาหุ้นส่วนทางธุรกิจ",
-    "ร่างและตรวจสอบสัญญาแฟรนไชส์",
-    "ร่างและตรวจสอบสัญญาแต่งตั้งตัวแทนจำหน่าย",
-    "ร่างและตรวจสอบสัญญาให้บริการ (Service Agreement)",
-    "ร่างและตรวจสอบสัญญารักษาความลับ (NDA)",
-    "ร่างและตรวจสอบข้อตกลงทางธุรกิจ (MOU)",
-  ];
-
-  const legalDocuments = [
-    "หนังสือทวงถามหนี้",
-    "หนังสือบอกกล่าว",
-    "หนังสือมอบอำนาจ",
-    "หนังสือรับสภาพหนี้",
-    "พินัยกรรม",
-    "คำร้อง คำขอ และหนังสือชี้แจงต่อหน่วยงานราชการ",
-    "หนังสือคัดค้านหรือโต้แย้งสิทธิ",
-    "เอกสารสำหรับการจัดตั้งและดำเนินธุรกิจ",
-  ];
-
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* Header - Luxury Design */}
-      <div className="relative overflow-hidden py-20 px-4">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900 via-blue-800 to-slate-900" />
-        {/* Gold accent line */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400" />
-        {/* Decorative pattern */}
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      {/* ===== HERO SECTION ===== */}
+      <section className="relative min-h-[60vh] flex items-center overflow-hidden pt-24">
+        {/* Layered background */}
+        <div className="absolute inset-0 hero-gradient" />
+
+        {/* Animated grid pattern */}
         <div
-          className="absolute inset-0 opacity-5"
+          className="absolute inset-0 opacity-[0.07]"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4af37'%3E%3Ccircle cx='50' cy='50' r='3'/%3E%3Ccircle cx='20' cy='20' r='2'/%3E%3Ccircle cx='80' cy='80' r='2'/%3E%3Ccircle cx='80' cy='20' r='2'/%3E%3Ccircle cx='20' cy='80' r='2'/%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundImage: `linear-gradient(oklch(0.72 0.12 75 / 0.5) 1px, transparent 1px),
+                              linear-gradient(90deg, oklch(0.72 0.12 75 / 0.5) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
           }}
         />
-        <div className="max-w-5xl mx-auto relative z-10 text-center">
-          <div className="inline-block mb-4 px-4 py-2 rounded-full border border-amber-400/30 bg-amber-400/10">
-            <span className="text-amber-300 text-sm font-medium tracking-wider">
-              ⚖️ บริการกฎหมายมืออาชีพ
-            </span>
-          </div>
-          <h1 className="text-5xl md:text-6xl font-serif font-bold mb-4 text-white">
-            บริการของเรา
-          </h1>
-          <div className="w-20 h-1 bg-gradient-to-r from-amber-400 to-amber-300 mx-auto mb-6" />
-          <p className="text-lg text-blue-100 max-w-2xl mx-auto">
-            สำนักงานนิตินิยมกฎหมายให้บริการร่าง ตรวจสอบ และแก้ไขเอกสารทางกฎหมายทุกประเภท
-            เพื่อให้เอกสารมีความถูกต้อง ชัดเจน และคุ้มครองสิทธิประโยชน์ของลูกค้าอย่างรอบด้าน
-          </p>
-        </div>
-      </div>
 
-      {/* Content */}
-      <div className="max-w-5xl mx-auto px-4 py-16">
-        {/* Introduction Section */}
-        <div className="mb-16 bg-white rounded-lg shadow-md p-8 md:p-12 border-l-4 border-amber-400">
-          <h2 className="text-3xl font-serif font-bold text-blue-900 mb-4">
-            ความเชี่ยวชาญของเรา
-          </h2>
-          <p className="text-lg text-slate-700 leading-relaxed">
-            ด้วยประสบการณ์หลายปีในสาขากฎหมาย ทีมของเรามีความเชี่ยวชาญในการร่างและตรวจสอบเอกสารทางกฎหมายทั้งหมดประเภท
-            เพื่อให้เอกสารของคุณมีความถูกต้องตามกฎหมาย ชัดเจน และคุ้มครองสิทธิประโยชน์ของคุณอย่างสูงสุด
-          </p>
-        </div>
+        {/* Radial glow */}
+        <div
+          className="absolute top-1/3 left-1/4 w-[600px] h-[600px] rounded-full opacity-20"
+          style={{
+            background: "radial-gradient(circle, oklch(0.72 0.12 75 / 0.4) 0%, transparent 70%)",
+          }}
+        />
 
-        {/* Contract Services Section */}
-        <div className="mb-16">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-1 h-8 bg-gradient-to-b from-amber-400 to-amber-300 rounded-full" />
-            <h2 className="text-3xl font-serif font-bold text-blue-900">บริการสัญญา</h2>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2">
-            {contractServices.map((service, index) => (
-              <Card
-                key={index}
-                className="border-amber-200/50 hover:border-amber-400 bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-300 group"
-              >
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0 group-hover:text-amber-600 transition-colors" />
-                    <p className="text-slate-700 group-hover:text-blue-900 transition-colors">
-                      {service}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+        {/* Gold top line */}
+        <div className="absolute top-0 left-0 right-0 h-1 gold-gradient-animated" />
+
+        <div className="container relative z-10">
+          <div className="max-w-3xl">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-amber-400/30 bg-amber-400/10 mb-8 animate-fade-in-up">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              <span className="text-amber-300 text-xs font-medium tracking-wider uppercase">
+                บริการกฎหมายมืออาชีพ
+              </span>
+            </div>
+
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 animate-fade-in-up delay-100">
+              บริการ
+              <br />
+              <span className="gold-text-shimmer">กฎหมายครบวงจร</span>
+            </h1>
+
+            <p className="text-lg text-white/75 leading-relaxed mb-8 max-w-2xl animate-fade-in-up delay-200">
+              สำนักงานนิตินิยมกฎหมายให้บริการร่าง ตรวจสอบ และแก้ไขเอกสารทางกฎหมายทุกประเภท
+              เพื่อให้เอกสารมีความถูกต้อง ชัดเจน และคุ้มครองสิทธิประโยชน์ของลูกค้าอย่างรอบด้าน
+            </p>
+
+            <div className="animate-fade-in-up delay-300">
+              <Link href="/#contact">
+                <Button className="gold-gradient-animated text-white hover:opacity-90 font-semibold px-8 shadow-lg shadow-amber-900/30 border-0 glow-gold">
+                  ติดต่อเรา
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
+      </section>
 
-        {/* Legal Documents Section */}
-        <div className="mb-16">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-1 h-8 bg-gradient-to-b from-amber-400 to-amber-300 rounded-full" />
-            <h2 className="text-3xl font-serif font-bold text-blue-900">
-              เอกสารทางกฎหมายอื่น ๆ
+      {/* ===== CONTENT ===== */}
+      <section className="py-20 md:py-28 bg-background">
+        <div className="container">
+          {/* Introduction Section */}
+          <div className="mb-20 rounded-2xl p-8 md:p-12 glass-card border border-white/10 animate-fade-in-up">
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-6">
+              ความเชี่ยวชาญของเรา
             </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              ด้วยประสบการณ์หลายปีในสาขากฎหมาย ทีมของเรามีความเชี่ยวชาญในการร่างและตรวจสอบเอกสารทางกฎหมายทั้งหมดประเภท
+              เพื่อให้เอกสารของคุณมีความถูกต้องตามกฎหมาย ชัดเจน และคุ้มครองสิทธิประโยชน์ของคุณอย่างสูงสุด
+            </p>
           </div>
-          <div className="grid gap-4 md:grid-cols-2">
-            {legalDocuments.map((document, index) => (
-              <Card
-                key={index}
-                className="border-amber-200/50 hover:border-amber-400 bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-300 group"
-              >
-                <CardContent className="pt-6">
+
+          {/* Contract Services Section */}
+          <div className="mb-20">
+            <div className="inline-flex items-center gap-2 mb-8">
+              <div className="h-px w-8 bg-gold" />
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground">บริการสัญญา</h2>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2">
+              {contractServices.map((service, index) => (
+                <div
+                  key={index}
+                  className={`glass-card rounded-xl p-5 border border-white/10 card-hover animate-fade-in-up`}
+                  style={{ animationDelay: `${index * 30}ms` }}
+                >
                   <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0 group-hover:text-amber-600 transition-colors" />
-                    <p className="text-slate-700 group-hover:text-blue-900 transition-colors">
-                      {document}
-                    </p>
+                    <CheckCircle2 className="w-5 h-5 text-gold mt-0.5 flex-shrink-0" />
+                    <p className="text-foreground/80 leading-relaxed">{service}</p>
                   </div>
-                </CardContent>
-              </Card>
-            ))}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
 
-        {/* Benefits Section */}
-        <div className="mb-16 bg-background rounded-lg p-8 md:p-12 border border-amber-200/30">
-          <h2 className="text-3xl font-serif font-bold text-blue-900 mb-8">
-            ประโยชน์ของการใช้บริการเรา
-          </h2>
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="flex gap-4">
-              <div className="w-12 h-12 bg-amber-400/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                <span className="text-2xl">✓</span>
-              </div>
-              <div>
-                <h3 className="font-semibold text-blue-900 mb-2">ความถูกต้องทางกฎหมาย</h3>
-                <p className="text-slate-600">
-                  เอกสารของคุณจะถูกตรวจสอบให้ถูกต้องตามกฎหมายปัจจุบัน
-                </p>
-              </div>
+          {/* Legal Documents Section */}
+          <div className="mb-20">
+            <div className="inline-flex items-center gap-2 mb-8">
+              <div className="h-px w-8 bg-gold" />
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground">
+                เอกสารทางกฎหมายอื่น ๆ
+              </h2>
             </div>
-            <div className="flex gap-4">
-              <div className="w-12 h-12 bg-amber-400/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                <span className="text-2xl">✓</span>
-              </div>
-              <div>
-                <h3 className="font-semibold text-blue-900 mb-2">คุ้มครองสิทธิประโยชน์</h3>
-                <p className="text-slate-600">
-                  ทีมของเราจะช่วยให้เอกสารคุ้มครองสิทธิประโยชน์ของคุณอย่างสูงสุด
-                </p>
-              </div>
+            <div className="grid gap-4 md:grid-cols-2">
+              {legalDocuments.map((document, index) => (
+                <div
+                  key={index}
+                  className={`glass-card rounded-xl p-5 border border-white/10 card-hover animate-fade-in-up`}
+                  style={{ animationDelay: `${(index + contractServices.length) * 30}ms` }}
+                >
+                  <div className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-gold mt-0.5 flex-shrink-0" />
+                    <p className="text-foreground/80 leading-relaxed">{document}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="flex gap-4">
-              <div className="w-12 h-12 bg-amber-400/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                <span className="text-2xl">✓</span>
-              </div>
-              <div>
-                <h3 className="font-semibold text-blue-900 mb-2">ชัดเจนและเข้าใจได้</h3>
-                <p className="text-slate-600">
-                  เอกสารจะถูกเขียนให้ชัดเจนและเข้าใจได้ง่าย
-                </p>
-              </div>
-            </div>
-            <div className="flex gap-4">
-              <div className="w-12 h-12 bg-amber-400/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                <span className="text-2xl">✓</span>
-              </div>
-              <div>
-                <h3 className="font-semibold text-blue-900 mb-2">ประสบการณ์มืออาชีพ</h3>
-                <p className="text-slate-600">
-                  ทนายความมีประสบการณ์ในการจัดการเอกสารกฎหมายหลากหลายประเภท
-                </p>
-              </div>
+          </div>
+
+          {/* Benefits Section */}
+          <div className="rounded-2xl p-8 md:p-12 glass-card border border-white/10">
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-10">
+              ประโยชน์ของการใช้บริการเรา
+            </h2>
+            <div className="grid gap-6 md:grid-cols-2">
+              {benefits.map((benefit, i) => (
+                <div
+                  key={i}
+                  className={`flex gap-4 p-6 rounded-xl bg-white/5 border border-white/5 hover:border-gold/20 transition-all duration-300 animate-fade-in-up`}
+                  style={{ animationDelay: `${i * 100}ms` }}
+                >
+                  <div className="w-12 h-12 rounded-xl gold-gradient flex items-center justify-center flex-shrink-0 shadow-md">
+                    <CheckCircle2 className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground mb-2">{benefit.title}</h3>
+                    <p className="text-sm text-muted-foreground">{benefit.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* CTA Section - Luxury */}
-      <div className="relative overflow-hidden py-16 px-4 mt-12">
+      {/* ===== CTA SECTION ===== */}
+      <section className="relative overflow-hidden py-16 md:py-20">
         {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900 via-blue-800 to-slate-900" />
-        {/* Gold accent line */}
-        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400" />
+        <div className="absolute inset-0 hero-gradient" />
+
+        {/* Decorative elements */}
+        <div
+          className="absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage: `linear-gradient(oklch(0.72 0.12 75 / 0.5) 1px, transparent 1px),
+                              linear-gradient(90deg, oklch(0.72 0.12 75 / 0.5) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+
+        {/* Gold accent lines */}
+        <div className="absolute top-0 left-0 right-0 h-1 gold-gradient-animated" />
+        <div className="absolute bottom-0 left-0 right-0 h-1 gold-gradient-animated" />
+
         {/* Decorative corners */}
         <div className="absolute top-0 left-0 w-20 h-20 border-t-2 border-l-2 border-amber-400/30" />
         <div className="absolute bottom-0 right-0 w-20 h-20 border-b-2 border-r-2 border-amber-400/30" />
-        {/* Pattern */}
-        <div
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4af37'%3E%3Ccircle cx='50' cy='50' r='3'/%3E%3Ccircle cx='20' cy='20' r='2'/%3E%3Ccircle cx='80' cy='80' r='2'/%3E%3Ccircle cx='80' cy='20' r='2'/%3E%3Ccircle cx='20' cy='80' r='2'/%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        />
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-amber-300">
-            พร้อมที่จะใช้บริการของเรา?
-          </h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-amber-300 mx-auto mb-6" />
-          <p className="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
-            ติดต่อเราเพื่อรับคำปรึกษาและบริการจากทนายความมืออาชีพของสำนักงานกฎหมายนิตินิยม
-          </p>
-          <Link href="/#contact">
-            <Button className="bg-gradient-to-r from-amber-400 to-amber-300 hover:from-amber-500 hover:to-amber-400 text-blue-900 font-semibold px-8 py-6 text-lg shadow-xl hover:shadow-2xl transition-all duration-300">
-              ติดต่อเรา →
-            </Button>
-          </Link>
+
+        <div className="container relative z-10">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6 text-white animate-fade-in-up">
+              พร้อมที่จะใช้บริการของเรา?
+            </h2>
+            <p className="text-lg text-white/75 mb-8 animate-fade-in-up delay-100">
+              ติดต่อเราเพื่อรับคำปรึกษาและบริการจากทนายความมืออาชีพของสำนักงานกฎหมายนิตินิยม
+            </p>
+            <div className="animate-fade-in-up delay-200">
+              <Link href="/#contact">
+                <Button className="gold-gradient-animated text-white hover:opacity-90 font-semibold px-8 py-6 text-lg shadow-lg shadow-amber-900/30 border-0 glow-gold">
+                  ติดต่อเรา
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

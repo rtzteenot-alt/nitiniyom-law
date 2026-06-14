@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Spinner } from "@/components/ui/spinner";
 import { trpc } from "@/lib/trpc";
 import { format } from "date-fns";
 import { th } from "date-fns/locale";
+import { ArrowRight, Sparkles, BookOpen, Calendar } from "lucide-react";
 
-const categoryColors: Record<string, string> = {
-  "กฎหมายอาญา": "bg-blue-100 text-blue-800 border border-blue-300",
-  "กฎหมายแพ่ง": "bg-amber-100 text-amber-800 border border-amber-300",
-  "การทำสัญญา": "bg-blue-50 text-blue-700 border border-blue-200",
-  "ทวงถามหนี้": "bg-amber-50 text-amber-700 border border-amber-200",
-  "ปรึกษาเบื้องต้น": "bg-blue-50 text-blue-700 border border-blue-200",
-  "business_law": "bg-amber-50 text-amber-700 border border-amber-200",
-  "อื่น ๆ": "bg-slate-100 text-slate-700 border border-slate-300",
+const categoryColors: Record<string, { bg: string; text: string; badge: string }> = {
+  "กฎหมายอาญา": { bg: "from-red-900/30 to-red-800/10", text: "text-red-400", badge: "bg-red-500/20 text-red-300 border-red-500/30" },
+  "กฎหมายแพ่ง": { bg: "from-blue-900/30 to-blue-800/10", text: "text-blue-400", badge: "bg-blue-500/20 text-blue-300 border-blue-500/30" },
+  "การทำสัญญา": { bg: "from-amber-900/30 to-amber-800/10", text: "text-amber-400", badge: "bg-amber-500/20 text-amber-300 border-amber-500/30" },
+  "ทวงถามหนี้": { bg: "from-green-900/30 to-green-800/10", text: "text-green-400", badge: "bg-green-500/20 text-green-300 border-green-500/30" },
+  "ปรึกษาเบื้องต้น": { bg: "from-purple-900/30 to-purple-800/10", text: "text-purple-400", badge: "bg-purple-500/20 text-purple-300 border-purple-500/30" },
+  "business_law": { bg: "from-teal-900/30 to-teal-800/10", text: "text-teal-400", badge: "bg-teal-500/20 text-teal-300 border-teal-500/30" },
+  "อื่น ๆ": { bg: "from-slate-900/30 to-slate-800/10", text: "text-slate-400", badge: "bg-slate-500/20 text-slate-300 border-slate-500/30" },
 };
 
 interface Article {
@@ -50,96 +50,175 @@ export default function Blog() {
   }, [queryLoading]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-blue-50 to-slate-50">
-      {/* Header - Luxury Design */}
-      <div className="relative overflow-hidden py-20 px-4">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900 via-blue-800 to-slate-900" />
-        {/* Gold accent line */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400" />
-        {/* Decorative pattern */}
-        <div className="absolute inset-0 opacity-5" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4af37'%3E%3Ccircle cx='50' cy='50' r='3'/%3E%3Ccircle cx='20' cy='20' r='2'/%3E%3Ccircle cx='80' cy='80' r='2'/%3E%3Ccircle cx='80' cy='20' r='2'/%3E%3Ccircle cx='20' cy='80' r='2'/%3E%3C/g%3E%3C/svg%3E")`
-        }} />
-        <div className="max-w-5xl mx-auto relative z-10 text-center">
-          <div className="inline-block mb-4 px-4 py-2 rounded-full border border-amber-400/30 bg-amber-400/10">
-            <span className="text-amber-300 text-sm font-medium tracking-wider">📚 บทความกฎหมายเชิงลึก</span>
-          </div>
-          <h1 className="text-5xl md:text-6xl font-serif font-bold mb-4 text-white">บทความกฎหมาย</h1>
-          <div className="w-20 h-1 bg-gradient-to-r from-amber-400 to-amber-300 mx-auto mb-6" />
-          <p className="text-lg text-blue-100 max-w-2xl mx-auto">
-            ความรู้และข้อมูลกฎหมายที่เป็นประโยชน์ เพื่อให้คุณเข้าใจสิทธิและหน้าที่ของตนเองได้อย่างชัดเจน
-          </p>
-        </div>
-      </div>
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      {/* ===== HERO SECTION ===== */}
+      <section className="relative min-h-[60vh] flex items-center overflow-hidden pt-24">
+        {/* Layered background */}
+        <div className="absolute inset-0 hero-gradient" />
 
-      {/* Content */}
-      <div className="max-w-5xl mx-auto px-4 py-16">
-        {isLoading ? (
-          <div className="flex justify-center items-center py-20">
-            <Spinner />
-          </div>
-        ) : articles.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="text-slate-500 text-lg">ยังไม่มีบทความในขณะนี้</p>
-          </div>
-        ) : (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {articles.map((article) => (
-              <Link key={article.id} href={`/blog/${article.slug}`}>
-                <Card className="h-full hover:shadow-2xl transition-all duration-300 cursor-pointer border-amber-200/50 hover:border-amber-400 bg-white/80 backdrop-blur-sm hover:bg-white group">
-                  <CardHeader className="pb-3">
-                    <div className="flex items-start justify-between gap-2 mb-3">
-                      <Badge className={categoryColors[article.category] || categoryColors["อื่น ๆ"]}>
-                        {article.category}
-                      </Badge>
-                    </div>
-                    <div className="h-1 w-12 bg-gradient-to-r from-amber-400 to-amber-300 rounded-full mb-2 group-hover:w-full transition-all duration-300" />
-                    <CardTitle className="line-clamp-2 text-lg text-blue-900 font-serif font-bold group-hover:text-amber-700 transition-colors">{article.title}</CardTitle>
-                    <CardDescription className="text-xs text-blue-600/70 mt-2">
-                      📅 {article.publishedAt
-                        ? format(new Date(article.publishedAt), "d MMMM yyyy", { locale: th })
-                        : format(new Date(article.createdAt), "d MMMM yyyy", { locale: th })}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-slate-600 line-clamp-3 leading-relaxed">
-                      {article.excerpt || article.content.substring(0, 150)}...
-                    </p>
-                  </CardContent>
-                </Card>
+        {/* Animated grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage: `linear-gradient(oklch(0.72 0.12 75 / 0.5) 1px, transparent 1px),
+                              linear-gradient(90deg, oklch(0.72 0.12 75 / 0.5) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+
+        {/* Radial glow */}
+        <div
+          className="absolute top-1/3 left-1/4 w-[600px] h-[600px] rounded-full opacity-20"
+          style={{
+            background: "radial-gradient(circle, oklch(0.72 0.12 75 / 0.4) 0%, transparent 70%)",
+          }}
+        />
+
+        {/* Gold top line */}
+        <div className="absolute top-0 left-0 right-0 h-1 gold-gradient-animated" />
+
+        <div className="container relative z-10">
+          <div className="max-w-3xl">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-amber-400/30 bg-amber-400/10 mb-8 animate-fade-in-up">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              <span className="text-amber-300 text-xs font-medium tracking-wider uppercase">
+                บทความกฎหมายเชิงลึก
+              </span>
+            </div>
+
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 animate-fade-in-up delay-100">
+              บทความ
+              <br />
+              <span className="gold-text-shimmer">กฎหมาย</span>
+            </h1>
+
+            <p className="text-lg text-white/75 leading-relaxed mb-8 max-w-2xl animate-fade-in-up delay-200">
+              ความรู้และข้อมูลกฎหมายที่เป็นประโยชน์ เพื่อให้คุณเข้าใจสิทธิและหน้าที่ของตนเองได้อย่างชัดเจน
+            </p>
+
+            <div className="animate-fade-in-up delay-300">
+              <Link href="/#contact">
+                <Button className="gold-gradient-animated text-white hover:opacity-90 font-semibold px-8 shadow-lg shadow-amber-900/30 border-0 glow-gold">
+                  ติดต่อเรา
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
               </Link>
-            ))}
+            </div>
           </div>
-        )}
-      </div>
+        </div>
+      </section>
 
-      {/* CTA Section - Luxury */}
-      <div className="relative overflow-hidden py-16 px-4 mt-12">
+      {/* ===== CONTENT ===== */}
+      <section className="py-20 md:py-28 bg-background">
+        <div className="container">
+          {isLoading ? (
+            <div className="flex justify-center items-center py-20">
+              <Spinner />
+            </div>
+          ) : articles.length === 0 ? (
+            <div className="text-center py-20">
+              <BookOpen className="w-16 h-16 text-muted-foreground/30 mx-auto mb-4" />
+              <p className="text-muted-foreground text-lg">ยังไม่มีบทความในขณะนี้</p>
+            </div>
+          ) : (
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {articles.map((article, index) => {
+                const colors = categoryColors[article.category] || categoryColors["อื่น ๆ"];
+                return (
+                  <Link key={article.id} href={`/blog/${article.slug}`}>
+                    <div
+                      className={`group h-full rounded-2xl overflow-hidden glass-card border border-white/10 card-hover animate-fade-in-up cursor-pointer`}
+                      style={{ animationDelay: `${index * 50}ms` }}
+                    >
+                      {/* Category accent bar */}
+                      <div className={`h-1 w-full bg-gradient-to-r ${colors.bg}`} />
+
+                      <div className="p-6 md:p-7">
+                        {/* Category badge */}
+                        <div className="mb-4">
+                          <Badge className={`${colors.badge} border`}>
+                            {article.category}
+                          </Badge>
+                        </div>
+
+                        {/* Title */}
+                        <h3 className="font-serif text-lg md:text-xl font-bold text-foreground mb-3 line-clamp-2 group-hover:text-gold transition-colors">
+                          {article.title}
+                        </h3>
+
+                        {/* Excerpt */}
+                        <p className="text-sm text-muted-foreground line-clamp-3 leading-relaxed mb-5">
+                          {article.excerpt || article.content.substring(0, 150)}...
+                        </p>
+
+                        {/* Meta info */}
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <Calendar className="w-3.5 h-3.5" />
+                          <span>
+                            {article.publishedAt
+                              ? format(new Date(article.publishedAt), "d MMMM yyyy", { locale: th })
+                              : format(new Date(article.createdAt), "d MMMM yyyy", { locale: th })}
+                          </span>
+                        </div>
+
+                        {/* Read more link */}
+                        <div className="mt-5 flex items-center gap-2 text-gold text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <span>อ่านต่อ</span>
+                          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* ===== CTA SECTION ===== */}
+      <section className="relative overflow-hidden py-16 md:py-20">
         {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900 via-blue-800 to-slate-900" />
-        {/* Gold accent line */}
-        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400" />
+        <div className="absolute inset-0 hero-gradient" />
+
+        {/* Decorative elements */}
+        <div
+          className="absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage: `linear-gradient(oklch(0.72 0.12 75 / 0.5) 1px, transparent 1px),
+                              linear-gradient(90deg, oklch(0.72 0.12 75 / 0.5) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+
+        {/* Gold accent lines */}
+        <div className="absolute top-0 left-0 right-0 h-1 gold-gradient-animated" />
+        <div className="absolute bottom-0 left-0 right-0 h-1 gold-gradient-animated" />
+
         {/* Decorative corners */}
         <div className="absolute top-0 left-0 w-20 h-20 border-t-2 border-l-2 border-amber-400/30" />
         <div className="absolute bottom-0 right-0 w-20 h-20 border-b-2 border-r-2 border-amber-400/30" />
-        {/* Pattern */}
-        <div className="absolute inset-0 opacity-5" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4af37'%3E%3Ccircle cx='50' cy='50' r='3'/%3E%3Ccircle cx='20' cy='20' r='2'/%3E%3Ccircle cx='80' cy='80' r='2'/%3E%3Ccircle cx='80' cy='20' r='2'/%3E%3Ccircle cx='20' cy='80' r='2'/%3E%3C/g%3E%3C/svg%3E")`
-        }} />
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-amber-300">มีคำถามเกี่ยวกับกฎหมายหรือไม่?</h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-amber-300 mx-auto mb-6" />
-          <p className="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
-            ติดต่อเราเพื่อรับคำปรึกษาจากทนายความมืออาชีพของสำนักงานกฎหมายนิตินิยม
-          </p>
-          <Link href="/#contact">
-            <Button className="bg-gradient-to-r from-amber-400 to-amber-300 hover:from-amber-500 hover:to-amber-400 text-blue-900 font-semibold px-8 py-6 text-lg shadow-xl hover:shadow-2xl transition-all duration-300">
-              ติดต่อเรา →
-            </Button>
-          </Link>
+
+        <div className="container relative z-10">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6 text-white animate-fade-in-up">
+              มีคำถามเกี่ยวกับกฎหมายหรือไม่?
+            </h2>
+            <p className="text-lg text-white/75 mb-8 animate-fade-in-up delay-100">
+              ติดต่อเราเพื่อรับคำปรึกษาจากทนายความมืออาชีพของสำนักงานกฎหมายนิตินิยม
+            </p>
+            <div className="animate-fade-in-up delay-200">
+              <Link href="/#contact">
+                <Button className="gold-gradient-animated text-white hover:opacity-90 font-semibold px-8 py-6 text-lg shadow-lg shadow-amber-900/30 border-0 glow-gold">
+                  ติดต่อเรา
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
