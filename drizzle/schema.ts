@@ -149,3 +149,43 @@ export const articles = mysqlTable("articles", {
 
 export type Article = typeof articles.$inferSelect;
 export type InsertArticle = typeof articles.$inferInsert;
+
+// ===== Tools Tables =====
+
+export const toolsUsage = mysqlTable("tools_usage", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull(),
+  toolType: mysqlEnum("toolType", [
+    "time_calculator",
+    "interest_calculator",
+    "contract_template",
+    "legal_calculator",
+  ]).notNull(),
+  toolName: varchar("toolName", { length: 255 }).notNull(),
+  description: text("description"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type ToolsUsage = typeof toolsUsage.$inferSelect;
+export type InsertToolsUsage = typeof toolsUsage.$inferInsert;
+
+export const toolsResults = mysqlTable("tools_results", {
+  id: int("id").autoincrement().primaryKey(),
+  usageId: int("usageId").notNull(),
+  userId: int("userId").notNull(),
+  toolType: mysqlEnum("toolType", [
+    "time_calculator",
+    "interest_calculator",
+    "contract_template",
+    "legal_calculator",
+  ]).notNull(),
+  inputData: text("inputData"),
+  resultData: text("resultData"),
+  notes: text("notes"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type ToolsResults = typeof toolsResults.$inferSelect;
+export type InsertToolsResults = typeof toolsResults.$inferInsert;

@@ -211,13 +211,10 @@
 - [x] ลบส่วน CTA Banner "มีปัญหาด้านกฎหมาย? ปรึกษาเราได้เลย" ออกจากหน้า Home
 - [x] Tests ผ่านทั้งหมด 17/17
 
-## Phase 26: Add Tools Launcher Menu
-- [x] สร้างหน้า Tools.tsx ใหม่
-  - [x] เพิ่มรายละเอียดโปรแกรมช่วยทนาย
-  - [x] สร้าง card สำหรับแต่ละเครื่องมือ (นับระยะเวลา คำนวณดอกเบี้ย ฏลห)
-  - [x] ออกแบบให้สอดคล้องกับธีม Navy + Gold
-  - [x] Responsive design (mobile + desktop)
-- [x] เพิ่มลิงค์ Tools ในเมนู Navigation
-  - [x] Desktop menu
-  - [x] Mobile menu
+## Phase 26: Move Tools to Admin Panel
+- [x] ลบเมนู Tools ออกจากหน้าแรก
+  - [x] ลบลิงค์ Tools ออกเมนู Desktop และ Mobile
+  - [x] สร้างตาราง tools_usage และ tools_results ในฟิลด์บาทหลัก
+  - [x] สร้างหน้า AdminTools.tsx ใหม่
+  - [x] เพิ่มลิงค์ Tools ใน sidebar ของ Admin Dashboard
 - [x] Tests ผ่านทั้งหมด 17/17
