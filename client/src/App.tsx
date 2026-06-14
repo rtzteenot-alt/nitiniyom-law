@@ -16,6 +16,7 @@ import Team from "./pages/Team";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
 import Services from "./pages/Services";
+import Tools from "./pages/Tools";
 
 function Router() {
   return (
@@ -23,6 +24,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/team" component={Team} />
       <Route path="/services" component={Services} />
+      <Route path="/tools" component={Tools} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:slug" component={BlogDetail} />
       <Route path="/admin/login" component={AdminLogin} />

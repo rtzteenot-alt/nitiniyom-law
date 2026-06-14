@@ -153,6 +153,11 @@ export default function Home() {
                   บทความ
                 </span>
               </Link>
+              <Link href="/tools">
+                <span className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors cursor-pointer">
+                  โปรแกรมช่วยทนาย
+                </span>
+              </Link>
               {[
                 { label: "เกี่ยวกับเรา", id: "about" },
                 { label: "ติดต่อ", id: "contact" },
@@ -203,6 +208,11 @@ export default function Home() {
               <Link href="/blog">
                 <div className="text-left py-2 text-sm font-medium text-foreground/80 hover:text-foreground border-b border-border/50 cursor-pointer">
                   บทความ
+                </div>
+              </Link>
+              <Link href="/tools">
+                <div className="text-left py-2 text-sm font-medium text-foreground/80 hover:text-foreground border-b border-border/50 cursor-pointer">
+                  โปรแกรมช่วยทนาย
                 </div>
               </Link>
               {[
