@@ -34,7 +34,7 @@ const menuItems = [
   { icon: LayoutDashboard, label: "Appointments", path: "/admin/appointments" },
   { icon: LayoutDashboard, label: "Messages", path: "/admin/messages" },
   { icon: LayoutDashboard, label: "Invoices", path: "/admin/invoices" },
-  { icon: Wrench, label: "Tools", path: "/admin/tools" },
+  { icon: Wrench, label: "โปรแกรมช่วยทนาย", path: "/admin/tools" },
 ];
 
 const SIDEBAR_WIDTH_KEY = "sidebar-width";
