@@ -15,12 +15,14 @@ import AdminLogin from "./pages/admin/Login";
 import Team from "./pages/Team";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
+import Services from "./pages/Services";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/team" component={Team} />
+      <Route path="/services" component={Services} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:slug" component={BlogDetail} />
       <Route path="/admin/login" component={AdminLogin} />

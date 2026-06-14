@@ -192,3 +192,16 @@
   - [x] รวมคำพิพากษาศาลฎีกาที่ 6436/2567 พร้อมบทเรียนสำคัญ
   - [x] แก้ไขรูปภาพให้ใช้ absolute URL แทน relative path
 - [x] Tests ผ่านทั้งหมด 17/17
+
+
+## Phase 24: Add Services Page
+- [x] สร้างหน้า Services.tsx ใหม่
+  - [x] เพิ่มรายละเอียดบริการหลัก (บริการร่าง ตรวจสอบ แก้ไขเอกสาร)
+  - [x] เพิ่มบริการสัญญา 13 ประเภท
+  - [x] เพิ่มเอกสารทางกฎหมายอื่น ๆ 8 ประเภท
+  - [x] ออกแบบให้สอดคล้องกับธีม Navy + Gold
+  - [x] Responsive design (mobile + desktop)
+- [x] เพิ่มลิงค์ Services ในเมนู Navigation
+  - [x] Desktop menu
+  - [x] Mobile menu
+- [x] Tests ผ่านทั้งหมด 17/17

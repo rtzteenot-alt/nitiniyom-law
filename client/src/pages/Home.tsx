@@ -143,6 +143,11 @@ export default function Home() {
                   โครงสร้างขององค์กร
                 </span>
               </Link>
+              <Link href="/services">
+                <span className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors cursor-pointer">
+                  บริการ
+                </span>
+              </Link>
               <Link href="/blog">
                 <span className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors cursor-pointer">
                   บทความ
@@ -150,7 +155,6 @@ export default function Home() {
               </Link>
               {[
                 { label: "เกี่ยวกับเรา", id: "about" },
-                { label: "บริการ", id: "services" },
                 { label: "ติดต่อ", id: "contact" },
               ].map((item) => (
                 <button
@@ -191,6 +195,11 @@ export default function Home() {
                   โครงสร้างขององค์กร
                 </div>
               </Link>
+              <Link href="/services">
+                <div className="text-left py-2 text-sm font-medium text-foreground/80 hover:text-foreground border-b border-border/50 cursor-pointer">
+                  บริการ
+                </div>
+              </Link>
               <Link href="/blog">
                 <div className="text-left py-2 text-sm font-medium text-foreground/80 hover:text-foreground border-b border-border/50 cursor-pointer">
                   บทความ
@@ -198,7 +207,6 @@ export default function Home() {
               </Link>
               {[
                 { label: "เกี่ยวกับเรา", id: "about" },
-                { label: "บริการ", id: "services" },
                 { label: "ติดต่อ", id: "contact" },
               ].map((item) => (
                 <button
