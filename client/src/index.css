@@ -196,3 +196,157 @@ button:active:not(:disabled) {
 * {
   transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
 }
+
+/* ===== ENHANCED ANIMATIONS ===== */
+
+/* Floating particles */
+@keyframes float-up {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+  100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+
+/* Shimmer effect */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Glow pulse */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px oklch(0.72 0.12 75 / 0.3), 0 0 40px oklch(0.72 0.12 75 / 0.1); }
+  50% { box-shadow: 0 0 30px oklch(0.72 0.12 75 / 0.5), 0 0 60px oklch(0.72 0.12 75 / 0.2); }
+}
+
+/* Fade in up */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Fade in left */
+@keyframes fade-in-left {
+  from { opacity: 0; transform: translateX(-24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Counter count up */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Gradient shift */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Orbit */
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(80px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(80px) rotate(-360deg); }
+}
+
+/* Scale in */
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Typing cursor blink */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Wave */
+@keyframes wave {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.6); }
+}
+
+/* Utility classes */
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
+  }
+  .animate-fade-in-left {
+    animation: fade-in-left 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
+  }
+  .animate-scale-in {
+    animation: scale-in 0.5s cubic-bezier(0.23, 1, 0.32, 1) both;
+  }
+  .animate-glow-pulse {
+    animation: glow-pulse 2.5s ease-in-out infinite;
+  }
+  .animate-gradient-shift {
+    background-size: 200% 200%;
+    animation: gradient-shift 4s ease infinite;
+  }
+
+  /* Delay utilities */
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+  .delay-600 { animation-delay: 600ms; }
+  .delay-700 { animation-delay: 700ms; }
+  .delay-800 { animation-delay: 800ms; }
+
+  /* Enhanced gradients */
+  .gold-gradient-animated {
+    background: linear-gradient(135deg, oklch(0.72 0.12 75), oklch(0.85 0.08 80), oklch(0.65 0.14 70), oklch(0.78 0.1 78));
+    background-size: 300% 300%;
+    animation: gradient-shift 5s ease infinite;
+  }
+
+  .hero-gradient {
+    background: linear-gradient(135deg,
+      oklch(0.14 0.06 265) 0%,
+      oklch(0.20 0.08 260) 40%,
+      oklch(0.22 0.07 255) 70%,
+      oklch(0.18 0.09 270) 100%
+    );
+  }
+
+  .glass-card {
+    background: oklch(1 0 0 / 0.06);
+    backdrop-filter: blur(12px);
+    border: 1px solid oklch(1 0 0 / 0.12);
+  }
+
+  .gold-text-shimmer {
+    background: linear-gradient(90deg, oklch(0.72 0.12 75), oklch(0.92 0.06 80), oklch(0.72 0.12 75));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s linear infinite;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300;
+  }
+  .card-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px oklch(0.18 0.06 260 / 0.15), 0 0 0 1px oklch(0.72 0.12 75 / 0.2);
+  }
+
+  .glow-gold {
+    box-shadow: 0 0 20px oklch(0.72 0.12 75 / 0.4), 0 0 40px oklch(0.72 0.12 75 / 0.15);
+  }
+
+  .noise-overlay {
+    position: relative;
+  }
+  .noise-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+  }
+}
