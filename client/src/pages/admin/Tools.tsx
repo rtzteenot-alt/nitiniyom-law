@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowRight, Calculator, Clock, FileText, BarChart3 } from "lucide-react";
-import { toast } from "sonner";
+import { useLocation } from "wouter";
 
 const tools = [
   {
@@ -39,8 +39,16 @@ const tools = [
 ];
 
 export default function AdminTools() {
+  const [, setLocation] = useLocation();
+
   const handleToolClick = (toolId: string) => {
-    toast.info("เครื่องมือนี้กำลังพัฒนา กรุณารอติดตามข้อมูลเพิ่มเติม");
+    const toolPaths: Record<string, string> = {
+      time_calculator: "/admin/tools/time-calculator",
+      interest_calculator: "/admin/tools/interest-calculator",
+      contract_template: "/admin/tools/contract-templates",
+      legal_calculator: "/admin/tools/other-tools",
+    };
+    setLocation(toolPaths[toolId] || "/admin/tools");
   };
 
   return (
