@@ -460,7 +460,13 @@ export default function Team() {
                 <div className="flex-1">
                   <h3 className="text-xl font-semibold text-foreground mb-2">ผู้อำนวยการ</h3>
                   <p className="text-lg text-gold font-medium mb-3">นาย นิยม ดีจันทึก</p>
-                  <p className="text-muted-foreground">กำกับการทำงานและดูแลคดีทั้งหมด บริหารภาพรวมของทีมกำหนด ตรวจสอบการทำงาน และควบคุมทิศทางการดำเนินคดีทั้งหมด</p>
+                  <p className="text-muted-foreground">· วางแผน กำหนดนโยบาย และกำหนดทิศทางการดำเนินงานของ
+สำนักงาน
+· บริหารและตรวจสอบการดำเนินงานของสำนักงาน
+· บริหารที่มกฎหมายและสนับสนุนการพัฒนาบุคลากร
+· ให้คำปรึกษากฎหมายอย่างสูงสำหรับเคสที่ซับซ้อนหรือสำคัญ
+· บริหารจัดการงบประมาณและทรัพยากรของสำนักงาน
+· แทนสำนักงานในการประชุมและการจัดการความสัมพันธ์กับไคลเอนต์</p>
                 </div>
               </div>
             </div>
@@ -488,7 +494,7 @@ export default function Team() {
                 <div className="flex-1">
                   <h3 className="text-xl font-semibold text-foreground mb-2">เลขานุการสำนักงาน</h3>
                   <p className="text-lg text-gold font-medium mb-3">นางสาว ภัคจิรา นาคพลกรัง</p>
-                  <p className="text-muted-foreground">ทนายความที่มีความเชี่ยวชาณในด้านกำหนดแพ่งและการจัดการสำนักงานเพื่อดำเนินการงานทุกปวงในสำนักงาน</p>
+                  <p className="text-muted-foreground">ดำเนินการธุรการของสำนักงาน และติดต่อประสานงาน</p>
                 </div>
               </div>
             </div>
