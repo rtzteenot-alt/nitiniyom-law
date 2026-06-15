@@ -220,11 +220,7 @@ export default function Home() {
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       {/* ===== NAVBAR ===== */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "bg-white/95 backdrop-blur-md shadow-lg border-b border-amber-100"
-            : "bg-transparent"
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-white/95 backdrop-blur-md shadow-lg border-b border-amber-100"
       >
         <div className="container">
           <div className="flex items-center justify-between h-16 md:h-20">

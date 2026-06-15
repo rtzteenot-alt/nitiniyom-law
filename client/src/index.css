@@ -43,6 +43,15 @@
   --font-serif: 'Playfair Display', 'Cormorant Garamond', serif;
 }
 
+html {
+  /* Force light theme from the start */
+  color-scheme: light;
+}
+
+body {
+  /* Remove dark class if it exists */
+}
+
 :root {
   --radius: 0.5rem;
   /* Elegant Law Firm Palette - Light */

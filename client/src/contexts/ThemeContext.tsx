@@ -21,11 +21,13 @@ export function ThemeProvider({
   defaultTheme = "light",
   switchable = false,
 }: ThemeProviderProps) {
+  // Clear old theme from localStorage on mount
+  React.useEffect(() => {
+    localStorage.removeItem("theme");
+  }, []);
+
   const [theme, setTheme] = useState<Theme>(() => {
-    if (switchable) {
-      const stored = localStorage.getItem("theme");
-      return (stored as Theme) || defaultTheme;
-    }
+    // Always use light theme as default, ignore localStorage
     return defaultTheme;
   });
 
@@ -37,9 +39,10 @@ export function ThemeProvider({
       root.classList.remove("dark");
     }
 
-    if (switchable) {
-      localStorage.setItem("theme", theme);
-    }
+    // Don't store theme in localStorage for now
+    // if (switchable) {
+    //   localStorage.setItem("theme", theme);
+    // }
   }, [theme, switchable]);
 
   const toggleTheme = switchable
