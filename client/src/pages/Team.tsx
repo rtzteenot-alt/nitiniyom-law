@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { Scale, Menu, X, ArrowRight, Award, Heart, Sparkles, CheckCircle2 } from "lucide-react";
+import { Scale, Menu, X, ArrowRight, Award, Heart, Sparkles, CheckCircle2, ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function Team() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [currentMemberIndex, setCurrentMemberIndex] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -60,6 +61,16 @@ export default function Team() {
     { icon: Award, title: "ความเชี่ยวชาญ", desc: "ทีมที่มีความรู้และประสบการณ์สูงในด้านกฎหมายต่างๆ พร้อมอัปเดตความรู้อยู่เสมอ" },
     { icon: Scale, title: "ยุติธรรม", desc: "ยึดมั่นในหลักการยุติธรรมและจริยธรรมวิชาชีพในการให้บริการทางกฎหมาย" },
   ];
+
+  const handlePrevMember = () => {
+    setCurrentMemberIndex((prev) => (prev === 0 ? teamMembers.length - 1 : prev - 1));
+  };
+
+  const handleNextMember = () => {
+    setCurrentMemberIndex((prev) => (prev === teamMembers.length - 1 ? 0 : prev + 1));
+  };
+
+  const currentMember = teamMembers[currentMemberIndex];
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
@@ -177,36 +188,40 @@ export default function Team() {
         </div>
       </section>
 
-      {/* ===== TEAM MEMBERS SECTION ===== */}
+      {/* ===== TEAM MEMBERS CAROUSEL SECTION ===== */}
       <section className="py-20 md:py-28 bg-background">
         <div className="container">
-          <div className="space-y-16">
-            {teamMembers.map((member, index) => (
-              <div
-                key={member.id}
-                className={`grid lg:grid-cols-2 gap-12 items-center animate-fade-in-up`}
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                {/* Info Section */}
-                <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                  <div className="inline-flex items-center gap-2 mb-4">
-                    <div className="h-px w-8 bg-gold" />
-                    <span className="text-xs font-semibold tracking-widest uppercase text-gold">ทีมหลัก</span>
-                  </div>
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 mb-4">
+              <div className="h-px w-8 bg-gold" />
+              <span className="text-xs font-semibold tracking-widest uppercase text-gold">ทีมหลัก</span>
+              <div className="h-px w-8 bg-gold" />
+            </div>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4">
+              สมาชิกทีมหลัก
+            </h2>
+          </div>
 
+          {/* Carousel Container */}
+          <div className="relative">
+            {/* Carousel Wrapper */}
+            <div className="overflow-hidden">
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                {/* Info Section - Left */}
+                <div className="animate-fade-in-up">
                   <h3 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-2">
-                    {member.title} {member.name}
+                    {currentMember.title} {currentMember.name}
                   </h3>
-                  <p className="text-lg font-semibold text-gold mb-6">{member.position}</p>
+                  <p className="text-lg font-semibold text-gold mb-6">{currentMember.position}</p>
 
                   <div className="mb-6 pb-6 border-b border-border/30">
                     <p className="text-sm text-muted-foreground">
-                      <span className="font-medium text-foreground">ประวัติการศึกษา:</span> {member.education}
+                      <span className="font-medium text-foreground">ประวัติการศึกษา:</span> {currentMember.education}
                     </p>
                   </div>
 
                   <p className="text-base text-muted-foreground leading-relaxed mb-8">
-                    {member.description}
+                    {currentMember.description}
                   </p>
 
                   {/* Specialties */}
@@ -216,7 +231,7 @@ export default function Team() {
                       ความเชี่ยวชาญ
                     </h4>
                     <div className="flex flex-wrap gap-3">
-                      {member.specialties.map((specialty) => (
+                      {currentMember.specialties.map((specialty) => (
                         <span
                           key={specialty}
                           className="px-4 py-2 glass-card rounded-full text-sm font-medium text-gold border border-gold/20 hover:border-gold/50 transition-colors"
@@ -228,27 +243,59 @@ export default function Team() {
                   </div>
 
                   {/* CTA */}
-                  <a href={member.facebookUrl} target="_blank" rel="noopener noreferrer">
+                  <a href={currentMember.facebookUrl} target="_blank" rel="noopener noreferrer">
                     <Button className="gold-gradient-animated text-white hover:opacity-90 font-semibold px-8 shadow-lg shadow-amber-900/30 border-0 glow-gold">
-                      ติดต่อ {member.name.split(" ")[1]}
+                      ติดต่อ {currentMember.name.split(" ")[1]}
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
                   </a>
                 </div>
 
-                {/* Visual placeholder */}
-                <div className={`relative h-96 rounded-2xl glass-card border border-white/10 overflow-hidden flex items-center justify-center ${index % 2 === 1 ? "lg:order-1" : ""}`}>
+                {/* Visual Card - Right */}
+                <div className="relative h-96 rounded-2xl glass-card border border-white/10 overflow-hidden flex items-center justify-center">
                   <div className="absolute inset-0 hero-gradient opacity-50" />
                   <div className="relative z-10 text-center">
                     <div className="w-24 h-24 rounded-full gold-gradient flex items-center justify-center mx-auto mb-4 shadow-lg animate-glow-pulse">
-                      <span className="text-4xl font-serif font-bold text-white">{member.name.charAt(0)}</span>
+                      <span className="text-4xl font-serif font-bold text-white">{currentMember.name.charAt(0)}</span>
                     </div>
-                    <p className="text-white/80 font-serif text-lg">{member.title} {member.name}</p>
-                    <p className="text-amber-300 text-sm mt-2">{member.position}</p>
+                    <p className="text-white/80 font-serif text-lg">{currentMember.title} {currentMember.name}</p>
+                    <p className="text-amber-300 text-sm mt-2">{currentMember.position}</p>
                   </div>
                 </div>
               </div>
-            ))}
+            </div>
+
+            {/* Navigation Buttons */}
+            <div className="flex items-center justify-center gap-4 mt-12">
+              <button
+                onClick={handlePrevMember}
+                className="p-3 rounded-full glass-card border border-white/10 hover:border-gold/50 transition-all duration-300 hover:bg-gold/10"
+              >
+                <ChevronLeft className="w-5 h-5 text-gold" />
+              </button>
+
+              {/* Dots Indicator */}
+              <div className="flex gap-2">
+                {teamMembers.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentMemberIndex(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      index === currentMemberIndex
+                        ? "bg-gold w-8"
+                        : "bg-gold/30 hover:bg-gold/50"
+                    }`}
+                  />
+                ))}
+              </div>
+
+              <button
+                onClick={handleNextMember}
+                className="p-3 rounded-full glass-card border border-white/10 hover:border-gold/50 transition-all duration-300 hover:bg-gold/10"
+              >
+                <ChevronRight className="w-5 h-5 text-gold" />
+              </button>
+            </div>
           </div>
         </div>
       </section>
