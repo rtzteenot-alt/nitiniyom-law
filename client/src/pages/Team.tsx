@@ -501,8 +501,15 @@ export default function Team() {
                 </div>
                 <div className="flex-1">
                   <h3 className="text-xl font-semibold text-foreground mb-2">ทนายความ</h3>
-                  <p className="text-lg text-gold font-medium mb-3">นาย ธนกร คูณตุ้ม และอื่นๆ</p>
-                  <p className="text-muted-foreground">ปรึกษาหลักคดีความในด้านต่างๆ ปรึกษาดำเนินคดีความใหม่ และสนับสนุนกำหนดไข่ความปรึกษากำหนดแพ่ง</p>
+                  <p className="text-lg text-gold font-medium mb-3">นางสาว ภัคจิรา นาคพลกรัง</p>
+                  <div className="text-muted-foreground space-y-2">
+                    <p>ทนายความที่มีความเชี่ยวชาญในด้านกฎหมายแพ่ง</p>
+                    <p className="text-sm"><strong>รายชื่อผ่านหน้า:</strong></p>
+                    <ul className="list-disc list-inside text-sm space-y-1">
+                      <li>นาย ธนกร คูณตุ้ม (ผู้ช่วยทนายความ)</li>
+                      <li>นาย ยศกร กันภัย (ทนายความและที่ปรึกษาสำนักงาน)</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
