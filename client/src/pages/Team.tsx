@@ -250,80 +250,69 @@ export default function Team() {
       </section>
 
       {/* ===== TEAM MEMBERS CAROUSEL SECTION ===== */}
-      <section className="py-20 md:py-32 relative overflow-hidden bg-background">
-        {/* Premium gradient background */}
-        <div className="absolute inset-0 navy-gradient" />
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-10"
-          style={{ background: "radial-gradient(circle, oklch(0.72 0.12 75) 0%, transparent 70%)" }}
-        />
-        <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full opacity-10"
-          style={{ background: "radial-gradient(circle, oklch(0.72 0.12 75) 0%, transparent 70%)" }}
-        />
-
-        <div className="container relative z-10">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-3 mb-6">
-              <div className="h-1 w-12 gold-gradient rounded-full" />
-              <span className="text-xs font-bold tracking-widest uppercase text-gold">ทีมหลัก</span>
-              <div className="h-1 w-12 gold-gradient rounded-full" />
+      <section className="py-20 md:py-28 bg-background">
+        <div className="container">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 mb-4">
+              <div className="h-px w-8 bg-gold" />
+              <span className="text-xs font-semibold tracking-widest uppercase text-gold">ทีมหลัก</span>
+              <div className="h-px w-8 bg-gold" />
             </div>
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4">
               สมาชิกทีมหลัก
-              <br />
-              <span className="text-gold">ผู้เชี่ยวชาญด้านกฎหมาย</span>
             </h2>
-            <p className="text-white/70 max-w-3xl mx-auto text-lg leading-relaxed">
-              เลื่อนซ้ายขวาเพื่อดูข้อมูลเพิ่มเติมเกี่ยวกับสมาชิกทีมของเรา
+            <p className="text-sm text-muted-foreground">
+              เลื่อนซ้ายขวาเพื่อดูข้อมูลเพิ่มเติม
             </p>
           </div>
 
           {/* Carousel Container */}
-          <div className="relative max-w-5xl mx-auto">
+          <div className="relative max-w-4xl mx-auto">
             {/* Carousel Wrapper */}
             <div
               className="overflow-hidden"
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
             >
-              <div className="rounded-3xl overflow-hidden p-8 md:p-12 transition-all duration-500 bg-white shadow-2xl hover:shadow-3xl">
+              <div className="rounded-3xl glass-card border border-white/10 overflow-hidden p-8 md:p-12 transition-all duration-300">
                 {/* Image Section - Top */}
                 <div className="mb-8 animate-fade-in-up">
-                  <div className="relative h-80 md:h-96 rounded-2xl overflow-hidden flex items-center justify-center bg-gradient-to-br from-gold/20 to-gold/5 border border-gold/20">
-                    <div className="absolute inset-0 navy-gradient opacity-80" />
+                  <div className="relative h-80 md:h-96 rounded-2xl glass-card border border-white/10 overflow-hidden flex items-center justify-center">
+                    <div className="absolute inset-0 hero-gradient opacity-50" />
                     <div className="relative z-10 text-center">
-                      <div className="w-40 h-40 rounded-full gold-gradient flex items-center justify-center mx-auto mb-6 shadow-2xl animate-glow-pulse hover:scale-105 transition-transform duration-300">
-                        <span className="text-7xl font-serif font-bold text-white">{currentMember.name.charAt(0)}</span>
+                      <div className="w-32 h-32 rounded-full gold-gradient flex items-center justify-center mx-auto mb-6 shadow-lg animate-glow-pulse">
+                        <span className="text-6xl font-serif font-bold text-white">{currentMember.name.charAt(0)}</span>
                       </div>
-                      <p className="text-white font-serif text-3xl font-bold">{currentMember.title} {currentMember.name}</p>
+                      <p className="text-white/80 font-serif text-2xl">{currentMember.title} {currentMember.name}</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Info Section - Bottom */}
                 <div className="animate-fade-in-up delay-100">
-                  <p className="text-2xl font-bold text-gold mb-2">{currentMember.position}</p>
+                  <p className="text-xl font-semibold text-gold mb-6">{currentMember.position}</p>
 
-                  <div className="mb-8 pb-8 border-b border-gold/20">
-                    <p className="text-base text-foreground/70">
-                      <span className="font-semibold text-foreground">ประวัติการศึกษา:</span> {currentMember.education}
+                  <div className="mb-6 pb-6 border-b border-border/30">
+                    <p className="text-sm text-muted-foreground">
+                      <span className="font-medium text-foreground">ประวัติการศึกษา:</span> {currentMember.education}
                     </p>
                   </div>
 
-                  <p className="text-lg text-foreground/80 leading-relaxed mb-8 font-medium">
+                  <p className="text-base text-muted-foreground leading-relaxed mb-8">
                     {currentMember.description}
                   </p>
 
                   {/* Specialties */}
                   <div className="mb-8">
-                    <h4 className="font-bold text-foreground mb-4 flex items-center gap-2 text-lg">
-                      <Award className="w-6 h-6 text-gold" />
+                    <h4 className="font-semibold text-foreground mb-4 flex items-center gap-2">
+                      <Award className="w-5 h-5 text-gold" />
                       ความเชี่ยวชาญ
                     </h4>
                     <div className="flex flex-wrap gap-3">
                       {currentMember.specialties.map((specialty) => (
                         <span
                           key={specialty}
-                          className="px-5 py-2 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-gold to-gold/80 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                          className="px-4 py-2 glass-card rounded-full text-sm font-medium text-gold border border-gold/20 hover:border-gold/50 transition-colors"
                         >
                           {specialty}
                         </span>
@@ -333,9 +322,9 @@ export default function Team() {
 
                   {/* CTA */}
                   <a href={currentMember.facebookUrl} target="_blank" rel="noopener noreferrer">
-                    <Button className="gold-gradient text-white hover:opacity-90 font-bold px-8 py-3 shadow-xl hover:shadow-2xl border-0 text-lg transition-all duration-300 hover:scale-105">
+                    <Button className="gold-gradient-animated text-white hover:opacity-90 font-semibold px-8 shadow-lg shadow-amber-900/30 border-0 glow-gold">
                       ติดต่อ {currentMember.name.split(" ")[1]}
-                      <ArrowRight className="w-5 h-5 ml-2" />
+                      <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
                   </a>
                 </div>
@@ -390,70 +379,53 @@ export default function Team() {
       </section>
 
       {/* ===== PARTNERS SECTION ===== */}
-      <section className="py-20 md:py-32 relative overflow-hidden bg-background">
-        <div className="absolute inset-0 bg-gradient-to-b from-muted/50 to-background" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full opacity-10"
-          style={{ background: "radial-gradient(circle, oklch(0.72 0.12 75) 0%, transparent 70%)" }}
-        />
-
-        <div className="container relative z-10">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-3 mb-6">
-              <div className="h-1 w-12 gold-gradient rounded-full" />
-              <span className="text-xs font-bold tracking-widest uppercase text-gold">ทีมสนับสนุน</span>
-              <div className="h-1 w-12 gold-gradient rounded-full" />
+      <section className="py-20 md:py-28 bg-muted/30">
+        <div className="container">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 mb-4">
+              <div className="h-px w-8 bg-gold" />
+              <span className="text-xs font-semibold tracking-widest uppercase text-gold">ทีมสนับสนุน</span>
+              <div className="h-px w-8 bg-gold" />
             </div>
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
-              ผู้ช่วยทนายความ
-              <br />
-              <span className="text-gold">มืออาชีพ</span>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Partners
             </h2>
-            <p className="text-muted-foreground max-w-3xl mx-auto text-lg leading-relaxed">
-              ทีมผู้เชี่ยวชาญที่พร้อมสนับสนุนการทำงานของเราด้วยความเชี่ยวชาญและประสบการณ์
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              ทีมผู้เชี่ยวชาญที่พร้อมสนับสนุนการทำงานของเรา
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-6">
             {partners.map((partner, i) => (
               <div
                 key={partner.id}
-                className={`group relative overflow-hidden rounded-2xl transition-all duration-500 cursor-pointer animate-fade-in-up`}
+                className={`rounded-2xl p-8 glass-card border border-white/10 card-hover animate-fade-in-up`}
                 style={{ animationDelay: `${i * 100}ms` }}
               >
-                <div className="absolute inset-0 bg-white group-hover:bg-gradient-to-br group-hover:from-white group-hover:to-muted/50 transition-all duration-500" />
-                <div className="absolute top-0 left-0 right-0 h-1 gold-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute inset-0 rounded-2xl border border-border/50 group-hover:border-gold/30 transition-colors duration-500" />
-                <div className="absolute inset-0 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                <h3 className="font-serif text-2xl font-bold text-foreground mb-2">
+                  {partner.title} {partner.name}
+                </h3>
+                <p className="text-lg font-semibold text-gold mb-4">{partner.position}</p>
 
-                <div className="relative p-8 flex flex-col h-full">
-                  <h3 className="font-serif text-2xl font-bold text-foreground mb-2 group-hover:text-gold transition-colors duration-300">
-                    {partner.title} {partner.name}
-                  </h3>
-                  <p className="text-lg font-bold text-gold mb-6">{partner.position}</p>
+                {partner.education && (
+                  <p className="text-sm text-muted-foreground mb-4">
+                    <span className="font-medium text-foreground">ประวัติการศึกษา:</span> {partner.education}
+                  </p>
+                )}
 
-                  {partner.education && (
-                    <p className="text-base text-foreground/70 mb-6 group-hover:text-foreground/80 transition-colors duration-300">
-                      <span className="font-semibold text-foreground">ประวัติการศึกษา:</span> {partner.education}
-                    </p>
-                  )}
-
-                  {partner.expertise && (
-                    <div className="text-sm flex-1">
-                      <span className="font-bold text-foreground block mb-4 flex items-center gap-2">
-                        <Award className="w-5 h-5 text-gold" />
-                        ความเชี่ยวชาญ
-                      </span>
-                      <div className="flex flex-wrap gap-2">
-                        {partner.expertise.map((exp, idx) => (
-                          <span key={idx} className="inline-flex items-center gap-1 px-4 py-2 rounded-full bg-gradient-to-r from-gold/10 to-gold/5 text-gold text-xs font-semibold border border-gold/30 group-hover:border-gold/60 group-hover:bg-gold/15 transition-all duration-300">
-                            <CheckCircle2 className="w-4 h-4" />
-                            {exp}
-                          </span>
-                        ))}
-                      </div>
+                {partner.expertise && (
+                  <div className="text-sm">
+                    <span className="font-medium text-foreground block mb-3">ความเชี่ยวชาญ:</span>
+                    <div className="flex flex-wrap gap-2">
+                      {partner.expertise.map((exp, idx) => (
+                        <span key={idx} className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-gold/10 text-gold text-xs font-medium border border-gold/20">
+                          <CheckCircle2 className="w-3 h-3" />
+                          {exp}
+                        </span>
+                      ))}
                     </div>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
