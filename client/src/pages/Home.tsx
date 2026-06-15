@@ -234,7 +234,8 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="flex items-center gap-6 md:gap-8">
+            {/* Desktop Menu */}
+            <div className="hidden md:flex items-center gap-6 lg:gap-8">
               {[
                 { label: "โครงสร้างองค์กร", href: "/team" },
                 { label: "บริการ", href: "/services" },
@@ -266,10 +267,50 @@ export default function Home() {
                 </Button>
               </Link>
             </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="md:hidden p-2 hover:bg-muted rounded-lg transition-colors"
+            >
+              {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
           </div>
+
+          {/* Mobile Menu */}
+          {menuOpen && (
+            <div className="md:hidden pb-4 space-y-3 border-t border-amber-100 pt-4">
+              {[
+                { label: "โครงสร้างองค์กร", href: "/team" },
+                { label: "บริการ", href: "/services" },
+                { label: "บทความ", href: "/blog" },
+              ].map((item) => (
+                <Link key={item.href} href={item.href}>
+                  <span className="block text-sm font-medium text-foreground/80 hover:text-foreground transition-colors py-2 px-2 rounded hover:bg-muted/50 cursor-pointer">
+                    {item.label}
+                  </span>
+                </Link>
+              ))}
+              {[
+                { label: "เกี่ยวกับเรา", id: "about" },
+                { label: "ติดต่อ", id: "contact" },
+              ].map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollTo(item.id)}
+                  className="block w-full text-left text-sm font-medium text-foreground/80 hover:text-foreground transition-colors py-2 px-2 rounded hover:bg-muted/50"
+                >
+                  {item.label}
+                </button>
+              ))}
+              <Link href="/admin">
+                <Button size="sm" className="w-full gold-gradient text-white border-0 font-medium shadow-md hover:opacity-90 transition-all">
+                  เข้าสู่ระบบ
+                </Button>
+              </Link>
+            </div>
+          )}
         </div>
-
-
       </nav>
 
       {/* ===== HERO SECTION ===== */}
