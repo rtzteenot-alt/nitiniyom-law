@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { Scale, Menu, X, ArrowRight, Award, Heart, Sparkles, CheckCircle2, ChevronLeft, ChevronRight } from "lucide-react";
@@ -7,6 +7,10 @@ export default function Team() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [currentMemberIndex, setCurrentMemberIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const [isAutoRotating, setIsAutoRotating] = useState(true);
+  const autoRotateTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -62,12 +66,69 @@ export default function Team() {
     { icon: Scale, title: "ยุติธรรม", desc: "ยึดมั่นในหลักการยุติธรรมและจริยธรรมวิชาชีพในการให้บริการทางกฎหมาย" },
   ];
 
+  // Auto-rotate logic
+  useEffect(() => {
+    if (!isAutoRotating) return;
+
+    const startTimer = () => {
+      autoRotateTimerRef.current = setTimeout(() => {
+        setCurrentMemberIndex((prev) => (prev === teamMembers.length - 1 ? 0 : prev + 1));
+      }, 3500); // 3.5 seconds
+    };
+
+    startTimer();
+
+    return () => {
+      if (autoRotateTimerRef.current) {
+        clearTimeout(autoRotateTimerRef.current);
+      }
+    };
+  }, [isAutoRotating, currentMemberIndex, teamMembers.length]);
+
+  // Handle touch swipe
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+    setIsAutoRotating(false);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    setTouchEnd(e.changedTouches[0].clientX);
+    handleSwipe();
+    // Resume auto-rotate after 2 seconds of inactivity
+    setTimeout(() => setIsAutoRotating(true), 2000);
+  };
+
+  const handleSwipe = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      handleNextMember();
+    }
+    if (isRightSwipe) {
+      handlePrevMember();
+    }
+  };
+
   const handlePrevMember = () => {
+    setIsAutoRotating(false);
     setCurrentMemberIndex((prev) => (prev === 0 ? teamMembers.length - 1 : prev - 1));
+    setTimeout(() => setIsAutoRotating(true), 2000);
   };
 
   const handleNextMember = () => {
+    setIsAutoRotating(false);
     setCurrentMemberIndex((prev) => (prev === teamMembers.length - 1 ? 0 : prev + 1));
+    setTimeout(() => setIsAutoRotating(true), 2000);
+  };
+
+  const handleDotClick = (index: number) => {
+    setIsAutoRotating(false);
+    setCurrentMemberIndex(index);
+    setTimeout(() => setIsAutoRotating(true), 2000);
   };
 
   const currentMember = teamMembers[currentMemberIndex];
@@ -200,13 +261,20 @@ export default function Team() {
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4">
               สมาชิกทีมหลัก
             </h2>
+            <p className="text-sm text-muted-foreground">
+              เลื่อนซ้ายขวาเพื่อดูข้อมูลเพิ่มเติม
+            </p>
           </div>
 
           {/* Carousel Container */}
           <div className="relative max-w-4xl mx-auto">
             {/* Carousel Wrapper */}
-            <div className="overflow-hidden">
-              <div className="rounded-3xl glass-card border border-white/10 overflow-hidden p-8 md:p-12">
+            <div
+              className="overflow-hidden"
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+            >
+              <div className="rounded-3xl glass-card border border-white/10 overflow-hidden p-8 md:p-12 transition-all duration-300">
                 {/* Image Section - Top */}
                 <div className="mb-8 animate-fade-in-up">
                   <div className="relative h-80 md:h-96 rounded-2xl glass-card border border-white/10 overflow-hidden flex items-center justify-center">
@@ -279,7 +347,7 @@ export default function Team() {
                 {teamMembers.map((_, index) => (
                   <button
                     key={index}
-                    onClick={() => setCurrentMemberIndex(index)}
+                    onClick={() => handleDotClick(index)}
                     className={`rounded-full transition-all duration-300 ${
                       index === currentMemberIndex
                         ? "w-10 h-10 bg-gold shadow-lg shadow-amber-900/50"
@@ -298,6 +366,13 @@ export default function Team() {
               >
                 <ChevronRight className="w-6 h-6 text-white" />
               </button>
+            </div>
+
+            {/* Auto-rotate indicator */}
+            <div className="text-center mt-6">
+              <p className="text-xs text-muted-foreground">
+                {isAutoRotating ? "🔄 เลื่อนอัตโนมัติ" : "⏸️ หยุดชั่วคราว"}
+              </p>
             </div>
           </div>
         </div>
