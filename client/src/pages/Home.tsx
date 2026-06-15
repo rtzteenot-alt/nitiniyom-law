@@ -34,7 +34,7 @@ const services = [
   {
     icon: Gavel,
     title: "กฎหมายอาญา",
-    desc: "ให้คำปรึกษาและว่าความคดีอาญา ทั้งในฐานะโจทก์และจำเลย ด้วยประสบการณ์และความเชี่ยวชาญ",
+    desc: "ให้คำปรึกษาและว่าความคดีอาญา เช่นคดี หมิ่นประมาท คดีทำร้ายร่างกาย คดีลักทรัพย์ คดีพรากผู้เยาว์ เป็นต้น ",
     color: "from-red-900/30 to-red-800/10",
     accent: "text-red-400",
   },
@@ -48,14 +48,14 @@ const services = [
   {
     icon: FileText,
     title: "การทำสัญญา",
-    desc: "ร่างและตรวจสอบสัญญาทุกประเภท ให้มีความสมบูรณ์ ถูกต้องตามกฎหมาย และปกป้องสิทธิ์ของคุณ",
+    desc: "ร่างและตรวจสอบสัญญาทุกประเภท ให้มีความสมบูรณ์ ถูกต้องตามกฎหมาย และป้องกันไม่ให้คุณเสียผลประโยชน์",
     color: "from-amber-900/30 to-amber-800/10",
     accent: "text-amber-400",
   },
   {
     icon: MessageSquare,
     title: "หนังสือทวงถามหนี้",
-    desc: "จัดทำหนังสือทวงถามหนี้อย่างเป็นทางการ มีผลทางกฎหมาย เพื่อเรียกคืนสิทธิ์ที่พึงได้รับ",
+    desc: "จัดทำหนังสือทวงถามหนี้อย่างเป็นทางการ ให้มีผลทางกฎหมาย เพื่อเพิ่มโอกาสข้อต่อสู้ทางกฎหมาย",
     color: "from-green-900/30 to-green-800/10",
     accent: "text-green-400",
   },
@@ -68,8 +68,8 @@ const services = [
   },
   {
     icon: Shield,
-    title: "คุ้มครองสิทธิ์",
-    desc: "ปกป้องและรักษาสิทธิ์ตามกฎหมายของคุณในทุกสถานการณ์ ด้วยความมุ่งมั่นและจริงจัง",
+    title: "รับจดทะเบียนบริษัทและห้างหุ้นส่วน",
+    desc: "การทำธุรกิจโดยการจดเป็นนิติบุคคลจะช่วยสร้างความหน้าเชื่อถือให้กับธุรกิจของคุณอย่่างมาก",
     color: "from-teal-900/30 to-teal-800/10",
     accent: "text-teal-400",
   },
@@ -234,7 +234,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="hidden md:flex items-center gap-8">
+            <div className="flex items-center gap-6 md:gap-8">
               {[
                 { label: "โครงสร้างองค์กร", href: "/team" },
                 { label: "บริการ", href: "/services" },
@@ -266,50 +266,10 @@ export default function Home() {
                 </Button>
               </Link>
             </div>
-
-            <button
-              className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors"
-              onClick={() => setMenuOpen(!menuOpen)}
-            >
-              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
           </div>
         </div>
 
-        {menuOpen && (
-          <div className="md:hidden bg-white/98 backdrop-blur-md border-t border-border shadow-lg animate-fade-in-up">
-            <div className="container py-4 flex flex-col gap-3">
-              {[
-                { label: "โครงสร้างองค์กร", href: "/team" },
-                { label: "บริการ", href: "/services" },
-                { label: "บทความ", href: "/blog" },
-              ].map((item) => (
-                <Link key={item.href} href={item.href}>
-                  <div className="text-left py-2 text-sm font-medium text-foreground/80 hover:text-foreground border-b border-border/50 cursor-pointer">
-                    {item.label}
-                  </div>
-                </Link>
-              ))}
-              {[
-                { label: "เกี่ยวกับเรา", id: "about" },
-                { label: "ติดต่อ", id: "contact" },
-              ].map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollTo(item.id)}
-                  className="text-left py-2 text-sm font-medium text-foreground/80 hover:text-foreground border-b border-border/50 last:border-0"
-                >
-                  {item.label}
-                </button>
-              ))}
-              <Link href="/admin">
-                <Button size="sm" className="w-full mt-2 gold-gradient text-white border-0">
-                  เข้าสู่ระบบเจ้าหน้าที่
-                </Button>
-              </Link>
-            </div>
-          </div>
-        )}
+
       </nav>
 
       {/* ===== HERO SECTION ===== */}
@@ -844,7 +804,7 @@ export default function Home() {
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground mb-0.5">พื้นที่บริการเพิ่มเติม</p>
-                      <p className="font-medium text-foreground text-sm">กรุงเทพฯ, ปริมณฑล</p>
+                      <p className="font-medium text-foreground text-sm">กรุงเทพฯ, ปริมณฑล , นครราชสีมา</p>
                     </div>
                   </div>
                 </div>
