@@ -191,7 +191,7 @@ export default function Team() {
       {/* ===== TEAM MEMBERS CAROUSEL SECTION ===== */}
       <section className="py-20 md:py-28 bg-background">
         <div className="container">
-          <div className="text-center mb-12">
+          <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 mb-4">
               <div className="h-px w-8 bg-gold" />
               <span className="text-xs font-semibold tracking-widest uppercase text-gold">ทีมหลัก</span>
@@ -203,16 +203,26 @@ export default function Team() {
           </div>
 
           {/* Carousel Container */}
-          <div className="relative">
+          <div className="relative max-w-4xl mx-auto">
             {/* Carousel Wrapper */}
             <div className="overflow-hidden">
-              <div className="grid lg:grid-cols-2 gap-12 items-center">
-                {/* Info Section - Left */}
-                <div className="animate-fade-in-up">
-                  <h3 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-2">
-                    {currentMember.title} {currentMember.name}
-                  </h3>
-                  <p className="text-lg font-semibold text-gold mb-6">{currentMember.position}</p>
+              <div className="rounded-3xl glass-card border border-white/10 overflow-hidden p-8 md:p-12">
+                {/* Image Section - Top */}
+                <div className="mb-8 animate-fade-in-up">
+                  <div className="relative h-80 md:h-96 rounded-2xl glass-card border border-white/10 overflow-hidden flex items-center justify-center">
+                    <div className="absolute inset-0 hero-gradient opacity-50" />
+                    <div className="relative z-10 text-center">
+                      <div className="w-32 h-32 rounded-full gold-gradient flex items-center justify-center mx-auto mb-6 shadow-lg animate-glow-pulse">
+                        <span className="text-6xl font-serif font-bold text-white">{currentMember.name.charAt(0)}</span>
+                      </div>
+                      <p className="text-white/80 font-serif text-2xl">{currentMember.title} {currentMember.name}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Info Section - Bottom */}
+                <div className="animate-fade-in-up delay-100">
+                  <p className="text-xl font-semibold text-gold mb-6">{currentMember.position}</p>
 
                   <div className="mb-6 pb-6 border-b border-border/30">
                     <p className="text-sm text-muted-foreground">
@@ -250,50 +260,43 @@ export default function Team() {
                     </Button>
                   </a>
                 </div>
-
-                {/* Visual Card - Right */}
-                <div className="relative h-96 rounded-2xl glass-card border border-white/10 overflow-hidden flex items-center justify-center">
-                  <div className="absolute inset-0 hero-gradient opacity-50" />
-                  <div className="relative z-10 text-center">
-                    <div className="w-24 h-24 rounded-full gold-gradient flex items-center justify-center mx-auto mb-4 shadow-lg animate-glow-pulse">
-                      <span className="text-4xl font-serif font-bold text-white">{currentMember.name.charAt(0)}</span>
-                    </div>
-                    <p className="text-white/80 font-serif text-lg">{currentMember.title} {currentMember.name}</p>
-                    <p className="text-amber-300 text-sm mt-2">{currentMember.position}</p>
-                  </div>
-                </div>
               </div>
             </div>
 
-            {/* Navigation Buttons */}
-            <div className="flex items-center justify-center gap-4 mt-12">
+            {/* Navigation Controls */}
+            <div className="flex items-center justify-center gap-6 mt-12">
+              {/* Previous Button */}
               <button
                 onClick={handlePrevMember}
-                className="p-3 rounded-full glass-card border border-white/10 hover:border-gold/50 transition-all duration-300 hover:bg-gold/10"
+                className="w-14 h-14 rounded-full gold-gradient flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 active:scale-95"
+                title="ดูข้อมูลก่อนหน้า"
               >
-                <ChevronLeft className="w-5 h-5 text-gold" />
+                <ChevronLeft className="w-6 h-6 text-white" />
               </button>
 
               {/* Dots Indicator */}
-              <div className="flex gap-2">
+              <div className="flex gap-3">
                 {teamMembers.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentMemberIndex(index)}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    className={`rounded-full transition-all duration-300 ${
                       index === currentMemberIndex
-                        ? "bg-gold w-8"
-                        : "bg-gold/30 hover:bg-gold/50"
+                        ? "w-10 h-10 bg-gold shadow-lg shadow-amber-900/50"
+                        : "w-4 h-4 bg-gold/30 hover:bg-gold/60"
                     }`}
+                    title={`ดูสมาชิกคนที่ ${index + 1}`}
                   />
                 ))}
               </div>
 
+              {/* Next Button */}
               <button
                 onClick={handleNextMember}
-                className="p-3 rounded-full glass-card border border-white/10 hover:border-gold/50 transition-all duration-300 hover:bg-gold/10"
+                className="w-14 h-14 rounded-full gold-gradient flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 active:scale-95"
+                title="ดูข้อมูลถัดไป"
               >
-                <ChevronRight className="w-5 h-5 text-gold" />
+                <ChevronRight className="w-6 h-6 text-white" />
               </button>
             </div>
           </div>
