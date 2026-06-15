@@ -454,9 +454,11 @@ export default function Team() {
             {/* Director */}
             <div className="rounded-2xl p-8 glass-card border border-white/10 hover:shadow-lg transition-all duration-300 animate-fade-in-up">
               <div className="flex items-start gap-6">
-                <div className="w-16 h-16 rounded-full gold-gradient flex items-center justify-center flex-shrink-0 shadow-md">
-                  <Award className="w-8 h-8 text-white" />
-                </div>
+                <img
+                  src="/manus-storage/niyom-director_9f53c2a6.png"
+                  alt="นาย นิยม ดีจันทึก"
+                  className="w-20 h-20 rounded-full object-cover flex-shrink-0 shadow-lg border-2 border-gold/30"
+                />
                 <div className="flex-1">
                   <h3 className="text-xl font-semibold text-foreground mb-2">ผู้อำนวยการ</h3>
                   <p className="text-lg text-gold font-medium mb-3">นาย นิยม ดีจันทึก</p>
