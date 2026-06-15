@@ -451,15 +451,15 @@ export default function Team() {
 
           {/* Organizational Chart */}
           <div className="max-w-6xl mx-auto">
-            {/* Level 1: CEO */}
+            {/* Level 1: CEO/Director */}
             <div className="flex justify-center mb-12">
               <div className="w-full md:w-80">
                 <div className="rounded-2xl p-6 glass-card border border-white/10 text-center hover:shadow-lg transition-all duration-300 animate-fade-in-up">
                   <div className="w-16 h-16 rounded-full gold-gradient flex items-center justify-center mx-auto mb-4 shadow-md">
                     <Scale className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="font-semibold text-foreground mb-1">หัวหน้าสำนักงาน</h3>
-                  <p className="text-sm text-muted-foreground">ตำแหน่งว่าง</p>
+                  <h3 className="font-semibold text-foreground mb-1">หัวหน้าสำนักงาน / ผู้อำนวยการ</h3>
+                  <p className="text-sm text-gold font-medium">นาย นิยม ดีจันทึก</p>
                 </div>
               </div>
             </div>
@@ -469,47 +469,36 @@ export default function Team() {
               <div className="w-1 h-8 bg-gradient-to-b from-gold to-transparent" />
             </div>
 
-            {/* Level 2: Directors */}
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
-              {/* Left: Director */}
-              <div className="flex flex-col items-center">
-                <div className="w-full max-w-xs">
-                  <div className="rounded-2xl p-6 glass-card border border-white/10 text-center hover:shadow-lg transition-all duration-300 animate-fade-in-up delay-100">
-                    <div className="w-16 h-16 rounded-full gold-gradient flex items-center justify-center mx-auto mb-4 shadow-md">
-                      <Award className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="font-semibold text-foreground mb-1">ผู้อำนวยการ</h3>
-                    <p className="text-sm text-gold font-medium">นาย นิยม ดีจันทึก</p>
+            {/* Level 2: Secretary */}
+            <div className="flex justify-center mb-12">
+              <div className="w-full md:w-80">
+                <div className="rounded-2xl p-6 glass-card border border-white/10 text-center hover:shadow-lg transition-all duration-300 animate-fade-in-up delay-100">
+                  <div className="w-16 h-16 rounded-full gold-gradient flex items-center justify-center mx-auto mb-4 shadow-md">
+                    <Heart className="w-8 h-8 text-white" />
                   </div>
+                  <h3 className="font-semibold text-foreground mb-1">เลขานุการสำนักงาน</h3>
+                  <p className="text-sm text-gold font-medium">นางสาว ภัคจิรา นาคพลกรัง</p>
                 </div>
-                <div className="w-1 h-8 bg-gradient-to-b from-gold to-transparent mt-4" />
-              </div>
-
-              {/* Right: Secretary */}
-              <div className="flex flex-col items-center">
-                <div className="w-full max-w-xs">
-                  <div className="rounded-2xl p-6 glass-card border border-white/10 text-center hover:shadow-lg transition-all duration-300 animate-fade-in-up delay-100">
-                    <div className="w-16 h-16 rounded-full gold-gradient flex items-center justify-center mx-auto mb-4 shadow-md">
-                      <Heart className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="font-semibold text-foreground mb-1">เลขานุการสำนักงาน</h3>
-                    <p className="text-sm text-gold font-medium">นางสาว ภัคจิรา นาคพลกรัง</p>
-                  </div>
-                </div>
-                <div className="w-1 h-8 bg-gradient-to-b from-gold to-transparent mt-4" />
               </div>
             </div>
 
-            {/* Connector lines from Level 1 to Level 2 */}
-            <div className="relative mb-12 hidden md:block">
-              <div className="absolute top-0 left-1/4 w-1/2 h-8 border-t-2 border-l-2 border-r-2 border-gold/30 rounded-t-3xl" />
+            {/* Connector line */}
+            <div className="flex justify-center mb-8">
+              <div className="w-1 h-8 bg-gradient-to-b from-gold to-transparent" />
             </div>
 
             {/* Level 3: Lawyers & Partners */}
             <div className="mb-12">
               <div className="rounded-2xl p-8 glass-card border border-white/10 text-center hover:shadow-lg transition-all duration-300 animate-fade-in-up delay-200">
                 <h3 className="font-semibold text-lg text-foreground mb-6">ทนายความและ Partners</h3>
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid md:grid-cols-3 gap-4">
+                  {/* Secretary as dual role */}
+                  <div className="p-4 rounded-xl bg-gold/10 border border-gold/40 hover:border-gold/60 transition-all duration-300">
+                    <p className="font-medium text-foreground">นางสาว ภัคจิรา นาคพลกรัง</p>
+                    <p className="text-sm text-gold">ทนายความและเลขานุการสำนักงาน</p>
+                    <p className="text-xs text-muted-foreground mt-2">(ควบสองตำแหน่ง)</p>
+                  </div>
+                  {/* Other partners */}
                   {partners.map((partner, idx) => (
                     <div
                       key={partner.id}
