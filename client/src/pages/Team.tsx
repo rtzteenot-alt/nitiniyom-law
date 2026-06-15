@@ -502,11 +502,11 @@ export default function Team() {
                 <div className="flex-1">
                   <h3 className="text-xl font-semibold text-foreground mb-2">ทนายความ</h3>
                   <p className="text-lg text-gold font-medium mb-3">นางสาว ภัคจิรา นาคพลกรัง</p>
-                  <div className="text-muted-foreground space-y-2">
-                    <p className="text-sm"><strong>Partners:</strong></p>
-                    <ul className="list-disc list-inside text-sm space-y-1">
-                      <li>นาย ธนกร คูณตุ้ม</li>
-                      <li>นาย ยศกร กันภัย</li>
+                  <div className="space-y-3">
+                    <p className="text-sm text-muted-foreground"><strong>Partners:</strong></p>
+                    <ul className="space-y-2">
+                      <li className="text-lg text-gold font-medium">นาย ธนกร คูณตุ้ม</li>
+                      <li className="text-lg text-gold font-medium">นาย ยศกร กันภัย</li>
                     </ul>
                   </div>
                 </div>
