@@ -540,51 +540,97 @@ export default function Home() {
       </section>
 
       {/* ===== SERVICES SECTION ===== */}
-      <section id="services" className="py-20 md:py-28 relative overflow-hidden" ref={servicesRef}>
-        <div className="absolute inset-0 bg-muted/30" />
-        {/* Decorative background */}
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-5"
+      <section id="services" className="py-20 md:py-32 relative overflow-hidden" ref={servicesRef}>
+        {/* Premium gradient background */}
+        <div className="absolute inset-0 navy-gradient" />
+        <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-10"
+          style={{ background: "radial-gradient(circle, oklch(0.72 0.12 75) 0%, transparent 70%)" }}
+        />
+        <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full opacity-10"
           style={{ background: "radial-gradient(circle, oklch(0.72 0.12 75) 0%, transparent 70%)" }}
         />
 
         <div className="container relative z-10">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 mb-4">
-              <div className="h-px w-8 bg-gold" />
-              <span className="text-xs font-semibold tracking-widest uppercase text-gold">บริการของเรา</span>
-              <div className="h-px w-8 bg-gold" />
+          {/* Header with premium styling */}
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center gap-3 mb-6">
+              <div className="h-1 w-12 gold-gradient rounded-full" />
+              <span className="text-xs font-bold tracking-widest uppercase text-gold">บริการกฎหมาย</span>
+              <div className="h-1 w-12 gold-gradient rounded-full" />
             </div>
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
               บริการกฎหมายครบวงจร
+              <br />
+              <span className="text-gold">สำหรับทุกความต้องการของคุณ</span>
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              เราให้บริการด้านกฎหมายอย่างครอบคลุม ด้วยทีมผู้เชี่ยวชาญที่พร้อมดูแลคุณในทุกสถานการณ์
+            <p className="text-white/70 max-w-3xl mx-auto text-lg leading-relaxed">
+              ทีมทนายความและผู้เชี่ยวชาญของเรา พร้อมให้บริการด้านกฎหมายอย่างครอบคลุม
+              <br className="hidden md:block" />
+              จากการให้คำปรึกษา ไปจนถึงการแทนความในศาล ด้วยประสบการณ์และความเชี่ยวชาญ
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Services Grid with enhanced styling */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {services.map((service, i) => {
               const Icon = service.icon;
               return (
                 <div
                   key={i}
-                  className={`group bg-white rounded-2xl p-7 shadow-sm card-hover border border-border cursor-pointer
+                  className={`group relative overflow-hidden rounded-2xl transition-all duration-500 cursor-pointer
                     ${servicesInView ? "animate-fade-in-up" : "opacity-0"}
                   `}
-                  style={{ animationDelay: `${i * 80}ms` }}
+                  style={{ animationDelay: `${i * 100}ms` }}
                 >
-                  <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}>
-                    <Icon className={`w-7 h-7 ${service.accent}`} />
-                  </div>
-                  <h3 className="font-serif text-lg font-bold text-foreground mb-3">{service.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{service.desc}</p>
-                  <div className="mt-5 flex items-center gap-2 text-gold text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span>ติดต่อสอบถาม</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  {/* Background with gradient */}
+                  <div className="absolute inset-0 bg-white group-hover:bg-gradient-to-br group-hover:from-white group-hover:to-muted/50 transition-all duration-500" />
+                  
+                  {/* Accent border effect */}
+                  <div className="absolute top-0 left-0 right-0 h-1 gold-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 rounded-2xl border border-border/50 group-hover:border-gold/30 transition-colors duration-500" />
+                  
+                  {/* Shadow effect */}
+                  <div className="absolute inset-0 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                  {/* Content */}
+                  <div className="relative p-8 flex flex-col h-full">
+                    {/* Icon with enhanced styling */}
+                    <div className="mb-6">
+                      <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center 
+                        group-hover:scale-125 group-hover:shadow-xl transition-all duration-500 transform`}>
+                        <Icon className={`w-8 h-8 ${service.accent} transition-transform duration-500 group-hover:rotate-12`} />
+                      </div>
+                    </div>
+
+                    {/* Text content */}
+                    <div className="flex-1">
+                      <h3 className="font-serif text-xl md:text-2xl font-bold text-foreground mb-3 group-hover:text-gold transition-colors duration-300">
+                        {service.title}
+                      </h3>
+                      <p className="text-sm md:text-base text-muted-foreground leading-relaxed group-hover:text-foreground/80 transition-colors duration-300">
+                        {service.desc}
+                      </p>
+                    </div>
+
+                    {/* CTA with enhanced styling */}
+                    <div className="mt-6 flex items-center gap-2 text-gold font-semibold text-sm opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1">
+                      <span>ติดต่อสอบถาม</span>
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                    </div>
                   </div>
                 </div>
               );
             })}
+          </div>
+
+          {/* Bottom CTA */}
+          <div className="mt-16 text-center">
+            <p className="text-white/60 mb-6">ต้องการรับคำปรึกษาเพิ่มเติม?</p>
+            <Link href="#contact">
+              <Button size="lg" className="gold-gradient text-white border-0 font-semibold px-8 shadow-xl hover:shadow-2xl hover:opacity-90 transition-all">
+                ติดต่อเราวันนี้
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
