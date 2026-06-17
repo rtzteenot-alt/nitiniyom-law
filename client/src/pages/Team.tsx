@@ -1,16 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { Scale, Menu, X, ArrowRight, Award, Heart, Sparkles, CheckCircle2, ChevronLeft, ChevronRight } from "lucide-react";
+import { Scale, Menu, X, ArrowRight, Heart, Award, Sparkles, CheckCircle2 } from "lucide-react";
 
 export default function Team() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [currentMemberIndex, setCurrentMemberIndex] = useState(0);
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
-  const [isAutoRotating, setIsAutoRotating] = useState(true);
-  const autoRotateTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -18,120 +13,53 @@ export default function Team() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const teamMembers = [
-    {
-      id: 1,
-      name: "นิยม ดีจันทึก",
-      title: "นาย",
-      position: "ผู้อำนวยการฝ่ายกฎหมาย",
-      description: "กำกับการทำงานและดูแลคดีในสำนักงาน บริหารภาพรวมของทีมกฎหมาย ตรวจสอบการทำงาน และควบคุมทิศทางการดำเนินคดีทั้งองค์กร",
-      education: "มหาวิทยาลัยรามคำแหง",
-      specialties: ["กฎหมายอาญา", "กฎหมายธุรกิจ", "การทำสัญญา"],
-      facebookUrl: "https://web.facebook.com/niyom.nottee?locale=th_TH",
-    },
-    {
-      id: 2,
-      name: "ภัคจิรา นาคพลกรัง",
-      title: "นางสาว",
-      position: "ทนายความและเลขานุการสำนักงาน",
-      description: "ทนายความที่มีความเชี่ยวชาญในด้านกฎหมายแพ่งและการจัดการสำนักงานเพื่อดำเนินการงานทั้งปวงในสำนักงาน",
-      education: "มหาวิทยาลัยขอนแก่น เกียรตินิยมอันดับ 1",
-      specialties: ["กฎหมายแพ่ง", "หนังสือทวงถามหนี้", "ปรึกษาเบื้องต้น"],
-      facebookUrl: "https://web.facebook.com/som.phakji?locale=th_TH",
-    },
-  ];
-
-  const partners = [
-    {
-      id: 1,
-      name: "ธนกร คูณตุ้ม",
-      title: "นาย",
-      position: "ผู้ช่วยทนายความ",
-      education: "มหาวิทยาลัยรามคำแหง",
-      expertise: ["กฎหมายแพ่ง", "กฎหมายวิธีพิจารณาแพ่ง", "คดีครอบครัว"],
-    },
-    {
-      id: 2,
-      name: "ยศกร กันภัย",
-      title: "นาย",
-      position: "ทนายความและที่ปรึกษาสำนักงาน",
-      education: "มหาวิทยาลัยรามคำแหง",
-      expertise: ["กฎหมายแพ่ง", "การจดนิติบุคคล", "การทำนิติกรรม"],
-    },
-  ];
-
   const values = [
     { icon: Heart, title: "ความเอาใจใส่", desc: "ตั้งใจฟังและเข้าใจปัญหาของลูกค้าอย่างแท้จริง เพื่อหาทางแก้ไขที่ดีที่สุด" },
     { icon: Award, title: "ความเชี่ยวชาญ", desc: "ทีมที่มีความรู้และประสบการณ์สูงในด้านกฎหมายต่างๆ พร้อมอัปเดตความรู้อยู่เสมอ" },
     { icon: Scale, title: "ยุติธรรม", desc: "ยึดมั่นในหลักการยุติธรรมและจริยธรรมวิชาชีพในการให้บริการทางกฎหมาย" },
   ];
 
-  // Auto-rotate logic
-  useEffect(() => {
-    if (!isAutoRotating) return;
+  const organizationStructure = [
+    {
+      id: 1,
+      position: "ผู้อำนวยการ",
+      name: "นาย นิยม ดีจันทึก",
+      education: "มหาวิทยาลัยรามคำแหง",
+    },
+    {
+      id: 2,
+      position: "หัวหน้าสำนักงาน",
+      name: "นางสาว ภัคจิรา นาคพลกรัง",
+      education: "มหาวิทยาลัยขอนแก่น เกียรตินิยมอันดับ 1",
+    },
+    {
+      id: 3,
+      position: "เลขานุการสำนักงาน",
+      name: "นางสาว ภัคจิรา นาคพลกรัง",
+      education: "มหาวิทยาลัยขอนแก่น เกียรตินิยมอันดับ 1",
+    },
+    {
+      id: 4,
+      position: "ทนายความ",
+      name: "นางสาว ภัคจิรา นาคพลกรัง",
+      education: "มหาวิทยาลัยขอนแก่น เกียรตินิยมอันดับ 1",
+    },
+  ];
 
-    const startTimer = () => {
-      autoRotateTimerRef.current = setTimeout(() => {
-        setCurrentMemberIndex((prev) => (prev === teamMembers.length - 1 ? 0 : prev + 1));
-      }, 3500); // 3.5 seconds
-    };
-
-    startTimer();
-
-    return () => {
-      if (autoRotateTimerRef.current) {
-        clearTimeout(autoRotateTimerRef.current);
-      }
-    };
-  }, [isAutoRotating, currentMemberIndex, teamMembers.length]);
-
-  // Handle touch swipe
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX);
-    setIsAutoRotating(false);
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    setTouchEnd(e.changedTouches[0].clientX);
-    handleSwipe();
-    // Resume auto-rotate after 2 seconds of inactivity
-    setTimeout(() => setIsAutoRotating(true), 2000);
-  };
-
-  const handleSwipe = () => {
-    if (!touchStart || !touchEnd) return;
-
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
-
-    if (isLeftSwipe) {
-      handleNextMember();
-    }
-    if (isRightSwipe) {
-      handlePrevMember();
-    }
-  };
-
-  const handlePrevMember = () => {
-    setIsAutoRotating(false);
-    setCurrentMemberIndex((prev) => (prev === 0 ? teamMembers.length - 1 : prev - 1));
-    setTimeout(() => setIsAutoRotating(true), 2000);
-  };
-
-  const handleNextMember = () => {
-    setIsAutoRotating(false);
-    setCurrentMemberIndex((prev) => (prev === teamMembers.length - 1 ? 0 : prev + 1));
-    setTimeout(() => setIsAutoRotating(true), 2000);
-  };
-
-  const handleDotClick = (index: number) => {
-    setIsAutoRotating(false);
-    setCurrentMemberIndex(index);
-    setTimeout(() => setIsAutoRotating(true), 2000);
-  };
-
-  const currentMember = teamMembers[currentMemberIndex];
+  const partners = [
+    {
+      id: 1,
+      position: "ผู้ช่วยทนายความ",
+      name: "นาย ธนกร คูณตุ้ม",
+      education: "มหาวิทยาลัยรามคำแหง",
+    },
+    {
+      id: 2,
+      position: "ทนายความและที่ปรึกษาสำนักงาน",
+      name: "นาย ยศกร กันภัย",
+      education: "มหาวิทยาลัยรามคำแหง",
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
@@ -249,189 +177,6 @@ export default function Team() {
         </div>
       </section>
 
-      {/* ===== TEAM MEMBERS CAROUSEL SECTION ===== */}
-      <section className="py-20 md:py-28 bg-background">
-        <div className="container">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 mb-4">
-              <div className="h-px w-8 bg-gold" />
-              <span className="text-xs font-semibold tracking-widest uppercase text-gold">ทีมหลัก</span>
-              <div className="h-px w-8 bg-gold" />
-            </div>
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4">
-              สมาชิกทีมหลัก
-            </h2>
-            <p className="text-sm text-muted-foreground">
-              เลื่อนซ้ายขวาเพื่อดูข้อมูลเพิ่มเติม
-            </p>
-          </div>
-
-          {/* Carousel Container */}
-          <div className="relative max-w-4xl mx-auto">
-            {/* Carousel Wrapper */}
-            <div
-              className="overflow-hidden"
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
-            >
-              <div className="rounded-3xl glass-card border border-white/10 overflow-hidden p-8 md:p-12 transition-all duration-300">
-                {/* Image Section - Top */}
-                <div className="mb-8 animate-fade-in-up">
-                  <div className="relative h-80 md:h-96 rounded-2xl glass-card border border-white/10 overflow-hidden flex items-center justify-center">
-                    <div className="absolute inset-0 hero-gradient opacity-50" />
-                    <div className="relative z-10 text-center">
-                      <div className="w-32 h-32 rounded-full gold-gradient flex items-center justify-center mx-auto mb-6 shadow-lg animate-glow-pulse">
-                        <span className="text-6xl font-serif font-bold text-white">{currentMember.name.charAt(0)}</span>
-                      </div>
-                      <p className="text-white/80 font-serif text-2xl">{currentMember.title} {currentMember.name}</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Info Section - Bottom */}
-                <div className="animate-fade-in-up delay-100">
-                  <p className="text-xl font-semibold text-gold mb-6">{currentMember.position}</p>
-
-                  <div className="mb-6 pb-6 border-b border-border/30">
-                    <p className="text-sm text-muted-foreground">
-                      <span className="font-medium text-foreground">ประวัติการศึกษา:</span> {currentMember.education}
-                    </p>
-                  </div>
-
-                  <p className="text-base text-muted-foreground leading-relaxed mb-8">
-                    {currentMember.description}
-                  </p>
-
-                  {/* Specialties */}
-                  <div className="mb-8">
-                    <h4 className="font-semibold text-foreground mb-4 flex items-center gap-2">
-                      <Award className="w-5 h-5 text-gold" />
-                      ความเชี่ยวชาญ
-                    </h4>
-                    <div className="flex flex-wrap gap-3">
-                      {currentMember.specialties.map((specialty) => (
-                        <span
-                          key={specialty}
-                          className="px-4 py-2 glass-card rounded-full text-sm font-medium text-gold border border-gold/20 hover:border-gold/50 transition-colors"
-                        >
-                          {specialty}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* CTA */}
-                  <a href={currentMember.facebookUrl} target="_blank" rel="noopener noreferrer">
-                    <Button className="gold-gradient-animated text-white hover:opacity-90 font-semibold px-8 shadow-lg shadow-amber-900/30 border-0 glow-gold">
-                      ติดต่อ {currentMember.name.split(" ")[1]}
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Navigation Controls */}
-            <div className="flex items-center justify-center gap-6 mt-12">
-              {/* Previous Button */}
-              <button
-                onClick={handlePrevMember}
-                className="w-14 h-14 rounded-full gold-gradient flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 active:scale-95"
-                title="ดูข้อมูลก่อนหน้า"
-              >
-                <ChevronLeft className="w-6 h-6 text-white" />
-              </button>
-
-              {/* Dots Indicator */}
-              <div className="flex gap-3">
-                {teamMembers.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleDotClick(index)}
-                    className={`rounded-full transition-all duration-300 ${
-                      index === currentMemberIndex
-                        ? "w-10 h-10 bg-gold shadow-lg shadow-amber-900/50"
-                        : "w-4 h-4 bg-gold/30 hover:bg-gold/60"
-                    }`}
-                    title={`ดูสมาชิกคนที่ ${index + 1}`}
-                  />
-                ))}
-              </div>
-
-              {/* Next Button */}
-              <button
-                onClick={handleNextMember}
-                className="w-14 h-14 rounded-full gold-gradient flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 active:scale-95"
-                title="ดูข้อมูลถัดไป"
-              >
-                <ChevronRight className="w-6 h-6 text-white" />
-              </button>
-            </div>
-
-            {/* Auto-rotate indicator */}
-            <div className="text-center mt-6">
-              <p className="text-xs text-muted-foreground">
-                {isAutoRotating ? "🔄 เลื่อนอัตโนมัติ" : "⏸️ หยุดชั่วคราว"}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== PARTNERS SECTION ===== */}
-      <section className="py-20 md:py-28 bg-muted/30">
-        <div className="container">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 mb-4">
-              <div className="h-px w-8 bg-gold" />
-              <span className="text-xs font-semibold tracking-widest uppercase text-gold">ทีมสนับสนุน</span>
-              <div className="h-px w-8 bg-gold" />
-            </div>
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Partners
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              ทีมผู้เชี่ยวชาญที่พร้อมสนับสนุนการทำงานของเรา
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {partners.map((partner, i) => (
-              <div
-                key={partner.id}
-                className={`rounded-2xl p-8 glass-card border border-white/10 card-hover animate-fade-in-up`}
-                style={{ animationDelay: `${i * 100}ms` }}
-              >
-                <h3 className="font-serif text-2xl font-bold text-foreground mb-2">
-                  {partner.title} {partner.name}
-                </h3>
-                <p className="text-lg font-semibold text-gold mb-4">{partner.position}</p>
-
-                {partner.education && (
-                  <p className="text-sm text-muted-foreground mb-4">
-                    <span className="font-medium text-foreground">ประวัติการศึกษา:</span> {partner.education}
-                  </p>
-                )}
-
-                {partner.expertise && (
-                  <div className="text-sm">
-                    <span className="font-medium text-foreground block mb-3">ความเชี่ยวชาญ:</span>
-                    <div className="flex flex-wrap gap-2">
-                      {partner.expertise.map((exp, idx) => (
-                        <span key={idx} className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-gold/10 text-gold text-xs font-medium border border-gold/20">
-                          <CheckCircle2 className="w-3 h-3" />
-                          {exp}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ===== ORGANIZATIONAL STRUCTURE SECTION ===== */}
       <section className="py-20 md:py-28 bg-muted/30">
         <div className="container">
@@ -451,33 +196,17 @@ export default function Team() {
 
           {/* Organization List */}
           <div className="max-w-4xl mx-auto space-y-4">
-            {/* Director */}
-            <div className="rounded-xl p-6 glass-card border border-white/10 hover:shadow-lg transition-all duration-300 animate-fade-in-up">
-              <h3 className="text-lg font-semibold text-foreground mb-1">ผู้อำนวยการ</h3>
-              <p className="text-base text-gold font-medium mb-2">นาย นิยม ดีจันทึก</p>
-              <p className="text-sm text-muted-foreground">มหาวิทยาลัยรามคำแหง</p>
-            </div>
-
-            {/* Office Manager */}
-            <div className="rounded-xl p-6 glass-card border border-white/10 hover:shadow-lg transition-all duration-300 animate-fade-in-up delay-100">
-              <h3 className="text-lg font-semibold text-foreground mb-1">หัวหน้าสำนักงาน</h3>
-              <p className="text-base text-gold font-medium mb-2">นางสาว ภัคจิรา นาคพลกรัง</p>
-              <p className="text-sm text-muted-foreground">มหาวิทยาลัยขอนแก่น เกียรตินิยมอันดับ 1</p>
-            </div>
-
-            {/* Secretary */}
-            <div className="rounded-xl p-6 glass-card border border-white/10 hover:shadow-lg transition-all duration-300 animate-fade-in-up delay-200">
-              <h3 className="text-lg font-semibold text-foreground mb-1">เลขานุการสำนักงาน</h3>
-              <p className="text-base text-gold font-medium mb-2">นางสาว ภัคจิรา นาคพลกรัง</p>
-              <p className="text-sm text-muted-foreground">มหาวิทยาลัยขอนแก่น เกียรตินิยมอันดับ 1</p>
-            </div>
-
-            {/* Lawyer */}
-            <div className="rounded-xl p-6 glass-card border border-white/10 hover:shadow-lg transition-all duration-300 animate-fade-in-up delay-300">
-              <h3 className="text-lg font-semibold text-foreground mb-1">ทนายความ</h3>
-              <p className="text-base text-gold font-medium mb-2">นางสาว ภัคจิรา นาคพลกรัง</p>
-              <p className="text-sm text-muted-foreground">มหาวิทยาลัยขอนแก่น เกียรตินิยมอันดับ 1</p>
-            </div>
+            {organizationStructure.map((member, i) => (
+              <div
+                key={member.id}
+                className="rounded-xl p-6 glass-card border border-white/10 hover:shadow-lg transition-all duration-300 animate-fade-in-up"
+                style={{ animationDelay: `${i * 100}ms` }}
+              >
+                <h3 className="text-lg font-semibold text-foreground mb-1">{member.position}</h3>
+                <p className="text-base text-gold font-medium mb-2">{member.name}</p>
+                <p className="text-sm text-muted-foreground">{member.education}</p>
+              </div>
+            ))}
 
             {/* Partners Section */}
             <div className="mt-12 pt-8 border-t border-gold/30">
@@ -485,19 +214,17 @@ export default function Team() {
                 Partners - ทนายความ
               </h2>
               <div className="space-y-4">
-                {/* Partner 1 */}
-                <div className="rounded-xl p-6 glass-card border border-white/10 hover:shadow-lg transition-all duration-300 animate-fade-in-up delay-100">
-                  <h3 className="text-lg font-semibold text-foreground mb-1">ผู้ช่วยทนายความ</h3>
-                  <p className="text-base text-gold font-medium mb-2">นาย ธนกร คูณตุ้ม</p>
-                  <p className="text-sm text-muted-foreground">มหาวิทยาลัยรามคำแหง</p>
-                </div>
-
-                {/* Partner 2 */}
-                <div className="rounded-xl p-6 glass-card border border-white/10 hover:shadow-lg transition-all duration-300 animate-fade-in-up delay-200">
-                  <h3 className="text-lg font-semibold text-foreground mb-1">ทนายความและที่ปรึกษาสำนักงาน</h3>
-                  <p className="text-base text-gold font-medium mb-2">นาย ยศกร กันภัย</p>
-                  <p className="text-sm text-muted-foreground">มหาวิทยาลัยรามคำแหง</p>
-                </div>
+                {partners.map((partner, i) => (
+                  <div
+                    key={partner.id}
+                    className="rounded-xl p-6 glass-card border border-white/10 hover:shadow-lg transition-all duration-300 animate-fade-in-up"
+                    style={{ animationDelay: `${(organizationStructure.length + i) * 100}ms` }}
+                  >
+                    <h3 className="text-lg font-semibold text-foreground mb-1">{partner.position}</h3>
+                    <p className="text-base text-gold font-medium mb-2">{partner.name}</p>
+                    <p className="text-sm text-muted-foreground">{partner.education}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
