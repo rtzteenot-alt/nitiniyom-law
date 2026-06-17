@@ -225,13 +225,7 @@ export default function Home() {
         <div className="container">
           <div className="flex items-center justify-between h-16 md:h-20">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full gold-gradient flex items-center justify-center shadow-md animate-glow-pulse">
-                <Scale className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <p className="font-serif font-bold text-base leading-tight text-foreground">นิตินิยม</p>
-                <p className="text-xs text-muted-foreground leading-tight">สำนักงานกฎหมาย</p>
-              </div>
+              <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663750415503/UDsdpLrrfo55VQmCBXtvjT/nitiniyom-logo-eyUvn78Dad7vmDkXr66hdW.webp" alt="นิตินิยม" className="h-12 w-auto" />
             </div>
 
             {/* Desktop Menu */}
