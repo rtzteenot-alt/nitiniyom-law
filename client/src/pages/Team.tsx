@@ -178,51 +178,136 @@ export default function Team() {
       </section>
 
       {/* ===== ORGANIZATIONAL STRUCTURE SECTION ===== */}
-      <section className="py-20 md:py-28 bg-muted/30">
-        <div className="container">
+      <section className="relative py-20 md:py-28 overflow-hidden">
+        {/* Background layers */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
+        
+        {/* Animated grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.05]"
+          style={{
+            backgroundImage: `linear-gradient(oklch(0.72 0.12 75 / 0.5) 1px, transparent 1px),
+                              linear-gradient(90deg, oklch(0.72 0.12 75 / 0.5) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+
+        {/* Radial glows */}
+        <div
+          className="absolute top-1/4 right-0 w-[500px] h-[500px] rounded-full opacity-15"
+          style={{
+            background: "radial-gradient(circle, oklch(0.72 0.12 75 / 0.3) 0%, transparent 70%)",
+          }}
+        />
+        <div
+          className="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full opacity-10"
+          style={{
+            background: "radial-gradient(circle, oklch(0.72 0.12 75 / 0.3) 0%, transparent 70%)",
+          }}
+        />
+
+        <div className="container relative z-10">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 mb-4">
               <div className="h-px w-8 bg-gold" />
               <span className="text-xs font-semibold tracking-widest uppercase text-gold">โครงสร้าง</span>
               <div className="h-px w-8 bg-gold" />
             </div>
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4 animate-fade-in-up">
               โครงสร้างองค์กร
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              รายชื่อสมาชิกในสำนักงาน
+            <p className="text-muted-foreground max-w-2xl mx-auto animate-fade-in-up delay-100">
+              ทีมมืออาชีพที่พร้อมให้บริการและคำปรึกษาทางกฎหมายด้วยความจริงจัง
             </p>
           </div>
 
           {/* Organization List */}
-          <div className="max-w-4xl mx-auto space-y-4">
-            {organizationStructure.map((member, i) => (
-              <div
-                key={member.id}
-                className="rounded-xl p-6 glass-card border border-white/10 hover:shadow-lg transition-all duration-300 animate-fade-in-up"
-                style={{ animationDelay: `${i * 100}ms` }}
-              >
-                <h3 className="text-lg font-semibold text-foreground mb-1">{member.position}</h3>
-                <p className="text-base text-gold font-medium mb-2">{member.name}</p>
-                <p className="text-sm text-muted-foreground">{member.education}</p>
-              </div>
-            ))}
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-6 mb-12">
+              {organizationStructure.map((member, i) => (
+                <div
+                  key={member.id}
+                  className="group relative rounded-2xl overflow-hidden animate-fade-in-up"
+                  style={{ animationDelay: `${i * 100}ms` }}
+                >
+                  {/* Card background with gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-gold/10 via-transparent to-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  {/* Glass card */}
+                  <div className="relative p-8 glass-card border border-white/10 group-hover:border-gold/30 transition-all duration-300 h-full">
+                    {/* Decorative top accent */}
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-gold to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                    {/* Position badge */}
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/20 mb-4">
+                      <div className="w-2 h-2 rounded-full bg-gold" />
+                      <span className="text-xs font-semibold text-gold tracking-wider uppercase">
+                        ตำแหน่ง {i + 1}
+                      </span>
+                    </div>
+
+                    {/* Content */}
+                    <h3 className="text-xl font-serif font-bold text-foreground mb-2 group-hover:text-gold transition-colors duration-300">
+                      {member.position}
+                    </h3>
+                    <p className="text-lg text-gold font-semibold mb-3">{member.name}</p>
+                    <div className="flex items-start gap-2">
+                      <div className="w-1 h-1 rounded-full bg-muted-foreground mt-1.5 flex-shrink-0" />
+                      <p className="text-sm text-muted-foreground">{member.education}</p>
+                    </div>
+
+                    {/* Hover effect line */}
+                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-gold via-amber-300 to-gold opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                </div>
+              ))}
+            </div>
 
             {/* Partners Section */}
-            <div className="mt-12 pt-8 border-t border-gold/30">
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-8 animate-fade-in-up">
-                Partners - ทนายความ
-              </h2>
-              <div className="space-y-4">
+            <div className="mt-16 pt-12 border-t border-gold/20">
+              <div className="text-center mb-8">
+                <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-2 animate-fade-in-up">
+                  Partners
+                </h2>
+                <p className="text-gold font-medium animate-fade-in-up delay-100">ทนายความ</p>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-6">
                 {partners.map((partner, i) => (
                   <div
                     key={partner.id}
-                    className="rounded-xl p-6 glass-card border border-white/10 hover:shadow-lg transition-all duration-300 animate-fade-in-up"
+                    className="group relative rounded-2xl overflow-hidden animate-fade-in-up"
                     style={{ animationDelay: `${(organizationStructure.length + i) * 100}ms` }}
                   >
-                    <h3 className="text-lg font-semibold text-foreground mb-1">{partner.position}</h3>
-                    <p className="text-base text-gold font-medium mb-2">{partner.name}</p>
-                    <p className="text-sm text-muted-foreground">{partner.education}</p>
+                    {/* Card background with gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-amber-400/10 via-transparent to-amber-300/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    
+                    {/* Glass card */}
+                    <div className="relative p-8 glass-card border border-white/10 group-hover:border-amber-400/30 transition-all duration-300 h-full">
+                      {/* Decorative top accent */}
+                      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                      {/* Partner badge */}
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20 mb-4">
+                        <Award className="w-3 h-3 text-amber-400" />
+                        <span className="text-xs font-semibold text-amber-400 tracking-wider uppercase">
+                          Partner
+                        </span>
+                      </div>
+
+                      {/* Content */}
+                      <h3 className="text-xl font-serif font-bold text-foreground mb-2 group-hover:text-amber-400 transition-colors duration-300">
+                        {partner.position}
+                      </h3>
+                      <p className="text-lg text-amber-400 font-semibold mb-3">{partner.name}</p>
+                      <div className="flex items-start gap-2">
+                        <div className="w-1 h-1 rounded-full bg-muted-foreground mt-1.5 flex-shrink-0" />
+                        <p className="text-sm text-muted-foreground">{partner.education}</p>
+                      </div>
+
+                      {/* Hover effect line */}
+                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
                   </div>
                 ))}
               </div>
