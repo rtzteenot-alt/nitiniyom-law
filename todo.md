@@ -240,3 +240,9 @@
   - [x] เพิ่ม animations และ hover effects
 - [x] ทดสอบทั้งหมด (Tests ผ่าน 17/17)
 - [x] บันทึก Checkpoint
+
+## Phase 30: Admin Dashboard Redesign
+- [x] สร้าง DashboardLayout ใหม่ด้วย Sidebar + Content Layout
+- [x] สร้างเมนู Sidebar ใหม่ด้วยโครงสร้าง (นิตินิยม, จัดการ, การเงิน, ตั้งค่า)
+- [x] ปรับเปลี่ยนสี styling ใหม่ (amber/white theme)
+- [x] ทดสอบและบันทึก checkpoint (Tests ผ่าน 17/17)
