@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { Scale, Menu, X, ArrowRight, Heart, Award, Sparkles, CheckCircle2 } from "lucide-react";
@@ -6,12 +6,41 @@ import { Scale, Menu, X, ArrowRight, Heart, Award, Sparkles, CheckCircle2 } from
 export default function Team() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [visibleCards, setVisibleCards] = useState<number[]>([]);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Scroll animation effect
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = cardRefs.current.indexOf(entry.target as HTMLDivElement);
+            if (index !== -1 && !visibleCards.includes(index)) {
+              setVisibleCards((prev) => [...prev, index]);
+            }
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "50px" }
+    );
+
+    cardRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => {
+      cardRefs.current.forEach((ref) => {
+        if (ref) observer.unobserve(ref);
+      });
+    };
+  }, [visibleCards]);
 
   const values = [
     { icon: Heart, title: "ความเอาใจใส่", desc: "ตั้งใจฟังและเข้าใจปัญหาของลูกค้าอย่างแท้จริง เพื่อหาทางแก้ไขที่ดีที่สุด" },
@@ -227,8 +256,15 @@ export default function Team() {
               {organizationStructure.map((member, i) => (
                 <div
                   key={member.id}
-                  className="group relative rounded-2xl overflow-hidden animate-fade-in-up"
-                  style={{ animationDelay: `${i * 100}ms` }}
+                  ref={(el) => {
+                    if (el) cardRefs.current[i] = el;
+                  }}
+                  className={`group relative rounded-2xl overflow-hidden transition-all duration-700 ${
+                    visibleCards.includes(i)
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-10"
+                  }`}
+                  style={{ transitionDelay: `${visibleCards.includes(i) ? i * 100 : 0}ms` }}
                 >
                   {/* Card background with gradient */}
                   <div className="absolute inset-0 bg-gradient-to-br from-gold/10 via-transparent to-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -273,11 +309,20 @@ export default function Team() {
               </div>
               
               <div className="grid md:grid-cols-2 gap-6">
-                {partners.map((partner, i) => (
+                {partners.map((partner, i) => {
+                  const partnerIndex = organizationStructure.length + i;
+                  return (
                   <div
                     key={partner.id}
-                    className="group relative rounded-2xl overflow-hidden animate-fade-in-up"
-                    style={{ animationDelay: `${(organizationStructure.length + i) * 100}ms` }}
+                    ref={(el) => {
+                      if (el) cardRefs.current[partnerIndex] = el;
+                    }}
+                    className={`group relative rounded-2xl overflow-hidden transition-all duration-700 ${
+                      visibleCards.includes(partnerIndex)
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-10"
+                    }`}
+                    style={{ transitionDelay: `${visibleCards.includes(partnerIndex) ? i * 100 : 0}ms` }}
                   >
                     {/* Card background with gradient */}
                     <div className="absolute inset-0 bg-gradient-to-br from-amber-400/10 via-transparent to-amber-300/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -309,7 +354,8 @@ export default function Team() {
                       <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>
                   </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>
