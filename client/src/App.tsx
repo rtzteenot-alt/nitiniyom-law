@@ -50,14 +50,14 @@ function Router() {
           {() => (
             <DashboardLayout>
               <Switch>
-                <Route path="/admin" component={AdminDashboard} />
-                <Route path="/admin/clients" component={AdminClients} />
-                <Route path="/admin/cases" component={AdminCases} />
-                <Route path="/admin/appointments" component={AdminAppointments} />
-                <Route path="/admin/messages" component={AdminMessages} />
-                <Route path="/admin/invoices" component={AdminInvoices} />
-                <Route path="/admin/tools" component={AdminTools} />
-                <Route path="/admin/interest-calculator" component={InterestCalculator} />
+                <Route path="/" component={AdminDashboard} />
+                <Route path="/clients" component={AdminClients} />
+                <Route path="/cases" component={AdminCases} />
+                <Route path="/appointments" component={AdminAppointments} />
+                <Route path="/messages" component={AdminMessages} />
+                <Route path="/invoices" component={AdminInvoices} />
+                <Route path="/tools" component={AdminTools} />
+                <Route path="/interest-calculator" component={InterestCalculator} />
                 <Route component={NotFound} />
               </Switch>
             </DashboardLayout>
