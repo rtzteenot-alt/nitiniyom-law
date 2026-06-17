@@ -155,9 +155,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
   };
 
   if (!user) {
-    // Redirect to login page (use window.location to avoid nested routing issues)
-    window.location.href = '/admin/login';
-    return null;
+    return <div className="flex items-center justify-center h-screen">Loading...</div>;
   }
 
   return (
