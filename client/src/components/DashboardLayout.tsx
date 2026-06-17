@@ -221,7 +221,7 @@ function DashboardLayoutContent({
                 </SidebarMenuButton>
 
                 {isToolsOpen && (
-                  <div className="ml-4 mt-1 space-y-1">
+                  <SidebarMenu className="ml-4 mt-1 space-y-1 px-0">
                     {toolsMenuItems.map(item => {
                       const isActive = location === item.path;
                       return (
@@ -238,7 +238,7 @@ function DashboardLayoutContent({
                         </SidebarMenuItem>
                       );
                     })}
-                  </div>
+                  </SidebarMenu>
                 )}
               </SidebarMenuItem>
             </SidebarMenu>
