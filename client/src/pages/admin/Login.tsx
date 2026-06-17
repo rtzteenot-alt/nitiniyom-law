@@ -22,22 +22,22 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="min-h-screen bg-amber-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-sm text-center">
-        <div className="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
-          <Scale className="w-8 h-8 text-amber-500" />
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-amber-100 flex items-center justify-center p-4">
+      <div className="bg-white rounded-3xl shadow-2xl p-12 w-full max-w-md text-center border border-amber-200">
+        <div className="w-20 h-20 bg-gradient-to-br from-amber-400 to-amber-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+          <Scale className="w-10 h-10 text-white" />
         </div>
-        <h1 className="text-xl font-bold text-gray-800 mb-1">ระบบจัดการ</h1>
-        <p className="text-sm text-gray-500 mb-6">สำนักงานกฎหมายนิตินิยม</p>
+        <h1 className="text-2xl font-bold text-gray-900 mb-2">ระบบจัดการ</h1>
+        <p className="text-base text-gray-600 mb-8">สำนักงานกฎหมายนิตินิยม</p>
 
-        <a href={getLoginUrl()}>
-          <Button className="w-full bg-amber-500 hover:bg-amber-600 text-white font-medium">
-            <LogIn className="w-4 h-4 mr-2" />
+        <a href={getLoginUrl()} className="block">
+          <Button className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold text-base py-3 rounded-xl shadow-lg hover:shadow-xl transition-all">
+            <LogIn className="w-5 h-5 mr-3" />
             เข้าสู่ระบบด้วย Manus
           </Button>
         </a>
 
-        <p className="text-xs text-gray-400 mt-4">เฉพาะเจ้าหน้าที่ที่ได้รับอนุญาตเท่านั้น</p>
+        <p className="text-sm text-gray-500 mt-6 leading-relaxed">เฉพาะเจ้าหน้าที่ที่ได้รับอนุญาตเท่านั้น</p>
       </div>
     </div>
   );

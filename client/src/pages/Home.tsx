@@ -261,7 +261,14 @@ export default function Home() {
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 gold-gradient group-hover:w-full transition-all duration-300 rounded-full" />
                 </button>
               ))}
-
+              
+              {/* Admin Login Button */}
+              <div className="h-8 w-px bg-amber-200" />
+              <Link href="/admin/login">
+                <Button size="sm" className="gold-gradient text-white border-0 font-medium hover:opacity-90 transition-opacity">
+                  เข้าสู่ระบบ
+                </Button>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -299,7 +306,15 @@ export default function Home() {
                   {item.label}
                 </button>
               ))}
-
+              
+              {/* Admin Login Button Mobile */}
+              <div className="border-t border-amber-100 pt-3 mt-3">
+                <Link href="/admin/login">
+                  <Button size="sm" className="w-full gold-gradient text-white border-0 font-medium">
+                    เข้าสู่ระบบ
+                  </Button>
+                </Link>
+              </div>
             </div>
           )}
         </div>
