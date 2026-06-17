@@ -16,6 +16,7 @@ import AdminTools from "./pages/admin/Tools";
 import Team from "./pages/Team";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
+import RevengePortnArticle from "./pages/RevengePortnArticle";
 import Services from "./pages/Services";
 import Tools from "./pages/Tools";
 
@@ -28,6 +29,7 @@ function Router() {
       <Route path="/tools" component={Tools} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:slug" component={BlogDetail} />
+      <Route path="/blog/revenge-porn" component={RevengePortnArticle} />
       <Route path="/admin/login" component={AdminLogin} />
       <Route path="/admin" component={AdminDashboard} />
       <Route path="/admin/clients" component={AdminClients} />
