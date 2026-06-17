@@ -50,7 +50,7 @@ function Router() {
           {() => (
             <DashboardLayout>
               <Switch>
-                <Route path="/" component={AdminDashboard} />
+                <Route path="" component={AdminDashboard} />
                 <Route path="/clients" component={AdminClients} />
                 <Route path="/cases" component={AdminCases} />
                 <Route path="/appointments" component={AdminAppointments} />
