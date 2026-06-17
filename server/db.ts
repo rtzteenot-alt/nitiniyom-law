@@ -236,7 +236,7 @@ export async function getDashboardStats() {
     .from(cases)
     .where(eq(cases.status, "in_progress"));
   const [revenueSum] = await db
-    .select({ total: sql<string>`COALESCE(SUM(paid_amount), 0)` })
+    .select({ total: sql<string>`COALESCE(SUM(paidAmount), 0)` })
     .from(invoices);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -269,9 +269,9 @@ export async function getMonthlyRevenue() {
   const db = await getDb();
   if (!db) return [];
   const rows = await db.execute(
-    sql`SELECT DATE_FORMAT(created_at, '%Y-%m') as month, SUM(paid_amount) as revenue
+    sql`SELECT DATE_FORMAT(createdAt, '%Y-%m') as month, SUM(paidAmount) as revenue
         FROM invoices
-        WHERE created_at >= DATE_SUB(NOW(), INTERVAL 6 MONTH)
+        WHERE createdAt >= DATE_SUB(NOW(), INTERVAL 6 MONTH)
         GROUP BY month
         ORDER BY month ASC`
   );
