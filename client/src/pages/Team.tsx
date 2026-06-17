@@ -432,6 +432,78 @@ export default function Team() {
         </div>
       </section>
 
+      {/* ===== ORGANIZATIONAL STRUCTURE SECTION ===== */}
+      <section className="py-20 md:py-28 bg-muted/30">
+        <div className="container">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 mb-4">
+              <div className="h-px w-8 bg-gold" />
+              <span className="text-xs font-semibold tracking-widest uppercase text-gold">โครงสร้าง</span>
+              <div className="h-px w-8 bg-gold" />
+            </div>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4">
+              โครงสร้างองค์กร
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              รายชื่อสมาชิกในสำนักงาน
+            </p>
+          </div>
+
+          {/* Organization List */}
+          <div className="max-w-4xl mx-auto space-y-4">
+            {/* Director */}
+            <div className="rounded-xl p-6 glass-card border border-white/10 hover:shadow-lg transition-all duration-300 animate-fade-in-up">
+              <h3 className="text-lg font-semibold text-foreground mb-1">ผู้อำนวยการ</h3>
+              <p className="text-base text-gold font-medium mb-2">นาย นิยม ดีจันทึก</p>
+              <p className="text-sm text-muted-foreground">มหาวิทยาลัยรามคำแหง</p>
+            </div>
+
+            {/* Office Manager */}
+            <div className="rounded-xl p-6 glass-card border border-white/10 hover:shadow-lg transition-all duration-300 animate-fade-in-up delay-100">
+              <h3 className="text-lg font-semibold text-foreground mb-1">หัวหน้าสำนักงาน</h3>
+              <p className="text-base text-gold font-medium mb-2">นางสาว ภัคจิรา นาคพลกรัง</p>
+              <p className="text-sm text-muted-foreground">มหาวิทยาลัยขอนแก่น เกียรตินิยมอันดับ 1</p>
+            </div>
+
+            {/* Secretary */}
+            <div className="rounded-xl p-6 glass-card border border-white/10 hover:shadow-lg transition-all duration-300 animate-fade-in-up delay-200">
+              <h3 className="text-lg font-semibold text-foreground mb-1">เลขานุการสำนักงาน</h3>
+              <p className="text-base text-gold font-medium mb-2">นางสาว ภัคจิรา นาคพลกรัง</p>
+              <p className="text-sm text-muted-foreground">มหาวิทยาลัยขอนแก่น เกียรตินิยมอันดับ 1</p>
+            </div>
+
+            {/* Lawyer */}
+            <div className="rounded-xl p-6 glass-card border border-white/10 hover:shadow-lg transition-all duration-300 animate-fade-in-up delay-300">
+              <h3 className="text-lg font-semibold text-foreground mb-1">ทนายความ</h3>
+              <p className="text-base text-gold font-medium mb-2">นางสาว ภัคจิรา นาคพลกรัง</p>
+              <p className="text-sm text-muted-foreground">มหาวิทยาลัยขอนแก่น เกียรตินิยมอันดับ 1</p>
+            </div>
+
+            {/* Partners Section */}
+            <div className="mt-12 pt-8 border-t border-gold/30">
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-8 animate-fade-in-up">
+                Partners - ทนายความ
+              </h2>
+              <div className="space-y-4">
+                {/* Partner 1 */}
+                <div className="rounded-xl p-6 glass-card border border-white/10 hover:shadow-lg transition-all duration-300 animate-fade-in-up delay-100">
+                  <h3 className="text-lg font-semibold text-foreground mb-1">ผู้ช่วยทนายความ</h3>
+                  <p className="text-base text-gold font-medium mb-2">นาย ธนกร คูณตุ้ม</p>
+                  <p className="text-sm text-muted-foreground">มหาวิทยาลัยรามคำแหง</p>
+                </div>
+
+                {/* Partner 2 */}
+                <div className="rounded-xl p-6 glass-card border border-white/10 hover:shadow-lg transition-all duration-300 animate-fade-in-up delay-200">
+                  <h3 className="text-lg font-semibold text-foreground mb-1">ทนายความและที่ปรึกษาสำนักงาน</h3>
+                  <p className="text-base text-gold font-medium mb-2">นาย ยศกร กันภัย</p>
+                  <p className="text-sm text-muted-foreground">มหาวิทยาลัยรามคำแหง</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ===== VALUES SECTION ===== */}
       <section className="py-20 md:py-28 bg-background">
         <div className="container">
