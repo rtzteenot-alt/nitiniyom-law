@@ -239,7 +239,6 @@ export default function Home() {
               {[
                 { label: "โครงสร้างองค์กร", href: "/team" },
                 { label: "บริการ", href: "/services" },
-                { label: "บทความ", href: "/articles" },
                 { label: "บล็อก", href: "/blog" },
               ].map((item) => (
                 <Link key={item.href} href={item.href}>
@@ -284,7 +283,6 @@ export default function Home() {
               {[
                 { label: "โครงสร้างองค์กร", href: "/team" },
                 { label: "บริการ", href: "/services" },
-                { label: "บทความ", href: "/articles" },
                 { label: "บล็อก", href: "/blog" },
               ].map((item) => (
                 <Link key={item.href} href={item.href}>

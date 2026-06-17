@@ -14,7 +14,6 @@ import AdminInvoices from "./pages/admin/Invoices";
 import AdminLogin from "./pages/admin/Login";
 import AdminTools from "./pages/admin/Tools";
 import Team from "./pages/Team";
-import Articles from "./pages/Articles";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
 import RevengePortnArticle from "./pages/RevengePortnArticle";
@@ -26,7 +25,6 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/team" component={Team} />
-      <Route path="/articles" component={Articles} />
       <Route path="/services" component={Services} />
       <Route path="/tools" component={Tools} />
       <Route path="/blog" component={Blog} />
