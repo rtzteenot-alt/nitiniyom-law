@@ -400,6 +400,94 @@ export default function Team() {
         </div>
       </section>
 
+      {/* ===== CONTACT INFO SECTION ===== */}
+      <section className="py-16 md:py-20 bg-muted/30">
+        <div className="container">
+          <div className="max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              {/* Contact Details */}
+              <div className="animate-fade-in-up">
+                <div className="inline-flex items-center gap-2 mb-4">
+                  <div className="h-px w-8 bg-gold" />
+                  <span className="text-xs font-semibold tracking-widest uppercase text-gold">ติดต่อเรา</span>
+                  <div className="h-px w-8 bg-gold" />
+                </div>
+                <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-8">
+                  ข้อมูลติดต่อ
+                </h2>
+
+                <div className="space-y-6">
+                  {/* Phone */}
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl gold-gradient flex items-center justify-center flex-shrink-0 shadow-md">
+                      <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">โทรศัพท์</p>
+                      <p className="text-lg font-semibold text-foreground">061-590-9678</p>
+                    </div>
+                  </div>
+
+                  {/* Email */}
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl gold-gradient flex items-center justify-center flex-shrink-0 shadow-md">
+                      <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">อีเมล</p>
+                      <p className="text-lg font-semibold text-foreground">niyomphakjira@gmail.com</p>
+                    </div>
+                  </div>
+
+                  {/* Address */}
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl gold-gradient flex items-center justify-center flex-shrink-0 shadow-md">
+                      <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">สำนักงาน</p>
+                      <p className="text-base text-foreground font-medium mb-2">พื้นที่จังหวัลอบสรายธานี</p>
+                      <p className="text-sm text-muted-foreground">บ้านเลขที่ 11 บ้านในสมบูรณ์ หมู่ 5 ตำบล บ้านแนน อำเภอบุณฑริก อุบลราชธานี 34230</p>
+                      <p className="text-sm text-muted-foreground mt-2">สำนักประสานงาน: 398 บ้านเรียงแฮ่ไต้ ต.นิคมสร้างเนื้อสำโคมน้อย อ.สิรินธร จ.อุบลราชธานี 34350</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Social Media / Facebook */}
+              <div className="animate-fade-in-up delay-100">
+                <div className="rounded-2xl p-8 glass-card border border-white/10 h-full flex flex-col items-center justify-center text-center">
+                  <div className="w-20 h-20 rounded-2xl bg-blue-600 flex items-center justify-center mb-6 shadow-lg">
+                    <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-serif font-bold text-foreground mb-2">นิตินิยมกฎหมาย</h3>
+                  <p className="text-muted-foreground mb-6">ติดตามเราบน Facebook เพื่อข้อมูลและข่าวสารล่าสุด</p>
+                  <a
+                    href="https://web.facebook.com/profile.php?id=100095300137230"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors duration-300 shadow-md hover:shadow-lg"
+                  >
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                    </svg>
+                    ไปที่เพจ Facebook
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ===== CTA SECTION ===== */}
       <section className="relative overflow-hidden py-16 md:py-20">
         {/* Background */}
