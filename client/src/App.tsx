@@ -2,6 +2,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
+import { useEffect } from "react";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
@@ -45,6 +46,39 @@ function Router() {
 }
 
 function App() {
+  useEffect(() => {
+    // Add Organization Schema Markup
+    const schemaScript = document.createElement('script');
+    schemaScript.type = 'application/ld+json';
+    schemaScript.innerHTML = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'LegalService',
+      'name': 'สำนักงานกฎหมายนิตินิยม',
+      'description': 'สำนักงานกฎหมายนิตินิยม ให้คำปรึกษากฎหมายอาญา กฎหมายแพ่ง การทำสัญญา ทวงถามหนี้ และปรึกษาเบื้องต้น',
+      'url': 'https://nitiniyomlaw.space',
+      'telephone': '061-590-9678',
+      'email': 'niyomphakjira@gmail.com',
+      'address': {
+        '@type': 'PostalAddress',
+        'streetAddress': '398 บ้านเรียงแฮ่ไต้ ต.นิคมสร้างเนื้อสำโคมน้อย',
+        'addressLocality': 'อุบลราชธานี',
+        'addressRegion': 'อุบลราชธานี',
+        'postalCode': '34350',
+        'addressCountry': 'TH'
+      },
+      'sameAs': [
+        'https://web.facebook.com/profile.php?id=100095300137230'
+      ]
+    });
+    document.head.appendChild(schemaScript);
+
+    return () => {
+      if (document.head.contains(schemaScript)) {
+        document.head.removeChild(schemaScript);
+      }
+    };
+  }, []);
+
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="light">

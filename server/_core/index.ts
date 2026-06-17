@@ -36,6 +36,47 @@ async function startServer() {
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   registerStorageProxy(app);
   registerOAuthRoutes(app);
+
+  // Sitemap endpoint
+  app.get('/sitemap.xml', async (req, res) => {
+    try {
+      const baseUrl = 'https://nitiniyomlaw.space';
+      const staticPages = [
+        { url: '/', changefreq: 'weekly', priority: '1.0' },
+        { url: '/team', changefreq: 'monthly', priority: '0.8' },
+        { url: '/services', changefreq: 'monthly', priority: '0.8' },
+        { url: '/blog', changefreq: 'weekly', priority: '0.9' },
+      ];
+
+      // Get all published articles
+      const articles = await fetch('http://localhost:3000/api/trpc/articles.list').then(r => r.json()).catch(() => ({ result: { data: [] } }));
+      const articleUrls = (articles.result?.data || []).map((article: any) => ({
+        url: `/blog/${article.slug}`,
+        changefreq: 'monthly',
+        priority: '0.7',
+        lastmod: article.publishedAt || article.updatedAt
+      }));
+
+      const allPages = [...staticPages, ...articleUrls];
+
+      const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${allPages.map(page => `  <url>
+    <loc>${baseUrl}${page.url}</loc>
+    <changefreq>${page.changefreq}</changefreq>
+    <priority>${page.priority}</priority>
+    ${page.lastmod ? `<lastmod>${new Date(page.lastmod).toISOString().split('T')[0]}</lastmod>` : ''}
+  </url>`).join('\n')}
+</urlset>`;
+
+      res.header('Content-Type', 'application/xml');
+      res.send(sitemap);
+    } catch (error) {
+      console.error('Sitemap generation error:', error);
+      res.status(500).send('Error generating sitemap');
+    }
+  });
+
   // tRPC API
   app.use(
     "/api/trpc",
