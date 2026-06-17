@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Switch, useLocation } from "wouter";
 import { useEffect } from "react";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -21,27 +21,40 @@ import RevengePortnArticle from "./pages/RevengePortnArticle";
 import Services from "./pages/Services";
 import Tools from "./pages/Tools";
 
+function ScrollToTop() {
+  const [location] = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  return null;
+}
+
 function Router() {
   return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/team" component={Team} />
-      <Route path="/services" component={Services} />
-      <Route path="/tools" component={Tools} />
-      <Route path="/blog" component={Blog} />
-      <Route path="/blog/revenge-porn" component={RevengePortnArticle} />
-      <Route path="/blog/:slug" component={BlogDetail} />
-      <Route path="/admin/login" component={AdminLogin} />
-      <Route path="/admin" component={AdminDashboard} />
-      <Route path="/admin/clients" component={AdminClients} />
-      <Route path="/admin/cases" component={AdminCases} />
-      <Route path="/admin/appointments" component={AdminAppointments} />
-      <Route path="/admin/messages" component={AdminMessages} />
-      <Route path="/admin/invoices" component={AdminInvoices} />
-      <Route path="/admin/tools" component={AdminTools} />
-      <Route path="/404" component={NotFound} />
-      <Route component={NotFound} />
-    </Switch>
+    <>
+      <ScrollToTop />
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/team" component={Team} />
+        <Route path="/services" component={Services} />
+        <Route path="/tools" component={Tools} />
+        <Route path="/blog" component={Blog} />
+        <Route path="/blog/revenge-porn" component={RevengePortnArticle} />
+        <Route path="/blog/:slug" component={BlogDetail} />
+        <Route path="/admin/login" component={AdminLogin} />
+        <Route path="/admin" component={AdminDashboard} />
+        <Route path="/admin/clients" component={AdminClients} />
+        <Route path="/admin/cases" component={AdminCases} />
+        <Route path="/admin/appointments" component={AdminAppointments} />
+        <Route path="/admin/messages" component={AdminMessages} />
+        <Route path="/admin/invoices" component={AdminInvoices} />
+        <Route path="/admin/tools" component={AdminTools} />
+        <Route path="/404" component={NotFound} />
+        <Route component={NotFound} />
+      </Switch>
+    </>
   );
 }
 
