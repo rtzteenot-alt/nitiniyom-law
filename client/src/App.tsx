@@ -28,8 +28,8 @@ function Router() {
       <Route path="/services" component={Services} />
       <Route path="/tools" component={Tools} />
       <Route path="/blog" component={Blog} />
-      <Route path="/blog/:slug" component={BlogDetail} />
       <Route path="/blog/revenge-porn" component={RevengePortnArticle} />
+      <Route path="/blog/:slug" component={BlogDetail} />
       <Route path="/admin/login" component={AdminLogin} />
       <Route path="/admin" component={AdminDashboard} />
       <Route path="/admin/clients" component={AdminClients} />
