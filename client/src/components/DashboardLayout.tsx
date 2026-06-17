@@ -21,7 +21,7 @@ import {
 import { getLoginUrl } from "@/const";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useIsMobile } from "@/hooks/useMobile";
-import { LayoutDashboard, LogOut, PanelLeft, Users } from "lucide-react";
+import { LayoutDashboard, LogOut, PanelLeft, Users, Gavel, ChevronDown } from "lucide-react";
 import { CSSProperties, useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
@@ -34,6 +34,10 @@ const menuItems = [
   { icon: LayoutDashboard, label: "นัดหมาย", path: "/admin/appointments" },
   { icon: LayoutDashboard, label: "ข้อความ", path: "/admin/messages" },
   { icon: LayoutDashboard, label: "ใบแจ้งหนี้", path: "/admin/invoices" },
+];
+
+const toolsMenuItems = [
+  { icon: LayoutDashboard, label: "ระบบคำนวณดอกเบี้ย", path: "/admin/interest-calculator" },
 ];
 
 const SIDEBAR_WIDTH_KEY = "sidebar-width";
@@ -115,6 +119,7 @@ function DashboardLayoutContent({
   const { state, toggleSidebar } = useSidebar();
   const isCollapsed = state === "collapsed";
   const [isResizing, setIsResizing] = useState(false);
+  const [isToolsOpen, setIsToolsOpen] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const activeMenuItem = menuItems.find(item => item.path === location);
   const isMobile = useIsMobile();
@@ -203,6 +208,39 @@ function DashboardLayoutContent({
                   </SidebarMenuItem>
                 );
               })}
+
+              {/* Tools Menu */}
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  onClick={() => setIsToolsOpen(!isToolsOpen)}
+                  className="h-10 transition-all font-normal"
+                >
+                  <Gavel className="h-4 w-4" />
+                  <span>ระบบโปรแกรมสำหรับทนาย</span>
+                  <ChevronDown className={`h-4 w-4 ml-auto transition-transform ${isToolsOpen ? "rotate-180" : ""}`} />
+                </SidebarMenuButton>
+
+                {isToolsOpen && (
+                  <div className="ml-4 mt-1 space-y-1">
+                    {toolsMenuItems.map(item => {
+                      const isActive = location === item.path;
+                      return (
+                        <SidebarMenuItem key={item.path}>
+                          <SidebarMenuButton
+                            isActive={isActive}
+                            onClick={() => setLocation(item.path)}
+                            tooltip={item.label}
+                            className="h-9 transition-all font-normal text-sm"
+                          >
+                            <item.icon className={`h-4 w-4 ${isActive ? "text-primary" : ""}`} />
+                            <span>{item.label}</span>
+                          </SidebarMenuButton>
+                        </SidebarMenuItem>
+                      );
+                    })}
+                  </div>
+                )}
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarContent>
 
