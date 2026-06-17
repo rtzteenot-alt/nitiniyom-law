@@ -246,3 +246,20 @@
 - [x] สร้างเมนู Sidebar ใหม่ด้วยโครงสร้าง (นิตินิยม, จัดการ, การเงิน, ตั้งค่า)
 - [x] ปรับเปลี่ยนสี styling ใหม่ (amber/white theme)
 - [x] ทดสอบและบันทึก checkpoint (Tests ผ่าน 17/17)
+
+## Phase 31: สร้างระบบหลังบ้าน (Admin Dashboard) ใหม่
+- [ ] สร้าง Database Schema: clients, cases, appointments, contact_messages, invoices
+- [ ] สร้าง server/db.ts: CRUD helpers สำหรับทุก table
+- [ ] สร้าง server/routers.ts: admin procedures (clients, cases, appointments, messages, invoices, dashboard)
+- [ ] สร้าง AdminLayout component (Sidebar + amber/white theme)
+- [ ] สร้างหน้า Admin Login
+- [ ] สร้างหน้า Admin Dashboard (stats overview)
+- [ ] สร้างหน้า Admin Clients (รายชื่อลูกความ)
+- [ ] สร้างหน้า Admin Cases (คดีความ)
+- [ ] สร้างหน้า Admin Appointments (นัดหมาย)
+- [ ] สร้างหน้า Admin Messages (ข้อความจากลูกค้า)
+- [ ] สร้างหน้า Admin Invoices (ใบแจ้งหนี้)
+- [ ] สร้างหน้า Admin Tools (โปรแกรมสำหรับทนาย - ว่างเปล่า)
+- [ ] เชื่อม Routes ใน App.tsx
+- [ ] เขียน Vitest tests
+- [ ] บันทึก Checkpoint

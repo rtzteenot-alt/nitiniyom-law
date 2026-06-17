@@ -12,6 +12,15 @@ import BlogDetail from "./pages/BlogDetail";
 import RevengePortnArticle from "./pages/RevengePortnArticle";
 import Services from "./pages/Services";
 import Tools from "./pages/Tools";
+import AdminLayout from "./components/AdminLayout";
+import AdminLogin from "./pages/admin/Login";
+import AdminDashboard from "./pages/admin/Dashboard";
+import AdminClients from "./pages/admin/Clients";
+import AdminCases from "./pages/admin/Cases";
+import AdminAppointments from "./pages/admin/Appointments";
+import AdminMessages from "./pages/admin/Messages";
+import AdminInvoices from "./pages/admin/Invoices";
+import AdminTools from "./pages/admin/Tools";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -23,7 +32,34 @@ function ScrollToTop() {
   return null;
 }
 
+function AdminRouter() {
+  return (
+    <AdminLayout>
+      <Switch>
+        <Route path="/admin" component={AdminDashboard} />
+        <Route path="/admin/clients" component={AdminClients} />
+        <Route path="/admin/cases" component={AdminCases} />
+        <Route path="/admin/appointments" component={AdminAppointments} />
+        <Route path="/admin/messages" component={AdminMessages} />
+        <Route path="/admin/invoices" component={AdminInvoices} />
+        <Route path="/admin/tools" component={AdminTools} />
+        <Route component={NotFound} />
+      </Switch>
+    </AdminLayout>
+  );
+}
+
 function Router() {
+  const [location] = useLocation();
+
+  // Admin routes
+  if (location.startsWith("/admin/login")) {
+    return <AdminLogin />;
+  }
+  if (location.startsWith("/admin")) {
+    return <AdminRouter />;
+  }
+
   return (
     <>
       <ScrollToTop />

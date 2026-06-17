@@ -1,11 +1,19 @@
-import { eq, desc } from "drizzle-orm";
+import { eq, desc, and, gte, lte, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import {
   InsertUser,
   users,
+  clients,
+  cases,
+  appointments,
   contactMessages,
+  invoices,
   articles,
+  InsertClient,
+  InsertCase,
+  InsertAppointment,
   InsertContactMessage,
+  InsertInvoice,
   InsertArticle,
 } from "../drizzle/schema";
 
@@ -65,18 +73,230 @@ export async function getUserByOpenId(openId: string) {
   return result[0] ?? null;
 }
 
+// ===== Clients =====
+export async function getClients() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(clients).orderBy(desc(clients.createdAt));
+}
+
+export async function getClientById(id: number) {
+  const db = await getDb();
+  if (!db) return null;
+  const result = await db.select().from(clients).where(eq(clients.id, id)).limit(1);
+  return result[0] ?? null;
+}
+
+export async function createClient(data: InsertClient) {
+  const db = await getDb();
+  if (!db) return;
+  await db.insert(clients).values(data);
+}
+
+export async function updateClient(id: number, data: Partial<InsertClient>) {
+  const db = await getDb();
+  if (!db) return;
+  await db.update(clients).set(data).where(eq(clients.id, id));
+}
+
+export async function deleteClient(id: number) {
+  const db = await getDb();
+  if (!db) return;
+  await db.delete(clients).where(eq(clients.id, id));
+}
+
+// ===== Cases =====
+export async function getCases() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(cases).orderBy(desc(cases.createdAt));
+}
+
+export async function getCasesByClientId(clientId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(cases).where(eq(cases.clientId, clientId)).orderBy(desc(cases.createdAt));
+}
+
+export async function getCaseById(id: number) {
+  const db = await getDb();
+  if (!db) return null;
+  const result = await db.select().from(cases).where(eq(cases.id, id)).limit(1);
+  return result[0] ?? null;
+}
+
+export async function createCase(data: InsertCase) {
+  const db = await getDb();
+  if (!db) return;
+  await db.insert(cases).values(data);
+}
+
+export async function updateCase(id: number, data: Partial<InsertCase>) {
+  const db = await getDb();
+  if (!db) return;
+  await db.update(cases).set(data).where(eq(cases.id, id));
+}
+
+export async function deleteCase(id: number) {
+  const db = await getDb();
+  if (!db) return;
+  await db.delete(cases).where(eq(cases.id, id));
+}
+
+// ===== Appointments =====
+export async function getAppointments() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(appointments).orderBy(desc(appointments.appointmentDate));
+}
+
+export async function getTodayAppointments() {
+  const db = await getDb();
+  if (!db) return [];
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  return db
+    .select()
+    .from(appointments)
+    .where(
+      and(
+        gte(appointments.appointmentDate, today),
+        lte(appointments.appointmentDate, tomorrow)
+      )
+    )
+    .orderBy(appointments.appointmentDate);
+}
+
+export async function createAppointment(data: InsertAppointment) {
+  const db = await getDb();
+  if (!db) return;
+  await db.insert(appointments).values(data);
+}
+
+export async function updateAppointment(id: number, data: Partial<InsertAppointment>) {
+  const db = await getDb();
+  if (!db) return;
+  await db.update(appointments).set(data).where(eq(appointments.id, id));
+}
+
+export async function deleteAppointment(id: number) {
+  const db = await getDb();
+  if (!db) return;
+  await db.delete(appointments).where(eq(appointments.id, id));
+}
+
 // ===== Contact Messages =====
+export async function getContactMessages() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(contactMessages).orderBy(desc(contactMessages.createdAt));
+}
+
 export async function createContactMessage(data: InsertContactMessage) {
   const db = await getDb();
   if (!db) return;
   await db.insert(contactMessages).values(data);
 }
 
+export async function updateContactMessage(id: number, data: Partial<InsertContactMessage>) {
+  const db = await getDb();
+  if (!db) return;
+  await db.update(contactMessages).set(data).where(eq(contactMessages.id, id));
+}
+
+// ===== Invoices =====
+export async function getInvoices() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(invoices).orderBy(desc(invoices.createdAt));
+}
+
+export async function createInvoice(data: InsertInvoice) {
+  const db = await getDb();
+  if (!db) return;
+  await db.insert(invoices).values(data);
+}
+
+export async function updateInvoice(id: number, data: Partial<InsertInvoice>) {
+  const db = await getDb();
+  if (!db) return;
+  await db.update(invoices).set(data).where(eq(invoices.id, id));
+}
+
+// ===== Dashboard Stats =====
+export async function getDashboardStats() {
+  const db = await getDb();
+  if (!db) return { totalClients: 0, activeCases: 0, totalRevenue: 0, todayAppointments: 0, newMessages: 0 };
+
+  const [clientCount] = await db.select({ count: sql<number>`count(*)` }).from(clients);
+  const [caseCount] = await db
+    .select({ count: sql<number>`count(*)` })
+    .from(cases)
+    .where(eq(cases.status, "in_progress"));
+  const [revenueSum] = await db
+    .select({ total: sql<string>`COALESCE(SUM(paid_amount), 0)` })
+    .from(invoices);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const [apptCount] = await db
+    .select({ count: sql<number>`count(*)` })
+    .from(appointments)
+    .where(
+      and(
+        gte(appointments.appointmentDate, today),
+        lte(appointments.appointmentDate, tomorrow)
+      )
+    );
+  const [msgCount] = await db
+    .select({ count: sql<number>`count(*)` })
+    .from(contactMessages)
+    .where(eq(contactMessages.status, "new"));
+
+  return {
+    totalClients: Number(clientCount?.count ?? 0),
+    activeCases: Number(caseCount?.count ?? 0),
+    totalRevenue: Number(revenueSum?.total ?? 0),
+    todayAppointments: Number(apptCount?.count ?? 0),
+    newMessages: Number(msgCount?.count ?? 0),
+  };
+}
+
+export async function getMonthlyRevenue() {
+  const db = await getDb();
+  if (!db) return [];
+  const rows = await db.execute(
+    sql`SELECT DATE_FORMAT(created_at, '%Y-%m') as month, SUM(paid_amount) as revenue
+        FROM invoices
+        WHERE created_at >= DATE_SUB(NOW(), INTERVAL 6 MONTH)
+        GROUP BY month
+        ORDER BY month ASC`
+  );
+  return (rows[0] as unknown as Array<{ month: string; revenue: string }>).map((r) => ({
+    month: r.month,
+    revenue: Number(r.revenue ?? 0),
+  }));
+}
+
+export async function getCaseTypeStats() {
+  const db = await getDb();
+  if (!db) return [];
+  const rows = await db.execute(
+    sql`SELECT type, COUNT(*) as count FROM cases GROUP BY type`
+  );
+  return (rows[0] as unknown as Array<{ type: string; count: string }>).map((r) => ({
+    type: r.type,
+    count: Number(r.count),
+  }));
+}
+
 // ===== Articles =====
 export async function getArticles(status?: "published" | "draft" | "archived") {
   const db = await getDb();
   if (!db) return [];
-  const query = db.select().from(articles).orderBy(desc(articles.publishedAt));
   if (status) {
     return db
       .select()
@@ -84,7 +304,7 @@ export async function getArticles(status?: "published" | "draft" | "archived") {
       .where(eq(articles.status, status))
       .orderBy(desc(articles.publishedAt));
   }
-  return query;
+  return db.select().from(articles).orderBy(desc(articles.publishedAt));
 }
 
 export async function getArticleBySlug(slug: string) {
