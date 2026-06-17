@@ -354,7 +354,7 @@ export default function Team() {
                       <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>
                   </div>
-                  );
+                )
                 })}
               </div>
             </div>
