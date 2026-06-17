@@ -40,6 +40,11 @@ const toolsMenuItems = [
   { icon: LayoutDashboard, label: "ระบบคำนวณดอกเบี้ย", path: "/admin/interest-calculator" },
 ];
 
+const getToolsMenuPath = (path: string) => {
+  // Convert /admin/interest-calculator to /interest-calculator for nested route
+  return path.replace('/admin', '');
+};
+
 const SIDEBAR_WIDTH_KEY = "sidebar-width";
 const DEFAULT_WIDTH = 280;
 const MIN_WIDTH = 200;
@@ -122,6 +127,7 @@ function DashboardLayoutContent({
   const [isToolsOpen, setIsToolsOpen] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const activeMenuItem = menuItems.find(item => item.path === location);
+  const activeToolsMenuItem = toolsMenuItems.find(item => item.path === location);
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -223,6 +229,7 @@ function DashboardLayoutContent({
                 {isToolsOpen && (
                   <SidebarMenu className="ml-4 mt-1 space-y-1 px-0">
                     {toolsMenuItems.map(item => {
+                      const toolPath = getToolsMenuPath(item.path);
                       const isActive = location === item.path;
                       return (
                         <SidebarMenuItem key={item.path}>
