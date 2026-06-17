@@ -6,16 +6,6 @@ import { useEffect } from "react";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
-import AdminDashboard from "./pages/admin/Dashboard";
-import AdminClients from "./pages/admin/Clients";
-import AdminCases from "./pages/admin/Cases";
-import AdminAppointments from "./pages/admin/Appointments";
-import AdminMessages from "./pages/admin/Messages";
-import AdminInvoices from "./pages/admin/Invoices";
-import AdminLogin from "./pages/admin/Login";
-import AdminTools from "./pages/admin/Tools";
-import InterestCalculator from "./pages/admin/InterestCalculator";
-import DashboardLayout from "./components/DashboardLayout";
 import Team from "./pages/Team";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
@@ -45,24 +35,6 @@ function Router() {
         <Route path="/blog" component={Blog} />
         <Route path="/blog/revenge-porn" component={RevengePortnArticle} />
         <Route path="/blog/:slug" component={BlogDetail} />
-        <Route path="/admin/login" component={AdminLogin} />
-        <Route path="/admin*" nest>
-          {() => (
-            <DashboardLayout>
-              <Switch>
-                <Route path="/" component={AdminDashboard} />
-                <Route path="/clients" component={AdminClients} />
-                <Route path="/cases" component={AdminCases} />
-                <Route path="/appointments" component={AdminAppointments} />
-                <Route path="/messages" component={AdminMessages} />
-                <Route path="/invoices" component={AdminInvoices} />
-                <Route path="/tools" component={AdminTools} />
-                <Route path="/interest-calculator" component={InterestCalculator} />
-                <Route component={NotFound} />
-              </Switch>
-            </DashboardLayout>
-          )}
-        </Route>
         <Route path="/404" component={NotFound} />
         <Route component={NotFound} />
       </Switch>
