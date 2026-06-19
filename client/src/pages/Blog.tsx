@@ -6,7 +6,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { trpc } from "@/lib/trpc";
 import { format } from "date-fns";
 import { th } from "date-fns/locale";
-import { ArrowRight, Sparkles, BookOpen, Calendar } from "lucide-react";
+import { ArrowRight, Sparkles, BookOpen, Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 
 const categoryColors: Record<string, { bg: string; text: string; badge: string }> = {
   "กฎหมายอาญา": { bg: "from-red-900/30 to-red-800/10", text: "text-red-400", badge: "bg-red-500/20 text-red-300 border-red-500/30" },
@@ -35,12 +35,20 @@ interface Article {
 export default function Blog() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
   const { data: articlesData, isLoading: queryLoading } = trpc.articles.list.useQuery();
 
   useEffect(() => {
     if (articlesData) {
-      setArticles(articlesData as Article[]);
+      // Sort articles by publishedAt (newest first), fallback to createdAt
+      const sorted = [...(articlesData as Article[])].sort((a, b) => {
+        const dateA = a.publishedAt ? new Date(a.publishedAt).getTime() : new Date(a.createdAt).getTime();
+        const dateB = b.publishedAt ? new Date(b.publishedAt).getTime() : new Date(b.createdAt).getTime();
+        return dateB - dateA; // Newest first
+      });
+      setArticles(sorted);
       setIsLoading(false);
     }
   }, [articlesData]);
@@ -48,6 +56,22 @@ export default function Blog() {
   useEffect(() => {
     setIsLoading(queryLoading);
   }, [queryLoading]);
+
+  // Calculate pagination
+  const totalPages = Math.ceil(articles.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentArticles = articles.slice(startIndex, endIndex);
+
+  const handlePreviousPage = () => {
+    setCurrentPage(prev => Math.max(prev - 1, 1));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage(prev => Math.min(prev + 1, totalPages));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
@@ -122,8 +146,9 @@ export default function Blog() {
               <p className="text-muted-foreground text-lg">ยังไม่มีบทความในขณะนี้</p>
             </div>
           ) : (
+            <>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {articles.map((article, index) => {
+              {currentArticles.map((article, index) => {
                 const colors = categoryColors[article.category] || categoryColors["อื่น ๆ"];
                 return (
                   <Link key={article.id} href={`/blog/${article.slug}`}>
@@ -173,6 +198,51 @@ export default function Blog() {
                 );
               })}
             </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="flex items-center justify-center gap-2 mt-12">
+                <Button
+                  onClick={handlePreviousPage}
+                  disabled={currentPage === 1}
+                  variant="outline"
+                  size="sm"
+                  className="gap-2"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                  ก่อนหน้า
+                </Button>
+
+                <div className="flex items-center gap-1">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                    <Button
+                      key={page}
+                      onClick={() => {
+                        setCurrentPage(page);
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
+                      variant={currentPage === page ? "default" : "outline"}
+                      size="sm"
+                      className="w-10 h-10 p-0"
+                    >
+                      {page}
+                    </Button>
+                  ))}
+                </div>
+
+                <Button
+                  onClick={handleNextPage}
+                  disabled={currentPage === totalPages}
+                  variant="outline"
+                  size="sm"
+                  className="gap-2"
+                >
+                  ถัดไป
+                  <ChevronRight className="w-4 h-4" />
+                </Button>
+              </div>
+            )}
+            </>
           )}
         </div>
       </section>
