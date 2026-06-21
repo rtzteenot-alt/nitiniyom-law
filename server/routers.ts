@@ -479,19 +479,13 @@ export const appRouter = router({
         const response = await invokeLLM({
           messages: conversationMessages,
           model: "gemini-2.0-flash",
-          maxTokens: 150, // Limit to ~100 words
         });
 
         const assistantMessage = response.choices[0]?.message?.content || "";
-        
-        // Ensure response doesn't exceed 100 words
-        const responseText = typeof assistantMessage === "string" ? assistantMessage : JSON.stringify(assistantMessage);
-        const words = responseText.split(/\s+/).length;
-        const finalResponse = words > 100 ? responseText.split(/\s+/).slice(0, 100).join(" ") + "..." : responseText;
 
         return {
           role: "assistant" as const,
-          content: finalResponse,
+          content: typeof assistantMessage === "string" ? assistantMessage : JSON.stringify(assistantMessage),
         };
       }),
   }),
