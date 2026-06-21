@@ -263,3 +263,43 @@
 - [ ] เชื่อม Routes ใน App.tsx
 - [ ] เขียน Vitest tests
 - [ ] บันทึก Checkpoint
+
+
+## Phase 32: เพิ่มระบบ Lawyer Tools
+- [x] เพิ่มระบบคำนวณดอกเบี้ยใน Admin Tools
+  - [x] สัญญากู้ยืมปกติ (อัตราสูงสุด 15%)
+  - [x] ผิดนัดชำระหนี้ (อัตรา 5% ตาม ปพพ. ม.224)
+  - [x] แสดงผลจำนวนวัน ดอกเบี้ยสะสม ยอดรวม
+  - [x] ปุ่มคัดลอกข้อความ
+
+## Phase 33: Blog Enhancement - Pagination
+- [x] เพิ่มระบบแบ่งหน้า (Pagination) ให้หน้า Blog
+  - [x] แต่ละหน้าแสดง 5 บทความ
+  - [x] ปุ่มนำทาง: ก่อนหน้า, เลขหน้า, ถัดไป
+  - [x] เลื่อนหน้าอัตโนมัติไปด้านบน
+  - [x] Responsive design
+
+## Phase 34: Blog Content Management
+- [x] เพิ่มบทความ "ความรู้เกี่ยวกับการปล่อยเงินกู้"
+- [x] เพิ่มบทความ "10 ข้อกฎหมายควรรู้ก่อนซื้อขายอสังหาริมทรัพย์"
+- [x] เพิ่มบทความ "10 ข้อกฎหมายเกี่ยวกับการซื้อขายอสังหาริมทรัพย์ที่ต้องรู้"
+- [x] ตั้งค่าการเรียงลำดับบทความจากล่าสุดไปเก่าสุด
+- [x] ปรับปรุงการแสดงผลบทความให้เป็นข้อๆ
+
+
+## Phase 32: AI Legal Consultant Chatbot
+- [x] สร้าง tRPC procedure สำหรับ AI chat ที่ใช้ Gemini API
+  - [x] ตั้งค่า system prompt ให้ AI เป็นผู้เชี่ยวชาญกฎหมายไทย
+  - [x] รับข้อความจากผู้ใช้และส่งไปยัง Gemini
+  - [x] ส่งคำตอบกลับมาให้ผู้ใช้
+- [x] สร้างหน้า AIConsultant.tsx
+  - [x] ออกแบบ Chat UI พร้อม message history
+  - [x] เพิ่ม input field สำหรับพิมพ์คำถาม
+  - [x] แสดงข้อความจากผู้ใช้และ AI
+  - [x] Loading state เมื่อรอคำตอบ
+  - [x] Responsive design
+- [x] เพิ่มเมนู "AI Consultant" ใน Navigation
+  - [x] Desktop menu
+  - [x] Mobile menu
+- [x] เพิ่ม Routing ใน App.tsx
+- [x] ทดสอบและ Save Checkpoint

@@ -240,6 +240,7 @@ export default function Home() {
                 { label: "โครงสร้างองค์กร", href: "/team" },
                 { label: "บริการ", href: "/services" },
                 { label: "บล็อก", href: "/blog" },
+                { label: "AI Consultant", href: "/ai-consultant" },
               ].map((item) => (
                 <Link key={item.href} href={item.href}>
                   <span className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors cursor-pointer relative group">
@@ -287,6 +288,7 @@ export default function Home() {
                 { label: "โครงสร้างองค์กร", href: "/team" },
                 { label: "บริการ", href: "/services" },
                 { label: "บล็อก", href: "/blog" },
+                { label: "AI Consultant", href: "/ai-consultant" },
               ].map((item) => (
                 <Link key={item.href} href={item.href}>
                   <span className="block text-sm font-medium text-foreground/80 hover:text-foreground transition-colors py-2 px-2 rounded hover:bg-muted/50 cursor-pointer">

@@ -38,6 +38,7 @@ import {
 } from "./db";
 import { notifyOwner } from "./_core/notification";
 import { sendEmail } from "./_core/email";
+import { invokeLLM } from "./_core/llm";
 
 const adminProcedure = protectedProcedure.use(({ ctx, next }) => {
   if (ctx.user.role !== "admin") {
@@ -419,6 +420,57 @@ export const appRouter = router({
       return all.slice(0, 10);
     }),
     todayAppointments: adminProcedure.query(() => getTodayAppointments()),
+  }),
+
+  // ===== Public: AI Legal Consultant =====
+  aiConsultant: router({
+    chat: publicProcedure
+      .input(
+        z.object({
+          messages: z.array(
+            z.object({
+              role: z.enum(["user", "assistant"]),
+              content: z.string(),
+            })
+          ),
+        })
+      )
+      .mutation(async ({ input }) => {
+        const conversationMessages = [
+          {
+            role: "system" as const,
+            content: `คุณเป็นที่ปรึกษาด้านกฎหมายไทยที่มีความเชี่ยวชาญระดับสูงมาก คุณมีความรู้เชิงลึกเกี่ยวกับ:
+- กฎหมายแพ่งและพาณิชย์
+- กฎหมายอาญา
+- กฎหมายครอบครัว
+- กฎหมายแรงงาน
+- กฎหมายภาษีอากร
+- กฎหมายทรัพย์สินทางปัญญา
+- กฎหมายการค้า
+- และกฎหมายอื่น ๆ ของไทย
+
+กรุณาให้คำปรึกษาที่ชัดเจน เข้าใจง่าย และอิงตามกฎหมายไทยที่ใช้บังคับในปัจจุบัน
+หากคำถามไม่เกี่ยวกับกฎหมายไทย โปรดแนะนำให้ผู้ใช้ติดต่อที่ปรึกษากฎหมายโดยตรง
+หากคุณไม่แน่ใจเกี่ยวกับคำตอบ โปรดบอกให้ชัดเจนว่าคุณไม่แน่ใจ`,
+          },
+          ...input.messages.map((msg) => ({
+            role: msg.role as "user" | "assistant",
+            content: msg.content,
+          })),
+        ];
+
+        const response = await invokeLLM({
+          messages: conversationMessages,
+          model: "gemini-2.0-flash",
+        });
+
+        const assistantMessage = response.choices[0]?.message?.content || "";
+
+        return {
+          role: "assistant" as const,
+          content: typeof assistantMessage === "string" ? assistantMessage : JSON.stringify(assistantMessage),
+        };
+      }),
   }),
 });
 
