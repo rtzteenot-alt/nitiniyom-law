@@ -436,22 +436,47 @@ export const appRouter = router({
         })
       )
       .mutation(async ({ input }) => {
+        // Count user questions - limit to 10 questions
+        const userQuestionCount = input.messages.filter((m) => m.role === "user").length;
+        
+        // If more than 1 question in current batch, warn user
+        if (userQuestionCount > 1) {
+          return {
+            role: "assistant" as const,
+            content: "⚠️ อย่าถามเยอะลำคาญครับ กรุณาถามทีละคำถามเท่านั้น ลองถามใหม่ได้ครับ",
+          };
+        }
+        
+        // If total questions exceed 10, block
+        if (userQuestionCount >= 10) {
+          return {
+            role: "assistant" as const,
+            content: "❌ คุณถามครบ 10 คำถามแล้ว ขอบคุณที่ใช้บริการ หากต้องการปรึกษาเพิ่มเติม โปรดติดต่อทนายความโดยตรง",
+          };
+        }
+
         const conversationMessages = [
           {
             role: "system" as const,
-            content: `คุณเป็นที่ปรึกษาด้านกฎหมายไทยที่มีความเชี่ยวชาญระดับสูงมาก คุณมีความรู้เชิงลึกเกี่ยวกับ:
-- กฎหมายแพ่งและพาณิชย์
-- กฎหมายอาญา
-- กฎหมายครอบครัว
-- กฎหมายแรงงาน
-- กฎหมายภาษีอากร
-- กฎหมายทรัพย์สินทางปัญญา
-- กฎหมายการค้า
-- และกฎหมายอื่น ๆ ของไทย
+            content: `คุณคือระบบให้คำปรึกษากฎหมายไทยที่พัฒนาโดย นาย นิยม ดีจันทึก
 
-กรุณาให้คำปรึกษาที่ชัดเจน เข้าใจง่าย และอิงตามกฎหมายไทยที่ใช้บังคับในปัจจุบัน
-หากคำถามไม่เกี่ยวกับกฎหมายไทย โปรดแนะนำให้ผู้ใช้ติดต่อที่ปรึกษากฎหมายโดยตรง
-หากคุณไม่แน่ใจเกี่ยวกับคำตอบ โปรดบอกให้ชัดเจนว่าคุณไม่แน่ใจ`,
+คำสั่งที่สำคัญ:
+1. ตอบแค่หัวข้อกฎหมายเท่านั้น ห้ามตอบเรื่องอื่น
+2. จำกัดคำตอบให้ไม่เกิน 100 คำ
+3. ห้ามบอกว่าคุณเป็น AI - บอกว่าพัฒนาโดย นาย นิยม ดีจันทึก
+4. ตอบเฉพาะหัวข้อกฎหมายไทยเท่านั้น:
+   - กฎหมายแพ่งและพาณิชย์
+   - กฎหมายอาญา
+   - กฎหมายครอบครัว
+   - กฎหมายแรงงาน
+   - กฎหมายภาษีอากร
+   - กฎหมายทรัพย์สินทางปัญญา
+   - กฎหมายการค้า
+   - และกฎหมายอื่น ๆ ของไทย
+
+5. ให้คำปรึกษาที่ชัดเจน เข้าใจง่าย
+6. หากไม่แน่ใจ บอกให้ชัดเจนว่าไม่แน่ใจ
+7. หากคำถามไม่เกี่ยวกับกฎหมายไทย ให้ปฏิเสธสุภาพ`,
           },
           ...input.messages.map((msg) => ({
             role: msg.role as "user" | "assistant",
@@ -462,13 +487,19 @@ export const appRouter = router({
         const response = await invokeLLM({
           messages: conversationMessages,
           model: "gemini-2.0-flash",
+          maxTokens: 150, // Limit to ~100 words
         });
 
         const assistantMessage = response.choices[0]?.message?.content || "";
+        
+        // Ensure response doesn't exceed 100 words
+        const responseText = typeof assistantMessage === "string" ? assistantMessage : JSON.stringify(assistantMessage);
+        const words = responseText.split(/\s+/).length;
+        const finalResponse = words > 100 ? responseText.split(/\s+/).slice(0, 100).join(" ") + "..." : responseText;
 
         return {
           role: "assistant" as const,
-          content: typeof assistantMessage === "string" ? assistantMessage : JSON.stringify(assistantMessage),
+          content: finalResponse,
         };
       }),
   }),
