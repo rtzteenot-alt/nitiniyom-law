@@ -439,14 +439,6 @@ export const appRouter = router({
         // Count user questions - limit to 10 questions
         const userQuestionCount = input.messages.filter((m) => m.role === "user").length;
         
-        // If more than 1 question in current batch, warn user
-        if (userQuestionCount > 1) {
-          return {
-            role: "assistant" as const,
-            content: "⚠️ อย่าถามเยอะลำคาญครับ กรุณาถามทีละคำถามเท่านั้น ลองถามใหม่ได้ครับ",
-          };
-        }
-        
         // If total questions exceed 10, block
         if (userQuestionCount >= 10) {
           return {
