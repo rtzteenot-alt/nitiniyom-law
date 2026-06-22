@@ -35,6 +35,7 @@ import {
   createArticle,
   updateArticle,
   deleteArticle,
+  getApiUsageStats,
 } from "./db";
 import { notifyOwner } from "./_core/notification";
 import { sendEmail } from "./_core/email";
@@ -488,6 +489,13 @@ export const appRouter = router({
           content: typeof assistantMessage === "string" ? assistantMessage : JSON.stringify(assistantMessage),
         };
       }),
+  }),
+  
+  // API Usage Dashboard
+  apiUsage: router({
+    getStats: publicProcedure.query(async () => {
+      return await getApiUsageStats();
+    }),
   }),
 });
 

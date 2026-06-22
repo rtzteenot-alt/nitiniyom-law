@@ -9,12 +9,14 @@ import {
   contactMessages,
   invoices,
   articles,
+  apiUsageLogs,
   InsertClient,
   InsertCase,
   InsertAppointment,
   InsertContactMessage,
   InsertInvoice,
   InsertArticle,
+  InsertApiUsageLog,
 } from "../drizzle/schema";
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -334,4 +336,41 @@ export async function deleteArticle(id: number) {
   const db = await getDb();
   if (!db) return;
   await db.delete(articles).where(eq(articles.id, id));
+}
+
+
+// ===== API Usage Tracking =====
+export async function logApiUsage(data: InsertApiUsageLog) {
+  const db = await getDb();
+  if (!db) return;
+  await db.insert(apiUsageLogs).values(data);
+}
+
+export async function getApiUsageStats() {
+  const db = await getDb();
+  if (!db) return null;
+
+  const logs = await db.select().from(apiUsageLogs);
+
+  const stats = {
+    totalRequests: logs.length,
+    totalTokensUsed: logs.reduce((sum, log) => sum + (log.tokensUsed || 0), 0),
+    averageResponseTime: logs.length > 0
+      ? Math.round(logs.reduce((sum, log) => sum + (log.responseTime || 0), 0) / logs.length)
+      : 0,
+    requestsByEndpoint: {} as Record<string, number>,
+    requestsByModel: {} as Record<string, number>,
+    recentRequests: logs.slice(-10).reverse(),
+  };
+
+  logs.forEach(log => {
+    if (log.endpoint) {
+      stats.requestsByEndpoint[log.endpoint] = (stats.requestsByEndpoint[log.endpoint] || 0) + 1;
+    }
+    if (log.model) {
+      stats.requestsByModel[log.model] = (stats.requestsByModel[log.model] || 0) + 1;
+    }
+  });
+
+  return stats;
 }

@@ -149,3 +149,20 @@ export const articles = mysqlTable("articles", {
 
 export type Article = typeof articles.$inferSelect;
 export type InsertArticle = typeof articles.$inferInsert;
+
+// ===== API Usage Tracking =====
+
+export const apiUsageLogs = mysqlTable("api_usage_logs", {
+  id: int("id").autoincrement().primaryKey(),
+  endpoint: varchar("endpoint", { length: 255 }).notNull(),
+  method: varchar("method", { length: 20 }).notNull(),
+  status: int("status"),
+  responseTime: int("responseTime"), // milliseconds
+  tokensUsed: int("tokensUsed").default(0),
+  model: varchar("model", { length: 100 }),
+  userId: int("userId"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type ApiUsageLog = typeof apiUsageLogs.$inferSelect;
+export type InsertApiUsageLog = typeof apiUsageLogs.$inferInsert;

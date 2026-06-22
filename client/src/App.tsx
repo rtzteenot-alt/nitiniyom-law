@@ -13,6 +13,7 @@ import RevengePortnArticle from "./pages/RevengePortnArticle";
 import Services from "./pages/Services";
 import Tools from "./pages/Tools";
 import AIConsultant from "./pages/AIConsultant";
+import APIUsageDashboard from "./pages/APIUsageDashboard";
 import AdminLayout from "./components/AdminLayout";
 import AdminLogin from "./pages/admin/Login";
 import AdminDashboard from "./pages/admin/Dashboard";
@@ -70,6 +71,7 @@ function Router() {
         <Route path="/services" component={Services} />
         <Route path="/tools" component={Tools} />
         <Route path="/ai-consultant" component={AIConsultant} />
+        <Route path="/api-usage" component={APIUsageDashboard} />
         <Route path="/blog" component={Blog} />
         <Route path="/blog/revenge-porn" component={RevengePortnArticle} />
         <Route path="/blog/:slug" component={BlogDetail} />

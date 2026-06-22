@@ -36,6 +36,13 @@
       "when": 1781457156192,
       "tag": "0004_lively_silver_sable",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1782109844759,
+      "tag": "0005_sweet_celestials",
+      "breakpoints": true
     }
   ]
 }
