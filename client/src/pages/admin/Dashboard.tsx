@@ -1,5 +1,5 @@
 import { trpc } from "@/lib/trpc";
-import { Users, Briefcase, FileText, Calendar, MessageSquare, TrendingUp } from "lucide-react";
+import { Users, Briefcase, FileText, Calendar, MessageSquare, TrendingUp, Activity, Zap } from "lucide-react";
 import { Link } from "wouter";
 
 const caseTypeLabel: Record<string, string> = {
@@ -15,6 +15,7 @@ export default function AdminDashboard() {
   const { data: stats, isLoading } = trpc.dashboard.stats.useQuery();
   const { data: recentCases } = trpc.dashboard.recentCases.useQuery();
   const { data: todayAppts } = trpc.dashboard.todayAppointments.useQuery();
+  const { data: apiStats } = trpc.apiUsage.getStats.useQuery();
 
   const statCards = [
     { label: "ลูกความทั้งหมด", value: stats?.totalClients ?? 0, icon: Users, color: "bg-blue-50 text-blue-600", href: "/admin/clients" },
@@ -22,6 +23,8 @@ export default function AdminDashboard() {
     { label: "นัดหมายวันนี้", value: stats?.todayAppointments ?? 0, icon: Calendar, color: "bg-green-50 text-green-600", href: "/admin/appointments" },
     { label: "ข้อความใหม่", value: stats?.newMessages ?? 0, icon: MessageSquare, color: "bg-red-50 text-red-600", href: "/admin/messages" },
     { label: "รายได้รวม (บาท)", value: stats?.totalRevenue?.toLocaleString("th-TH") ?? "0", icon: TrendingUp, color: "bg-purple-50 text-purple-600", href: "/admin/invoices" },
+    { label: "API Requests", value: apiStats?.totalRequests ?? 0, icon: Activity, color: "bg-indigo-50 text-indigo-600", href: "/api-usage" },
+    { label: "Tokens Used", value: apiStats?.totalTokensUsed ?? 0, icon: Zap, color: "bg-pink-50 text-pink-600", href: "/api-usage" },
   ];
 
   return (
@@ -32,7 +35,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Stat Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4 mb-8">
         {statCards.map((card) => {
           const Icon = card.icon;
           return (
@@ -54,6 +57,39 @@ export default function AdminDashboard() {
           );
         })}
       </div>
+
+      {/* API Usage Section */}
+      {apiStats && (
+        <div className="bg-gradient-to-br from-indigo-50 to-pink-50 rounded-xl border border-indigo-100 p-6 mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+              <Activity className="w-4 h-4 text-indigo-600" />
+              API Usage Summary
+            </h2>
+            <Link href="/api-usage">
+              <span className="text-xs text-indigo-600 hover:underline cursor-pointer">ดูรายละเอียด</span>
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div>
+              <p className="text-xs text-gray-600">Avg Response Time</p>
+              <p className="text-lg font-bold text-gray-800 mt-1">{apiStats.averageResponseTime}ms</p>
+            </div>
+            <div>
+              <p className="text-xs text-gray-600">Models Used</p>
+              <p className="text-lg font-bold text-gray-800 mt-1">{Object.keys(apiStats.requestsByModel).length}</p>
+            </div>
+            <div>
+              <p className="text-xs text-gray-600">Endpoints</p>
+              <p className="text-lg font-bold text-gray-800 mt-1">{Object.keys(apiStats.requestsByEndpoint).length}</p>
+            </div>
+            <div>
+              <p className="text-xs text-gray-600">Recent Requests</p>
+              <p className="text-lg font-bold text-gray-800 mt-1">{apiStats.recentRequests.length}</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Cases */}
