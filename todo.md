@@ -303,3 +303,30 @@
   - [x] Mobile menu
 - [x] เพิ่ม Routing ใน App.tsx
 - [x] ทดสอบและ Save Checkpoint
+
+
+## Phase 33: Customer Reviews System
+- [x] สร้าง database schema สำหรับ reviews
+  - [x] สร้าง table `reviews` เก็บข้อมูลรีวิว
+  - [x] สร้าง migration SQL
+  - [x] Execute migration
+- [x] สร้าง tRPC procedures
+  - [x] procedure: submitReview (POST review)
+  - [x] procedure: getReviews (GET reviews with pagination)
+  - [x] procedure: approveReview (admin only)
+- [x] สร้างหน้า ReviewForm.tsx
+  - [x] Form input: name, email, rating (1-5 stars), message
+  - [x] Validation
+  - [x] Success/error messages
+- [x] สร้างส่วน CustomerReviews.tsx
+  - [x] แสดงรีวิวที่ approved
+  - [x] แสดง rating stars
+  - [x] Pagination
+  - [x] Responsive design
+- [x] เพิ่มใน Home.tsx
+  - [x] เพิ่มส่วน "เสียงจากลูกค้า"
+  - [x] Link ไปยัง review form
+- [ ] Admin panel
+  - [ ] ดูรีวิวทั้งหมด (approved + pending)
+  - [ ] Approve/reject reviews
+- [x] ทดสอบและ Save Checkpoint

@@ -36,6 +36,14 @@ import {
   updateArticle,
   deleteArticle,
   getApiUsageStats,
+  submitReview,
+  getApprovedReviews,
+  getAllReviews,
+  getReviewCount,
+  getApprovedReviewCount,
+  approveReview,
+  rejectReview,
+  deleteReview,
 } from "./db";
 import { notifyOwner } from "./_core/notification";
 import { sendEmail } from "./_core/email";
@@ -491,6 +499,70 @@ export const appRouter = router({
       }),
   }),
   
+  // Customer Reviews
+  reviews: router({
+    submit: publicProcedure
+      .input(z.object({
+        name: z.string().min(1, "ชื่อจำเป็น"),
+        email: z.string().email("อีเมลไม่ถูกต้อง"),
+        rating: z.number().min(1).max(5, "ดาวต้องเป็น 1-5"),
+        message: z.string().min(10, "ข้อความต้องมีอย่างน้อย 10 ตัวอักษร"),
+      }))
+      .mutation(async ({ input }) => {
+        await submitReview({
+          name: input.name,
+          email: input.email,
+          rating: input.rating,
+          message: input.message,
+          status: "pending",
+        });
+        return { success: true };
+      }),
+
+    getApproved: publicProcedure
+      .input(z.object({
+        limit: z.number().default(10),
+        offset: z.number().default(0),
+      }))
+      .query(async ({ input }) => {
+        const reviews = await getApprovedReviews(input.limit, input.offset);
+        const count = await getApprovedReviewCount();
+        return { reviews, count };
+      }),
+
+    getAll: adminProcedure
+      .input(z.object({
+        limit: z.number().default(50),
+        offset: z.number().default(0),
+      }))
+      .query(async ({ input }) => {
+        const reviews = await getAllReviews(input.limit, input.offset);
+        const count = await getReviewCount();
+        return { reviews, count };
+      }),
+
+    approve: adminProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input }) => {
+        await approveReview(input.id);
+        return { success: true };
+      }),
+
+    reject: adminProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input }) => {
+        await rejectReview(input.id);
+        return { success: true };
+      }),
+
+    delete: adminProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input }) => {
+        await deleteReview(input.id);
+        return { success: true };
+      }),
+  }),
+
   // API Usage Dashboard
   apiUsage: router({
     getStats: publicProcedure.query(async () => {

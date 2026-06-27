@@ -29,6 +29,7 @@ import {
   TrendingUp,
   Sparkles,
 } from "lucide-react";
+import CustomerReviews from "@/components/CustomerReviews";
 
 const services = [
   {
@@ -751,6 +752,27 @@ export default function Home() {
               />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ===== CUSTOMER REVIEWS SECTION ===== */}
+      <section className="py-20 md:py-32 relative overflow-hidden">
+        <div className="absolute inset-0 navy-gradient" />
+        <div className="container relative z-10">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 mb-4">
+              <div className="h-px w-8 bg-gold" />
+              <span className="text-xs font-semibold tracking-widest uppercase text-gold">รีวิวจากลูกค้า</span>
+              <div className="h-px w-8 bg-gold" />
+            </div>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4">
+              ลูกค้าพูดถึงเราอย่างไร
+            </h2>
+            <p className="text-white/60 max-w-lg mx-auto text-sm">
+              ความไว้วางใจจากลูกค้าคือสิ่งที่เราภาคภูมิใจที่สุด
+            </p>
+          </div>
+          <CustomerReviews />
         </div>
       </section>
 

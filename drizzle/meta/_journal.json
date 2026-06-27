@@ -43,6 +43,13 @@
       "when": 1782109844759,
       "tag": "0005_sweet_celestials",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1782562122828,
+      "tag": "0006_dark_groot",
+      "breakpoints": true
     }
   ]
 }

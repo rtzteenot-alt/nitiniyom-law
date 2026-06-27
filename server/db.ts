@@ -10,6 +10,7 @@ import {
   invoices,
   articles,
   apiUsageLogs,
+  reviews,
   InsertClient,
   InsertCase,
   InsertAppointment,
@@ -17,6 +18,7 @@ import {
   InsertInvoice,
   InsertArticle,
   InsertApiUsageLog,
+  InsertReview,
 } from "../drizzle/schema";
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -373,4 +375,70 @@ export async function getApiUsageStats() {
   });
 
   return stats;
+}
+
+
+// ===== Customer Reviews =====
+export async function submitReview(data: InsertReview) {
+  const db = await getDb();
+  if (!db) return;
+  await db.insert(reviews).values(data);
+}
+
+export async function getApprovedReviews(limit: number = 10, offset: number = 0) {
+  const db = await getDb();
+  if (!db) return [];
+  return db
+    .select()
+    .from(reviews)
+    .where(eq(reviews.status, "approved"))
+    .orderBy(desc(reviews.createdAt))
+    .limit(limit)
+    .offset(offset);
+}
+
+export async function getAllReviews(limit: number = 50, offset: number = 0) {
+  const db = await getDb();
+  if (!db) return [];
+  return db
+    .select()
+    .from(reviews)
+    .orderBy(desc(reviews.createdAt))
+    .limit(limit)
+    .offset(offset);
+}
+
+export async function getReviewCount() {
+  const db = await getDb();
+  if (!db) return 0;
+  const result = await db.select({ count: sql<number>`COUNT(*)` }).from(reviews);
+  return result[0]?.count ?? 0;
+}
+
+export async function getApprovedReviewCount() {
+  const db = await getDb();
+  if (!db) return 0;
+  const result = await db
+    .select({ count: sql<number>`COUNT(*)` })
+    .from(reviews)
+    .where(eq(reviews.status, "approved"));
+  return result[0]?.count ?? 0;
+}
+
+export async function approveReview(id: number) {
+  const db = await getDb();
+  if (!db) return;
+  await db.update(reviews).set({ status: "approved" }).where(eq(reviews.id, id));
+}
+
+export async function rejectReview(id: number) {
+  const db = await getDb();
+  if (!db) return;
+  await db.update(reviews).set({ status: "rejected" }).where(eq(reviews.id, id));
+}
+
+export async function deleteReview(id: number) {
+  const db = await getDb();
+  if (!db) return;
+  await db.delete(reviews).where(eq(reviews.id, id));
 }
