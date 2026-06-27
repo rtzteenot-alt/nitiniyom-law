@@ -22,6 +22,7 @@ import AdminClients from "./pages/admin/Clients";
 import AdminCases from "./pages/admin/Cases";
 import AdminAppointments from "./pages/admin/Appointments";
 import AdminMessages from "./pages/admin/Messages";
+import AdminReviews from "./pages/admin/Reviews";
 import AdminInvoices from "./pages/admin/Invoices";
 import AdminTools from "./pages/admin/Tools";
 
@@ -44,6 +45,7 @@ function AdminRouter() {
         <Route path="/admin/cases" component={AdminCases} />
         <Route path="/admin/appointments" component={AdminAppointments} />
         <Route path="/admin/messages" component={AdminMessages} />
+        <Route path="/admin/reviews" component={AdminReviews} />
         <Route path="/admin/invoices" component={AdminInvoices} />
         <Route path="/admin/tools" component={AdminTools} />
         <Route component={NotFound} />

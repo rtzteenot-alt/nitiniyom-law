@@ -326,7 +326,7 @@
 - [x] เพิ่มใน Home.tsx
   - [x] เพิ่มส่วน "เสียงจากลูกค้า"
   - [x] Link ไปยัง review form
-- [ ] Admin panel
-  - [ ] ดูรีวิวทั้งหมด (approved + pending)
-  - [ ] Approve/reject reviews
+- [x] Admin panel
+  - [x] ดูรีวิวทั้งหมด (approved + pending)
+  - [x] Approve/reject reviews
 - [x] ทดสอบและ Save Checkpoint

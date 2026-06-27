@@ -25,6 +25,7 @@ const navItems = [
   { href: "/admin/cases", label: "คดีความ", icon: Briefcase },
   { href: "/admin/appointments", label: "นัดหมาย", icon: Calendar },
   { href: "/admin/messages", label: "ข้อความ", icon: MessageSquare },
+  { href: "/admin/reviews", label: "รีวิว", icon: MessageSquare },
   { href: "/admin/invoices", label: "ใบแจ้งหนี้", icon: FileText },
   { href: "/admin/tools", label: "โปรแกรมทนาย", icon: Wrench },
 ];
