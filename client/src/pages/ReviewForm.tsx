@@ -10,7 +10,6 @@ import { toast } from "sonner";
 
 export default function ReviewForm() {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [rating, setRating] = useState(5);
   const [message, setMessage] = useState("");
   const [hoveredRating, setHoveredRating] = useState(0);
@@ -19,7 +18,6 @@ export default function ReviewForm() {
     onSuccess: () => {
       toast.success("ขอบคุณสำหรับรีวิว! รีวิวของคุณอยู่ระหว่างการตรวจสอบ");
       setName("");
-      setEmail("");
       setRating(5);
       setMessage("");
     },
@@ -36,11 +34,6 @@ export default function ReviewForm() {
       return;
     }
     
-    if (!email.trim()) {
-      toast.error("กรุณากรอกอีเมล");
-      return;
-    }
-    
     if (message.trim().length < 10) {
       toast.error("ข้อความต้องมีอย่างน้อย 10 ตัวอักษร");
       return;
@@ -48,7 +41,7 @@ export default function ReviewForm() {
 
     submitMutation.mutate({
       name: name.trim(),
-      email: email.trim(),
+      email: "anonymous@review.local", // ใช้ email ที่ซ่อนไว้
       rating,
       message: message.trim(),
     });
@@ -78,21 +71,6 @@ export default function ReviewForm() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="กรุณากรอกชื่อ"
-                className="bg-white/10 border border-white/20 text-white placeholder:text-slate-400"
-                disabled={submitMutation.isPending}
-              />
-            </div>
-
-            {/* Email */}
-            <div>
-              <label className="block text-sm font-medium text-white mb-2">
-                อีเมล *
-              </label>
-              <Input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="example@email.com"
                 className="bg-white/10 border border-white/20 text-white placeholder:text-slate-400"
                 disabled={submitMutation.isPending}
               />
@@ -133,7 +111,7 @@ export default function ReviewForm() {
             {/* Message */}
             <div>
               <label className="block text-sm font-medium text-white mb-2">
-                ข้อความ * (อย่างน้อย 10 ตัวอักษร)
+                ความพอใจของคุณ * (อย่างน้อย 10 ตัวอักษร)
               </label>
               <Textarea
                 value={message}
